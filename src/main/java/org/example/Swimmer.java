@@ -35,4 +35,59 @@ public class Swimmer {
         this.isMember = isMember;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public LocalDate getBirthday() {
+        return birthday;
+    }
+
+    public LocalDate getCreationDate() {
+        return creationDate;
+    }
+
+    public int getMemberID() {
+        return memberID;
+    }
+
+    public boolean isHasPaid() {
+        return hasPaid;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public boolean isCompetitor() {
+        return isCompetitor;
+    }
+
+    public boolean isStudent() {
+        return isStudent;
+    }
+
+    public boolean isMember() {
+        return isMember;
+    }
+
+    public ArrayList<SwimTime> getCompetitionResults() {
+        return competitionResults;
+    }
+
+    public ArrayList<SwimTime> getTrainingResults() {
+        return trainingResults;
+    }
 }

@@ -10,5 +10,9 @@ public class Controller {
         filehandler = new Filehandler();
     }
 
+    public Swimmer createSwimmer(){
+        Swimmer swimmer = database.createSwimmer();
+        return swimmer;
+    }
 
 }
