@@ -6,12 +6,9 @@ public class Database {
     private ArrayList<Swimmer> swimmerList = new ArrayList<Swimmer>();
     private ArrayList<Swimmer> swimmerSearchList = new ArrayList<>();
 
-    //TODO createSwimmer()
-
- public Swimmer createSwimmer(){
-     Swimmer newSwimmer = new Swimmer();
-     return newSwimmer;
- }
+    public void addSwimmerToDatabase(Swimmer swimmer){
+     swimmerList.add(swimmer);
+    }
 
  //Kan søge både med medlemmets navn og deres medlemsnummer
  public ArrayList<Swimmer> searchForSwimmers(String searchParameter){

@@ -1,6 +1,6 @@
 package org.example;
 
-import java.util.ArrayList;
+import java.time.LocalDate;
 
 public class Controller {
 
@@ -8,13 +8,15 @@ public class Controller {
     Filehandler filehandler;
 
     public Controller(){
-         database = new Database();
+        database = new Database();
         filehandler = new Filehandler();
     }
 
-    public Swimmer createSwimmer(){
-        Swimmer swimmer = database.createSwimmer();
-        return swimmer;
+    public void createSwimmer(String name, String address, String phoneNumber, String mail, LocalDate birthday, boolean isCompetitor, boolean isStudent){
+        int memberID = database.swimmerList.size();
+
+        Swimmer swimmer = new Swimmer(name, address, phoneNumber, mail, birthday, memberID, isCompetitor, isStudent);
+        database.addSwimmerToDatabase(swimmer);
     }
 
     public ArrayList<Swimmer>searchForSwimmers(String searchParameter){
