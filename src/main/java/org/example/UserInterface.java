@@ -62,20 +62,20 @@ public class UserInterface {
         boolean isStudent;
 
         System.out.println("Indtast svømmerens navn");
-        navn = scanner.nextLine();
+        navn = readString();
         System.out.println("Indtast svømmerens addresse");
-        address = scanner.nextLine();
+        address = readString();
         System.out.println("Indtast svømmerens telefonnummer");
-        phoneNumber = scanner.nextLine();
+        phoneNumber = readString();
         System.out.println("Indtast svømmerens mail");
-        mail = scanner.nextLine();
+        mail = readString();
         System.out.println("Indtast svømmerens fødselsdato (på formen ÅÅÅÅ-MM-DD");
-        birthdayString = scanner.nextLine();
+        birthdayString = readString();
         LocalDate birthday = LocalDate.parse(birthdayString);
         System.out.println("Er det en konkurrencesvømmer? ja/nej");
-        isCompetitor = yesOrNoToBoolean(scanner.nextLine());
+        isCompetitor = yesOrNoToBoolean(readString());
         System.out.println("Er svømmeren studerende?");
-        isStudent = yesOrNoToBoolean(scanner.nextLine());
+        isStudent = yesOrNoToBoolean(readString());
 
 
         controller.createSwimmer(navn,address,phoneNumber,mail,birthday,isCompetitor,isStudent);
@@ -255,4 +255,16 @@ private void showAllSwimmers(){
         return result;
     }
 
+    //Sørger for at input ikke er tomt. Strukturen i readInt virker ikke for string af en eller anden grund.
+    private String readString(){
+        String readString;
+        do{
+        readString = scanner.nextLine();
+        if(readString.isEmpty()){
+            System.out.println("Input må ikke være tom");
+        }
+        }
+        while(readString.isEmpty());
+        return readString;
+    }
 }
