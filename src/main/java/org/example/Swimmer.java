@@ -90,4 +90,40 @@ public class Swimmer {
     public ArrayList<SwimTime> getTrainingResults() {
         return trainingResults;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
+    public void setBirthday(LocalDate birthday) {
+        this.birthday = birthday;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
+    public void setCompetitor(boolean competitor) {
+        isCompetitor = competitor;
+    }
+
+    public void setStudent(boolean student) {
+        isStudent = student;
+    }
+
+    public void setMember(boolean member) {
+        isMember = member;
+    }
 }
