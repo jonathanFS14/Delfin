@@ -4,13 +4,10 @@ import java.util.ArrayList;
 
 public class Database {
 
-    ArrayList<Swimmer> swimmerList = new ArrayList<Swimmer>();
+    ArrayList<Swimmer> swimmerList = new ArrayList<>();
 
-    //TODO createSwimmer()
-
- public Swimmer createSwimmer(){
-     Swimmer newSwimmer = new Swimmer();
-     return newSwimmer;
- }
+    public void addSwimmerToDatabase(Swimmer swimmer){
+     swimmerList.add(swimmer);
+    }
 
 }

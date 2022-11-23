@@ -27,9 +27,7 @@ public class Filehandler {
                         LocalDate.parse(attributes[4]),
                         Integer.parseInt(attributes[5]),
                         Boolean.parseBoolean(attributes[6]),
-                        Boolean.parseBoolean(attributes[7]),
-                        Boolean.parseBoolean(attributes[8]),
-                        Boolean.parseBoolean(attributes[9]));
+                        Boolean.parseBoolean(attributes[7]));
                 swimmerListFile.add(swimmer);
             }
         } catch (IOException e) {

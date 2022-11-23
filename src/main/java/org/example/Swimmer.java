@@ -20,7 +20,7 @@ public class Swimmer {
     private ArrayList<SwimTime> trainingResults = new ArrayList<>();
 
 
-    public Swimmer(String name, String address, String phoneNumber, String mail, LocalDate birthday, int memberID, boolean isActive, boolean isCompetitor, boolean isStudent, boolean isMember ) {
+    public Swimmer(String name, String address, String phoneNumber, String mail, LocalDate birthday, int memberID, boolean isCompetitor, boolean isStudent) {
         this.name = name;
         this.address = address;
         this.phoneNumber = phoneNumber;
@@ -29,7 +29,7 @@ public class Swimmer {
         creationDate = LocalDate.now();
         this.memberID = memberID;
         hasPaid = false;
-        this.isActive = isActive;
+        isActive = true;
         this.isCompetitor = isCompetitor;
         this.isStudent = isStudent;
         this.isMember = isMember;

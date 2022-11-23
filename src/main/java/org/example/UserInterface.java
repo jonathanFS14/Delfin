@@ -16,8 +16,8 @@ public class UserInterface {
                 """);
         int valg = scanner.nextInt();
 
-        if(valg == 1){
-            controller.createSwimmer();
+        switch (valg) {
+            case 1 -> menuCreateNewSwimmer();
         }
     }
 
