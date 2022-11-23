@@ -98,6 +98,7 @@ public class UserInterface {
             int menuInput = readInt();
 
             switch (menuInput) {
+                //TODO Lav hver switch til sin egen hjælpeemtode.
                 case 1:
                     System.out.println("Rediger " + swimmer.getName() + " eller tryk enter for at fortryde");
                     String newName = scanner.nextLine();
