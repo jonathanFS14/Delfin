@@ -1,5 +1,7 @@
 package org.example;
 
+import java.util.ArrayList;
+
 public class Controller {
 
     Database database;
@@ -14,5 +16,10 @@ public class Controller {
         Swimmer swimmer = database.createSwimmer();
         return swimmer;
     }
+
+    public ArrayList<Swimmer>searchForSwimmers(String searchParameter){
+        return database.searchForSwimmers(searchParameter);
+    }
+
 
 }

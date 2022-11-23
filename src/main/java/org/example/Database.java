@@ -3,9 +3,8 @@ package org.example;
 import java.util.ArrayList;
 
 public class Database {
-
-    ArrayList<Swimmer> swimmerList = new ArrayList<Swimmer>();
-    ArrayList<Swimmer> swimmerSearchList = new ArrayList<>();
+    private ArrayList<Swimmer> swimmerList = new ArrayList<Swimmer>();
+    private ArrayList<Swimmer> swimmerSearchList = new ArrayList<>();
 
     //TODO createSwimmer()
 
