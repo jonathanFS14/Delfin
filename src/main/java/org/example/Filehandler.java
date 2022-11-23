@@ -9,9 +9,9 @@ import java.util.Scanner;
 
 public class Filehandler {
 
-    String fileName = "svømmerDatabase.csv";
+    String fileName = "swimmerDatabase.csv";
 
-    public ArrayList<Swimmer> readFile() {
+    public ArrayList<Swimmer> retrieveSwimmerDatabase() {
         ArrayList<Swimmer> swimmerListFile = new ArrayList<Swimmer>();
         try {
             Scanner sc = new Scanner(new File(fileName));
@@ -38,19 +38,19 @@ public class Filehandler {
         return swimmerListFile;
     }
 
-    public void writeToFile(ArrayList<Swimmer> swimmerList) {
+    public void overwriteSwimmerDatabase(ArrayList<Swimmer> swimmerList) {
         try {
             PrintStream out = new PrintStream(fileName);
             for (Swimmer swimmer : swimmerList) {
-                //TODO getters til swimmer
-                //out.printf("%s,%s,%s,%b,%d", s.getName(), s.getSuperheroName(), s.getSuperheroPower(), s.getIsHuman(), s.getCreationYear());
                 out.print(toFileWriter(swimmer));
             }
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
     }
+
     private String toFileWriter(Swimmer swimmer){
         return swimmer.getName() + "," + swimmer.getAddress() + "," + swimmer.getPhoneNumber() + "," + swimmer.getBirthday() + "," + swimmer.getMemberID() + "," + swimmer.isActive() + "," + swimmer.isCompetitor() + "," + swimmer.isStudent() + "," + swimmer.isMember();
     }
+
 }

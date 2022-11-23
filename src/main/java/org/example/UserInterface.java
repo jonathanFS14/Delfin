@@ -15,6 +15,7 @@ public class UserInterface {
                 1. Opret ny svømmer
                 """);
         int valg = scanner.nextInt();
+
         if(valg == 1){
             controller.createSwimmer();
         }
