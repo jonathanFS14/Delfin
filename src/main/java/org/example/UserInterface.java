@@ -130,11 +130,11 @@ public class UserInterface {
                 case 3:
                     //TODO test om dette virker - vil sikre der ikke kan komme bogstaver i telefonnummeret.
                     System.out.println("Rediger " + swimmer.getPhoneNumber() + " eller tryk enter for at fortryde");
-                    int newPhoneNumberInt = readInt();
-                    String newPhoneNumberString = String.valueOf(newPhoneNumberInt);
-                    if (!newPhoneNumberString.isEmpty()) {
-                        swimmer.setPhoneNumber(newPhoneNumberString);
+                    String newPhoneNumber = readString();
+                    if(!newPhoneNumber.isEmpty()){
+                        swimmer.setPhoneNumber(newPhoneNumber);
                     }
+
                     break;
                 case 4:
                     System.out.println("Rediger " + swimmer.getMail() + " eller tryk enter for at fortryde");
