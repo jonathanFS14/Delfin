@@ -6,6 +6,8 @@ public class Database {
     private ArrayList<Swimmer> swimmerList = new ArrayList<Swimmer>();
     private ArrayList<Swimmer> swimmerSearchList = new ArrayList<>();
 
+
+
     public void addSwimmerToDatabase(Swimmer swimmer){
      swimmerList.add(swimmer);
     }
@@ -26,5 +28,7 @@ public class Database {
 
      return swimmerSearchList;
  }
-
+    public ArrayList<Swimmer> getSwimmerList() {
+        return swimmerList;
+    }
 }

@@ -14,5 +14,7 @@ public class Main {
 
         System.out.println(period.getYears() +" år " + period.getMonths()+ " måned " + period.getDays());
 
+        UserInterface userInterface = new UserInterface();
+        userInterface.startProgram();
     }
 }

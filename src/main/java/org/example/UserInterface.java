@@ -27,7 +27,7 @@ public class UserInterface {
                     """);
             userChoice = readInt();
             switch (userChoice) {
-                case 1 -> menuCreateNewSwimmer();
+                case 1 -> createNewSwimmer();
                 case 2 -> editSwimmer();
                 case 9 -> {
                     System.out.println("\n Lukker programmet");
@@ -36,6 +36,35 @@ public class UserInterface {
                 default -> System.out.println("Ugyldigt valg");
             }
         } while (userChoice != 9);
+    }
+
+    private void createNewSwimmer() {
+        String navn;
+        String address;
+        String phoneNumber;
+        String mail;
+        String birthdayString;
+        boolean isCompetitor;
+        boolean isStudent;
+
+        System.out.println("Indtast svømmerens navn");
+        navn = scanner.nextLine();
+        System.out.println("Indtast svømmerens addresse");
+        address = scanner.nextLine();
+        System.out.println("Indtast svømmerens telefonnummer");
+        phoneNumber = scanner.nextLine();
+        System.out.println("Indtast svømmerens mail");
+        mail = scanner.nextLine();
+        System.out.println("Indtast svømmerens fødselsdato (på formen ÅÅÅÅ-MM-DD");
+        birthdayString = scanner.nextLine();
+        LocalDate birthday = LocalDate.parse(birthdayString);
+        System.out.println("Er det en konkurrencesvømmer? ja/nej");
+        isCompetitor = yesOrNoToBoolean(scanner.nextLine());
+        System.out.println("Er svømmeren studerende?");
+        isStudent = yesOrNoToBoolean(scanner.nextLine());
+
+
+        controller.createSwimmer(navn,address,phoneNumber,mail,birthday,isCompetitor,isStudent);
     }
 
 
@@ -181,36 +210,9 @@ public class UserInterface {
     }
 
 
-    public void menuCreateNewSwimmer() {
-        String navn;
-        String address;
-        String phoneNumber;
-        String mail;
-        String birthdayString;
-        boolean isCompetitor;
-        boolean isStudent;
-
-        System.out.println("Indtast svømmerens navn");
-        navn = scanner.nextLine();
-        System.out.println("Indtast svømmerens addresse");
-        address = scanner.nextLine();
-        System.out.println("Indtast svømmerens telefonnummer");
-        phoneNumber = scanner.nextLine();
-        System.out.println("Indtast svømmerens mail");
-        mail = scanner.nextLine();
-        System.out.println("Indtast svømmerens fødselsdato (på formen ÅÅÅÅ-MM-DD");
-        birthdayString = scanner.nextLine();
-        LocalDate birthday = LocalDate.parse(birthdayString);
-        System.out.println("Er det en konkurrencesvømmer? ja/nej");
-        isCompetitor = yesOrNoToBoolean(scanner.nextLine());
-        System.out.println("Er svømmeren studerende?");
-        isStudent = yesOrNoToBoolean(scanner.nextLine());
 
 
-        controller.createSwimmer(navn,address,phoneNumber,mail,birthday,isCompetitor,isStudent);
-    }
-
-    public boolean yesOrNoToBoolean(String yesOrNo) {
+    private boolean yesOrNoToBoolean(String yesOrNo) {
         boolean answer = false;
         if (yesOrNo.equalsIgnoreCase("ja")){
             answer = true;
@@ -223,7 +225,7 @@ public class UserInterface {
         return answer;
     }
 
-    public int readInt() {
+    private int readInt() {
         while (!scanner.hasNextInt()) {
             String text = scanner.next();
             System.out.println(text + " er ugyldig input, indtast igen.");
