@@ -5,12 +5,26 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UserInterface {
-    Scanner scanner = new Scanner(System.in);
-    Controller controller = new Controller();
+    Scanner scanner;
+    Controller controller;
+
+    public UserInterface(){
+        scanner = new Scanner(System.in);
+        controller = new Controller();
+    }
 
     public void startProgram() {
         initialLoad();
         userMenu();
+    }
+
+    public void initialLoad(){
+        controller.initialLoad();
+    }
+    public void endProgram(){
+        System.out.println("\n Lukker programmet");
+        controller.overwriteSwimmerDatabase();
+        System.exit(0);
     }
 
     private void userMenu() {
@@ -18,7 +32,6 @@ public class UserInterface {
         do {
             System.out.println("""
                     Velkommen til Delfinen svømmeklub
-                    Midlertidlig UI, vi gør det pænere senere x(
                                     
                     Hvad vil du gøre?                       
                     1. Opret ny svømmer

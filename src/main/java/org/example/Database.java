@@ -12,13 +12,13 @@ public class Database {
     }
 
     public void addSwimmerToDatabase(Swimmer swimmer){
-     swimmerList.add(swimmer);
+        swimmerList.add(swimmer);
     }
 
- //Kan søge både med medlemmets navn og deres medlemsnummer
- public ArrayList<Swimmer> searchForSwimmers(String searchParameter){
+    //Kan søge både med medlemmets navn og deres medlemsnummer
+    public ArrayList<Swimmer> searchForSwimmers(String searchParameter){
 
-     swimmerSearchList.clear();
+        swimmerSearchList.clear();
 
         for(Swimmer swimmer : swimmerList){
             if(swimmer.getName().toLowerCase().contains(searchParameter.toLowerCase())){
@@ -29,8 +29,9 @@ public class Database {
             }
         }
 
-     return swimmerSearchList;
- }
+        return swimmerSearchList;
+    }
+
     public ArrayList<Swimmer> getSwimmerList() {
         return swimmerList;
     }
