@@ -5,11 +5,26 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UserInterface {
-    Scanner scanner = new Scanner(System.in);
-    Controller controller = new Controller();
+    Scanner scanner;
+    Controller controller;
+
+    public UserInterface(){
+        scanner = new Scanner(System.in);
+        controller = new Controller();
+    }
 
     public void startProgram() {
+        initialLoad();
         userMenu();
+    }
+
+    public void initialLoad(){
+        controller.initialLoad();
+    }
+    public void endProgram(){
+        System.out.println("\n Lukker programmet");
+        controller.overwriteSwimmerDatabase();
+        System.exit(0);
     }
 
     private void userMenu() {
@@ -17,11 +32,12 @@ public class UserInterface {
         do {
             System.out.println("""
                     Velkommen til Delfinen svømmeklub
-                    Midlertidlig UI, vi gør det pænere senere x(
                                     
                     Hvad vil du gøre?                       
                     1. Opret ny svømmer
                     2. Rediger en eksisterende svømmer
+                    3. Vis alle svømmere
+                    
                                     
                     9. afslut programmet
                     """);
@@ -29,10 +45,8 @@ public class UserInterface {
             switch (userChoice) {
                 case 1 -> createNewSwimmer();
                 case 2 -> editSwimmer();
-                case 9 -> {
-                    System.out.println("\n Lukker programmet");
-                    System.exit(0);
-                }
+                case 3 -> showAllSwimmers();
+                case 9 -> endProgram();
                 default -> System.out.println("Ugyldigt valg");
             }
         } while (userChoice != 9);
@@ -48,20 +62,20 @@ public class UserInterface {
         boolean isStudent;
 
         System.out.println("Indtast svømmerens navn");
-        navn = scanner.nextLine();
+        navn = readString();
         System.out.println("Indtast svømmerens addresse");
-        address = scanner.nextLine();
+        address = readString();
         System.out.println("Indtast svømmerens telefonnummer");
-        phoneNumber = scanner.nextLine();
+        phoneNumber = readString();
         System.out.println("Indtast svømmerens mail");
-        mail = scanner.nextLine();
+        mail = readString();
         System.out.println("Indtast svømmerens fødselsdato (på formen ÅÅÅÅ-MM-DD");
-        birthdayString = scanner.nextLine();
+        birthdayString = readString();
         LocalDate birthday = LocalDate.parse(birthdayString);
         System.out.println("Er det en konkurrencesvømmer? ja/nej");
-        isCompetitor = yesOrNoToBoolean(scanner.nextLine());
+        isCompetitor = yesOrNoToBoolean(readString());
         System.out.println("Er svømmeren studerende?");
-        isStudent = yesOrNoToBoolean(scanner.nextLine());
+        isStudent = yesOrNoToBoolean(readString());
 
 
         controller.createSwimmer(navn,address,phoneNumber,mail,birthday,isCompetitor,isStudent);
@@ -79,7 +93,7 @@ public class UserInterface {
         } else {
             System.out.println("Vælg hvem der skal redigeres");
             for (Swimmer swimmer : localSwimmerList) {
-                System.out.println(localSwimmerList.indexOf(swimmer) + 1 + ". " + swimmer.getName() + "\t" + swimmer.getMemberID() );
+                System.out.println(localSwimmerList.indexOf(swimmer) + 1 + ". " + swimmer.getName());
             }
             int chooseSwimmer = readInt();
             Swimmer swimmer = localSwimmerList.get(chooseSwimmer - 1);
@@ -116,11 +130,11 @@ public class UserInterface {
                 case 3:
                     //TODO test om dette virker - vil sikre der ikke kan komme bogstaver i telefonnummeret.
                     System.out.println("Rediger " + swimmer.getPhoneNumber() + " eller tryk enter for at fortryde");
-                    int newPhoneNumberInt = readInt();
-                    String newPhoneNumberString = String.valueOf(newPhoneNumberInt);
-                    if (!newPhoneNumberString.isEmpty()) {
-                        swimmer.setPhoneNumber(newPhoneNumberString);
+                    String newPhoneNumber = readString();
+                    if(!newPhoneNumber.isEmpty()){
+                        swimmer.setPhoneNumber(newPhoneNumber);
                     }
+
                     break;
                 case 4:
                     System.out.println("Rediger " + swimmer.getMail() + " eller tryk enter for at fortryde");
@@ -211,7 +225,11 @@ public class UserInterface {
     }
 
 
-
+private void showAllSwimmers(){
+        for(Swimmer swimmer : controller.getSwimmerList()){
+            System.out.println(swimmer.getName());
+        }
+}
 
     private boolean yesOrNoToBoolean(String yesOrNo) {
         boolean answer = false;
@@ -237,4 +255,16 @@ public class UserInterface {
         return result;
     }
 
+    //Sørger for at input ikke er tomt. Strukturen i readInt virker ikke for string af en eller anden grund.
+    private String readString(){
+        String readString;
+        do{
+        readString = scanner.nextLine();
+        if(readString.isEmpty()){
+            System.out.println("Input må ikke være tom");
+        }
+        }
+        while(readString.isEmpty());
+        return readString;
+    }
 }

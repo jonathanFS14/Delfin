@@ -25,5 +25,15 @@ public class Controller {
         return database.searchForSwimmers(searchParameter);
     }
 
+    public ArrayList<Swimmer> getSwimmerList(){
+            return database.getSwimmerList();
+    }
 
+    public void overwriteSwimmerDatabase(){
+        filehandler.overwriteSwimmerDatabase(database.getSwimmerList());
+    }
+
+    public void initialLoad() {
+        database.setSwimmerDatabase(filehandler.retrieveSwimmerDatabase());
+    }
 }

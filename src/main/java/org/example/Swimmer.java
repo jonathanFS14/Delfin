@@ -16,8 +16,8 @@ public class Swimmer {
     private boolean isCompetitor;
     private boolean isStudent;
     private boolean isMember;
-    private ArrayList<SwimTime> competitionResults = new ArrayList<>();
-    private ArrayList<SwimTime> trainingResults = new ArrayList<>();
+    private ArrayList<SwimTime> competitionResults;
+    private ArrayList<SwimTime> trainingResults;
 
 
     public Swimmer(String name, String address, String phoneNumber, String mail, LocalDate birthday, int memberID, boolean isCompetitor, boolean isStudent) {
@@ -33,6 +33,8 @@ public class Swimmer {
         this.isCompetitor = isCompetitor;
         this.isStudent = isStudent;
         isMember = true;
+        competitionResults = new ArrayList<SwimTime>();
+        trainingResults = new ArrayList<SwimTime>();
     }
 
     public String getName() {
@@ -126,4 +128,7 @@ public class Swimmer {
     public void setMember(boolean member) {
         isMember = member;
     }
+
+
+
 }
