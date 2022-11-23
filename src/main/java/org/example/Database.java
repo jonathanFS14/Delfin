@@ -3,10 +3,13 @@ package org.example;
 import java.util.ArrayList;
 
 public class Database {
-    private ArrayList<Swimmer> swimmerList = new ArrayList<Swimmer>();
-    private ArrayList<Swimmer> swimmerSearchList = new ArrayList<>();
+    private ArrayList<Swimmer> swimmerList;
+    private ArrayList<Swimmer> swimmerSearchList;
 
-
+    public Database(){
+        swimmerList = new ArrayList<>();
+        swimmerSearchList = new ArrayList<>();
+    }
 
     public void addSwimmerToDatabase(Swimmer swimmer){
      swimmerList.add(swimmer);
@@ -17,18 +20,23 @@ public class Database {
 
      swimmerSearchList.clear();
 
-     for(Swimmer swimmer : swimmerSearchList){
-         if(swimmer.getName().toLowerCase().contains(searchParameter.toLowerCase())){
-             swimmerSearchList.add(swimmer);
-         }
-         else if (String.valueOf(swimmer.getMemberID()).equals(searchParameter)){
-             swimmerSearchList.add(swimmer);
-         }
-     }
+        for(Swimmer swimmer : swimmerList){
+            if(swimmer.getName().toLowerCase().contains(searchParameter.toLowerCase())){
+                swimmerSearchList.add(swimmer);
+            }
+            else if (String.valueOf(swimmer.getMemberID()).equals(searchParameter)){
+                swimmerSearchList.add(swimmer);
+            }
+        }
 
      return swimmerSearchList;
  }
     public ArrayList<Swimmer> getSwimmerList() {
         return swimmerList;
     }
+
+    public void setSwimmerDatabase(ArrayList<Swimmer> swimmerList){
+        this.swimmerList = swimmerList;
+    }
+
 }

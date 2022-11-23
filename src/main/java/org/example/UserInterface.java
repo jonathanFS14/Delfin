@@ -9,6 +9,7 @@ public class UserInterface {
     Controller controller = new Controller();
 
     public void startProgram() {
+        initialLoad();
         userMenu();
     }
 
@@ -22,6 +23,8 @@ public class UserInterface {
                     Hvad vil du gøre?                       
                     1. Opret ny svømmer
                     2. Rediger en eksisterende svømmer
+                    3. Vis alle svømmere
+                    
                                     
                     9. afslut programmet
                     """);
@@ -29,10 +32,8 @@ public class UserInterface {
             switch (userChoice) {
                 case 1 -> createNewSwimmer();
                 case 2 -> editSwimmer();
-                case 9 -> {
-                    System.out.println("\n Lukker programmet");
-                    System.exit(0);
-                }
+                case 3 -> showAllSwimmers();
+                case 9 -> endProgram();
                 default -> System.out.println("Ugyldigt valg");
             }
         } while (userChoice != 9);
@@ -79,7 +80,7 @@ public class UserInterface {
         } else {
             System.out.println("Vælg hvem der skal redigeres");
             for (Swimmer swimmer : localSwimmerList) {
-                System.out.println(localSwimmerList.indexOf(swimmer) + 1 + ". " + swimmer.getName() + "\t" + swimmer.getMemberID() );
+                System.out.println(localSwimmerList.indexOf(swimmer) + 1 + ". " + swimmer.getName());
             }
             int chooseSwimmer = readInt();
             Swimmer swimmer = localSwimmerList.get(chooseSwimmer - 1);
@@ -211,7 +212,11 @@ public class UserInterface {
     }
 
 
-
+private void showAllSwimmers(){
+        for(Swimmer swimmer : controller.getSwimmerList()){
+            System.out.println(swimmer.getName());
+        }
+}
 
     private boolean yesOrNoToBoolean(String yesOrNo) {
         boolean answer = false;

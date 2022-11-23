@@ -33,6 +33,8 @@ public class Swimmer {
         this.isCompetitor = isCompetitor;
         this.isStudent = isStudent;
         isMember = true;
+        competitionResults = new ArrayList<SwimTime>();
+        trainingResults = new ArrayList<SwimTime>();
     }
 
     public String getName() {
