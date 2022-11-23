@@ -32,7 +32,7 @@ public class Swimmer {
         isActive = true;
         this.isCompetitor = isCompetitor;
         this.isStudent = isStudent;
-        this.isMember = isMember;
+        isMember = true;
     }
 
     public String getName() {

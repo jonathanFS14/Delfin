@@ -8,7 +8,7 @@ public class Controller {
     Filehandler filehandler;
 
     public Controller(){
-         database = new Database();
+        database = new Database();
         filehandler = new Filehandler();
     }
 
