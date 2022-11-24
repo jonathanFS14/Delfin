@@ -34,7 +34,7 @@ public class UserInterface {
                     Velkommen til Delfinen svømmeklub
                                     
                     Hvad vil du gøre?                       
-                    1. Opret ny svømmer
+                    1. Opret ny svømmer/ gendan gammel svømmer
                     2. Rediger en eksisterende svømmer
                     3. Vis alle svømmere
                     
@@ -44,9 +44,10 @@ public class UserInterface {
                     """);
             userChoice = readInt();
             switch (userChoice) {
-                case 1 -> createNewSwimmer();
+                case 1 -> createSwimmerMenu();
                 case 2 -> editSwimmer();
                 case 3 -> showAllSwimmers();
+
                 case 9 -> endProgram();
                 default -> System.out.println("Ugyldigt valg");
             }
@@ -77,7 +78,6 @@ public class UserInterface {
         isCompetitor = yesOrNoToBoolean(readString());
         System.out.println("Er svømmeren studerende?");
         isStudent = yesOrNoToBoolean(readString());
-
 
         controller.createSwimmer(navn,address,phoneNumber,mail,birthday,isCompetitor,isStudent);
     }

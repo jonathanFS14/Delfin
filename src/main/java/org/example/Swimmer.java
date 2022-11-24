@@ -37,6 +37,24 @@ public class Swimmer {
         trainingResults = new ArrayList<SwimTime>();
     }
 
+    //Denne constructor bruges når der skal læses fra filen i filehandler så alle attributer kommer med.
+    public Swimmer(String name, String address, String phoneNumber, String mail, LocalDate birthday, LocalDate creationDate, int memberID, boolean hasPaid, boolean isActive, boolean isCompetitor, boolean isStudent, boolean isArchived) {
+        this.name = name;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.mail = mail;
+        this.birthday = birthday;
+        this.creationDate = creationDate;
+        this.memberID = memberID;
+        this.hasPaid = hasPaid;
+        this.isActive = isActive;
+        this.isCompetitor = isCompetitor;
+        this.isStudent = isStudent;
+        this.isArchived = isArchived;
+        competitionResults = new ArrayList<SwimTime>();
+        trainingResults = new ArrayList<SwimTime>();
+    }
+
     public String getName() {
         return name;
     }
