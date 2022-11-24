@@ -16,19 +16,37 @@ public class Database {
     }
 
     //Kan søge både med medlemmets navn og deres medlemsnummer
-    public ArrayList<Swimmer> searchForSwimmers(String searchParameter){
+    public ArrayList<Swimmer> searchForMembers(String searchParameter){
 
         swimmerSearchList.clear();
 
         for(Swimmer swimmer : swimmerList){
-            if(swimmer.getName().toLowerCase().contains(searchParameter.toLowerCase())){
-                swimmerSearchList.add(swimmer);
-            }
-            else if (String.valueOf(swimmer.getMemberID()).equals(searchParameter)){
-                swimmerSearchList.add(swimmer);
+            if (!swimmer.isArchived()) {
+                if(swimmer.getName().toLowerCase().contains(searchParameter.toLowerCase())){
+                    swimmerSearchList.add(swimmer);
+                }
+                else if (String.valueOf(swimmer.getMemberID()).equals(searchParameter)){
+                    swimmerSearchList.add(swimmer);
+                }
             }
         }
+        return swimmerSearchList;
+    }
 
+    public ArrayList<Swimmer> searchForArchived(String searchParameter){
+
+        swimmerSearchList.clear();
+
+        for(Swimmer swimmer : swimmerList){
+            if (swimmer.isArchived()) {
+                if(swimmer.getName().toLowerCase().contains(searchParameter.toLowerCase())){
+                    swimmerSearchList.add(swimmer);
+                }
+                else if (String.valueOf(swimmer.getMemberID()).equals(searchParameter)){
+                    swimmerSearchList.add(swimmer);
+                }
+            }
+        }
         return swimmerSearchList;
     }
 

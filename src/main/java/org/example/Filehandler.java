@@ -20,14 +20,19 @@ public class Filehandler {
                 String linje = sc.nextLine();
                 String[] attributes = linje.split(",");
                 Swimmer swimmer = new Swimmer(
-                        attributes[0],
-                        attributes[1],
-                        attributes[2],
-                        attributes[3],
-                        LocalDate.parse(attributes[4]),
-                        Integer.parseInt(attributes[5]),
-                        Boolean.parseBoolean(attributes[6]),
-                        Boolean.parseBoolean(attributes[7]));
+                        attributes[0], // name
+                        attributes[1], // address
+                        attributes[2], // phoneNumber
+                        attributes[3], // mail
+                        LocalDate.parse(attributes[4]), // birthday
+                        LocalDate.parse(attributes[5]), // creationDate
+                        Integer.parseInt(attributes[6]), // memberID
+                        Boolean.parseBoolean(attributes[7]), // hasPaid
+                        Boolean.parseBoolean(attributes[8]), // isActive
+                        Boolean.parseBoolean(attributes[9]), // isCompetitor
+                        Boolean.parseBoolean(attributes[10]), // isStudent
+                        Boolean.parseBoolean(attributes[11]) // isArchived
+                );
                 swimmerListFile.add(swimmer);
             }
         } catch (IOException e) {
@@ -49,9 +54,9 @@ public class Filehandler {
 
     private String toFileWriter(Swimmer swimmer) {
         return (swimmer.getName() + "," + swimmer.getAddress() + "," + swimmer.getPhoneNumber()+ "," +
-                swimmer.getMail() + "," + swimmer.getBirthday() + "," + swimmer.getMemberID() + "," +
-                swimmer.isActive() + "," + swimmer.isCompetitor() + "," + swimmer.isStudent() + "," +
-                swimmer.isMember());
+                swimmer.getMail() + "," + swimmer.getBirthday() + "," + swimmer.getCreationDate() + "," +
+                swimmer.getMemberID() + "," + swimmer.isHasPaid() +  "," + swimmer.isActive() + "," +
+                swimmer.isCompetitor() + "," + swimmer.isStudent() + "," + swimmer.isArchived());
     }
 
 }
