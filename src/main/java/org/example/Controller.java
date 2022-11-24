@@ -21,8 +21,12 @@ public class Controller {
         database.addSwimmerToDatabase(swimmer);
     }
 
-    public ArrayList<Swimmer> searchForSwimmers(String searchParameter){
+    public ArrayList<Swimmer> searchForMembers(String searchParameter){
         return database.searchForMembers(searchParameter);
+    }
+
+    public ArrayList<Swimmer> searchForArchived(String searchParameter){
+        return database.searchForArchived(searchParameter);
     }
 
     public ArrayList<Swimmer> getSwimmerList(){
@@ -36,4 +40,5 @@ public class Controller {
     public void initialLoad() {
         database.setSwimmerDatabase(filehandler.retrieveSwimmerDatabase());
     }
+
 }

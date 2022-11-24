@@ -147,6 +147,9 @@ public class Swimmer {
         isArchived = archived;
     }
 
+    public void setHasPaid(boolean hasPaid){
+        this.hasPaid = hasPaid;
+    }
 
 
 }

@@ -37,8 +37,6 @@ public class UserInterface {
                     1. Opret ny svømmer/ gendan gammel svømmer
                     2. Rediger en eksisterende svømmer
                     3. Vis alle svømmere
-                    
-                    
                     8. Arkivér svømmer (afmeld)                
                     9. afslut programmet
                     """);
@@ -47,7 +45,7 @@ public class UserInterface {
                 case 1 -> createSwimmerMenu();
                 case 2 -> editSwimmer();
                 case 3 -> showAllSwimmers();
-
+                case 8 -> archiveSwimmer();
                 case 9 -> endProgram();
                 default -> System.out.println("Ugyldigt valg");
             }
@@ -65,22 +63,24 @@ public class UserInterface {
         switch (input){
             case 1 -> createNewSwimmer();
             case 2 -> restoreArchivedSwimmer();
+            case 3 -> showAllSwimmers();
+
+            case 8 -> archiveSwimmer();
             case 9 -> System.out.println("Vender tilbage til menuen");
             default -> System.out.println("Ugyldig input");
         }
     }
 
-    private void restoreArchivedSwimmer() {
-
-        System.out.println("Indtast medlem der skal genoprettes");
+    private void archiveSwimmer(){
+        System.out.println("Indtast medlem der skal arkiveres");
         String searchParameter = scanner.nextLine();
 
-        ArrayList<Swimmer> localSwimmerList = controller.database.searchForArchived(searchParameter);
+        ArrayList<Swimmer> localSwimmerList = controller.searchForMembers(searchParameter);
 
         if (localSwimmerList.isEmpty()) {
             System.out.println("Kunne ikke finde medlemmet");
         } else {
-            System.out.println("Vælg hvem der skal redigeres (indtast tal)");
+            System.out.println("Vælg hvem der skal arkiveres (indtast tal)");
             for (Swimmer swimmer : localSwimmerList) {
                 System.out.println(localSwimmerList.indexOf(swimmer) + 1 + ". " + swimmer.getName());
             }
@@ -88,8 +88,31 @@ public class UserInterface {
         int chooseSwimmer = readInt();
         Swimmer swimmer = localSwimmerList.get(chooseSwimmer - 1);
 
-        swimmer.setArchived(false);
-        System.out.println(swimmer.getName() + " er nu genoprettet.");
+        swimmer.setArchived(true);
+        swimmer.setHasPaid(false);
+        System.out.println(swimmer.getName() + " er nu arkiveret.");
+    }
+
+    private void restoreArchivedSwimmer() {
+
+            System.out.println("Indtast medlem der skal genoprettes");
+            String searchParameter = scanner.nextLine();
+
+            ArrayList<Swimmer> localSwimmerList = controller.searchForArchived(searchParameter);
+
+            if (localSwimmerList.isEmpty()) {
+                System.out.println("Kunne ikke finde medlemmet");
+            } else {
+                System.out.println("Vælg hvem der skal genoprettes (indtast tal)");
+                for (Swimmer swimmer : localSwimmerList) {
+                    System.out.println(localSwimmerList.indexOf(swimmer) + 1 + ". " + swimmer.getName());
+                }
+            }
+            int chooseSwimmer = readInt();
+            Swimmer swimmer = localSwimmerList.get(chooseSwimmer - 1);
+
+            swimmer.setArchived(false);
+            System.out.println(swimmer.getName() + " er nu genoprettet.");
 
     }
 
@@ -126,7 +149,7 @@ public class UserInterface {
         System.out.println("Indtast medlem der skal redigeres");
         String searchParameter = scanner.nextLine();
 
-        ArrayList<Swimmer> localSwimmerList = controller.searchForSwimmers(searchParameter);
+        ArrayList<Swimmer> localSwimmerList = controller.searchForMembers(searchParameter);
 
         if (localSwimmerList.isEmpty()) {
             System.out.println("Kunne ikke finde medlemmet");
