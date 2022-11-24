@@ -22,7 +22,7 @@ public class Controller {
     }
 
     public ArrayList<Swimmer> searchForSwimmers(String searchParameter){
-        return database.searchForSwimmers(searchParameter);
+        return database.searchForMembers(searchParameter);
     }
 
     public ArrayList<Swimmer> getSwimmerList(){

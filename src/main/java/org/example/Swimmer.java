@@ -15,7 +15,7 @@ public class Swimmer {
     private boolean isActive;
     private boolean isCompetitor;
     private boolean isStudent;
-    private boolean isMember;
+    private boolean isArchived;
     private ArrayList<SwimTime> competitionResults;
     private ArrayList<SwimTime> trainingResults;
 
@@ -32,7 +32,7 @@ public class Swimmer {
         isActive = true;
         this.isCompetitor = isCompetitor;
         this.isStudent = isStudent;
-        isMember = true;
+        isArchived = false;
         competitionResults = new ArrayList<SwimTime>();
         trainingResults = new ArrayList<SwimTime>();
     }
@@ -81,8 +81,8 @@ public class Swimmer {
         return isStudent;
     }
 
-    public boolean isMember() {
-        return isMember;
+    public boolean isArchived() {
+        return isArchived;
     }
 
     public ArrayList<SwimTime> getCompetitionResults() {
@@ -125,8 +125,8 @@ public class Swimmer {
         isStudent = student;
     }
 
-    public void setMember(boolean member) {
-        isMember = member;
+    public void setArchived(boolean archived) {
+        isArchived = archived;
     }
 
 

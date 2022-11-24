@@ -51,7 +51,7 @@ public class Filehandler {
         return (swimmer.getName() + "," + swimmer.getAddress() + "," + swimmer.getPhoneNumber()+ "," +
                 swimmer.getMail() + "," + swimmer.getBirthday() + "," + swimmer.getMemberID() + "," +
                 swimmer.isActive() + "," + swimmer.isCompetitor() + "," + swimmer.isStudent() + "," +
-                swimmer.isMember());
+                swimmer.isArchived());
     }
 
 }

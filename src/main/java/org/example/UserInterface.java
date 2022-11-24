@@ -38,7 +38,8 @@ public class UserInterface {
                     2. Rediger en eksisterende svømmer
                     3. Vis alle svømmere
                     
-                                    
+                    
+                    8. Arkivér svømmer (afmeld)                
                     9. afslut programmet
                     """);
             userChoice = readInt();
