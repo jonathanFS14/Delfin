@@ -54,6 +54,45 @@ public class UserInterface {
         } while (userChoice != 9);
     }
 
+    private void createSwimmerMenu(){
+        System.out.println("""
+                Vil du oprette et helt nyt medlem eller gendanne et gammel medlem?
+                1. Opret nyt medlem
+                2. Gendan gammelt medlem
+                9. fortryd
+                """);
+        int input = readInt();
+        switch (input){
+            case 1 -> createNewSwimmer();
+            case 2 -> restoreArchivedSwimmer();
+            case 9 -> System.out.println("Vender tilbage til menuen");
+            default -> System.out.println("Ugyldig input");
+        }
+    }
+
+    private void restoreArchivedSwimmer() {
+
+        System.out.println("Indtast medlem der skal genoprettes");
+        String searchParameter = scanner.nextLine();
+
+        ArrayList<Swimmer> localSwimmerList = controller.database.searchForArchived(searchParameter);
+
+        if (localSwimmerList.isEmpty()) {
+            System.out.println("Kunne ikke finde medlemmet");
+        } else {
+            System.out.println("Vælg hvem der skal redigeres (indtast tal)");
+            for (Swimmer swimmer : localSwimmerList) {
+                System.out.println(localSwimmerList.indexOf(swimmer) + 1 + ". " + swimmer.getName());
+            }
+        }
+        int chooseSwimmer = readInt();
+        Swimmer swimmer = localSwimmerList.get(chooseSwimmer - 1);
+
+        swimmer.setArchived(false);
+        System.out.println(swimmer.getName() + " er nu genoprettet.");
+
+    }
+
     private void createNewSwimmer() {
         String navn;
         String address;
@@ -221,6 +260,7 @@ public class UserInterface {
                     break;
                 default:
                     System.out.println("Ugyldig input");
+                    break;
             }
         }
     }
@@ -228,7 +268,7 @@ public class UserInterface {
 
 private void showAllSwimmers(){
         for(Swimmer swimmer : controller.getSwimmerList()){
-            System.out.println(swimmer.getName());
+            System.out.println(swimmer.getName() + " " + swimmer.getCreationDate());
         }
 }
 
@@ -269,3 +309,4 @@ private void showAllSwimmers(){
         return readString;
     }
 }
+
