@@ -123,8 +123,10 @@ public class UserInterface {
         String phoneNumber;
         String mail;
         String birthdayString;
+        LocalDate birthday;
         boolean isCompetitor;
         boolean isStudent;
+        boolean userChoice;
         
         System.out.println("Indtast svømmerens navn");
         navn = readString();
@@ -142,6 +144,19 @@ public class UserInterface {
         System.out.println("Er svømmeren studerende?");
         isStudent = yesOrNoToBoolean();
         
+            System.out.println("\nDu er ved at tilføje følgende svømmer:" +
+                    "\nNavn: " + navn +
+                    "\nAddresse: " + address +
+                    "\nTelefonnr: " + phoneNumber +
+                    "\nMail: " + mail +
+                    "\nFødselsdato: " + birthdayString +
+                    "\nEr konkurrencesvømmer: " + booleanToYesOrNo(isCompetitor) +
+                    "\nEr studerende: " + booleanToYesOrNo(isStudent) +
+                    "\n\nBekræft venligst (Ja/Nej) ");
+            userChoice = yesOrNoToBoolean(readString());
+        
+        } while (!userChoice);
+    
         controller.createSwimmer(navn, address, phoneNumber, mail, birthday, isCompetitor, isStudent);
     }
     
@@ -346,6 +361,18 @@ public class UserInterface {
         }
         while (check == 0);
         return answer;
+    }
+    
+    private String booleanToYesOrNo(Boolean bool) {
+        String answer = null;
+        if (bool)
+            answer = "Ja";
+        else if (!bool)
+            answer = "Nej";
+        else
+            System.out.println("Forkert input.");
+        return answer;
+        
     }
     
     private int readInt() {
