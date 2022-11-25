@@ -8,14 +8,14 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Filehandler {
-
+    
     String fileName = "swimmerDatabase.csv";
-
+    
     public ArrayList<Swimmer> retrieveSwimmerDatabase() {
         ArrayList<Swimmer> swimmerListFile = new ArrayList<Swimmer>();
         try {
             Scanner sc = new Scanner(new File(fileName));
-
+            
             while (sc.hasNextLine()) {
                 String linje = sc.nextLine();
                 String[] attributes = linje.split(",");
@@ -40,7 +40,7 @@ public class Filehandler {
         }
         return swimmerListFile;
     }
-
+    
     public void overwriteSwimmerDatabase(ArrayList<Swimmer> swimmerList) {
         try {
             PrintStream out = new PrintStream(fileName);
@@ -51,12 +51,12 @@ public class Filehandler {
             System.out.println(e.getMessage());
         }
     }
-
+    
     private String toFileWriter(Swimmer swimmer) {
-        return (swimmer.getName() + "," + swimmer.getAddress() + "," + swimmer.getPhoneNumber()+ "," +
+        return (swimmer.getName() + "," + swimmer.getAddress() + "," + swimmer.getPhoneNumber() + "," +
                 swimmer.getMail() + "," + swimmer.getBirthday() + "," + swimmer.getCreationDate() + "," +
-                swimmer.getMemberID() + "," + swimmer.isHasPaid() +  "," + swimmer.isActive() + "," +
+                swimmer.getMemberID() + "," + swimmer.isHasPaid() + "," + swimmer.isActive() + "," +
                 swimmer.isCompetitor() + "," + swimmer.isStudent() + "," + swimmer.isArchived());
     }
-
+    
 }
