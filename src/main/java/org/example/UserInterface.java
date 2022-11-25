@@ -137,9 +137,9 @@ public class UserInterface {
         System.out.println("Indtast svømmerens fødselsdato (på formen ÅÅÅÅ-MM-DD");
         birthdayString = readString();
         LocalDate birthday = LocalDate.parse(birthdayString);
-        System.out.println("Er det en konkurrencesvømmer? ja/nej");
+        System.out.println("Er det en konkurrencesvømmer? \nja\nnej");
         isCompetitor = yesOrNoToBoolean();
-        System.out.println("Er svømmeren studerende?");
+        System.out.println("Er svømmeren studerende?\nja\nnej");
         isStudent = yesOrNoToBoolean();
 
         controller.createSwimmer(navn, address, phoneNumber, mail, birthday, isCompetitor, isStudent);
@@ -311,9 +311,10 @@ public class UserInterface {
 
     private boolean yesOrNoToBoolean() {
         boolean answer = false;
-        int check = 0;
-        String yesOrNo = scanner.nextLine();
+        int check; //Er der en bedre måde at loop løkken?
+        String yesOrNo;
         do {
+            yesOrNo = scanner.nextLine();
             switch (yesOrNo) {
                 case "ja", "yes", "j", "y" -> {
                     answer = true;
