@@ -7,26 +7,27 @@ import java.util.Scanner;
 public class UserInterface {
     Scanner scanner;
     Controller controller;
-
-    public UserInterface(){
+    
+    public UserInterface() {
         scanner = new Scanner(System.in);
         controller = new Controller();
     }
-
+    
     public void startProgram() {
         initialLoad();
         userMenu();
     }
-
-    private void initialLoad(){
+    
+    public void initialLoad() {
         controller.initialLoad();
     }
-    public void endProgram(){
+    
+    public void endProgram() {
         System.out.println("\n Lukker programmet");
         controller.overwriteSwimmerDatabase();
         System.exit(0);
     }
-
+    
     private void userMenu() {
         int userChoice;
         do {
@@ -51,8 +52,8 @@ public class UserInterface {
             }
         } while (userChoice != 9);
     }
-
-    private void createSwimmerMenu(){
+    
+    private void createSwimmerMenu() {
         System.out.println("""
                 Vil du oprette et helt nyt medlem eller gendanne et gammel medlem?
                 1. Opret nyt medlem
@@ -60,23 +61,23 @@ public class UserInterface {
                 9. fortryd
                 """);
         int input = readInt();
-        switch (input){
+        switch (input) {
             case 1 -> createNewSwimmer();
             case 2 -> restoreArchivedSwimmer();
             case 3 -> showAllSwimmers();
-
+            
             case 8 -> archiveSwimmer();
             case 9 -> System.out.println("Vender tilbage til menuen");
             default -> System.out.println("Ugyldig input");
         }
     }
-
-    private void archiveSwimmer(){
+    
+    private void archiveSwimmer() {
         System.out.println("Indtast medlem der skal arkiveres");
         String searchParameter = scanner.nextLine();
-
+        
         ArrayList<Swimmer> localSwimmerList = controller.searchForMembers(searchParameter);
-
+        
         if (localSwimmerList.isEmpty()) {
             System.out.println("Kunne ikke finde medlemmet");
         } else {
@@ -87,35 +88,35 @@ public class UserInterface {
         }
         int chooseSwimmer = readInt();
         Swimmer swimmer = localSwimmerList.get(chooseSwimmer - 1);
-
+        
         swimmer.setArchived(true);
         swimmer.setHasPaid(false);
         System.out.println(swimmer.getName() + " er nu arkiveret.");
     }
-
+    
     private void restoreArchivedSwimmer() {
-
-            System.out.println("Indtast medlem der skal genoprettes");
-            String searchParameter = scanner.nextLine();
-
-            ArrayList<Swimmer> localSwimmerList = controller.searchForArchived(searchParameter);
-
-            if (localSwimmerList.isEmpty()) {
-                System.out.println("Kunne ikke finde medlemmet");
-            } else {
-                System.out.println("Vælg hvem der skal genoprettes (indtast tal)");
-                for (Swimmer swimmer : localSwimmerList) {
-                    System.out.println(localSwimmerList.indexOf(swimmer) + 1 + ". " + swimmer.getName());
-                }
+        
+        System.out.println("Indtast medlem der skal genoprettes");
+        String searchParameter = scanner.nextLine();
+        
+        ArrayList<Swimmer> localSwimmerList = controller.searchForArchived(searchParameter);
+        
+        if (localSwimmerList.isEmpty()) {
+            System.out.println("Kunne ikke finde medlemmet");
+        } else {
+            System.out.println("Vælg hvem der skal genoprettes (indtast tal)");
+            for (Swimmer swimmer : localSwimmerList) {
+                System.out.println(localSwimmerList.indexOf(swimmer) + 1 + ". " + swimmer.getName());
             }
-            int chooseSwimmer = readInt();
-            Swimmer swimmer = localSwimmerList.get(chooseSwimmer - 1);
-
-            swimmer.setArchived(false);
-            System.out.println(swimmer.getName() + " er nu genoprettet.");
-
+        }
+        int chooseSwimmer = readInt();
+        Swimmer swimmer = localSwimmerList.get(chooseSwimmer - 1);
+        
+        swimmer.setArchived(false);
+        System.out.println(swimmer.getName() + " er nu genoprettet.");
+        
     }
-
+    
     private void createNewSwimmer() {
         String navn;
         String address;
@@ -124,7 +125,7 @@ public class UserInterface {
         String birthdayString;
         boolean isCompetitor;
         boolean isStudent;
-
+        
         System.out.println("Indtast svømmerens navn");
         navn = readString();
         System.out.println("Indtast svømmerens addresse");
@@ -140,17 +141,17 @@ public class UserInterface {
         isCompetitor = yesOrNoToBoolean(readString());
         System.out.println("Er svømmeren studerende?");
         isStudent = yesOrNoToBoolean(readString());
-
-        controller.createSwimmer(navn,address,phoneNumber,mail,birthday,isCompetitor,isStudent);
+        
+        controller.createSwimmer(navn, address, phoneNumber, mail, birthday, isCompetitor, isStudent);
     }
-
-
+    
+    
     private void editSwimmer() {
         System.out.println("Indtast medlem der skal redigeres");
         String searchParameter = scanner.nextLine();
-
+        
         ArrayList<Swimmer> localSwimmerList = controller.searchForMembers(searchParameter);
-
+        
         if (localSwimmerList.isEmpty()) {
             System.out.println("Kunne ikke finde medlemmet");
         } else {
@@ -160,7 +161,7 @@ public class UserInterface {
             }
             int chooseSwimmer = readInt();
             Swimmer swimmer = localSwimmerList.get(chooseSwimmer - 1);
-
+            
             System.out.println("""
                     Hvad vil du redigere?
                     1. Navn
@@ -173,7 +174,7 @@ public class UserInterface {
                     9. Fortryd
                     """);
             int menuInput = readInt();
-
+            
             switch (menuInput) {
                 //TODO Lav hver switch til sin egen hjælpeemtode.
                 case 1:
@@ -194,10 +195,10 @@ public class UserInterface {
                     //TODO test om dette virker - vil sikre der ikke kan komme bogstaver i telefonnummeret.
                     System.out.println("Rediger " + swimmer.getPhoneNumber() + " eller tryk enter for at fortryde");
                     String newPhoneNumber = readString();
-                    if(!newPhoneNumber.isEmpty()){
+                    if (!newPhoneNumber.isEmpty()) {
                         swimmer.setPhoneNumber(newPhoneNumber);
                     }
-
+                    
                     break;
                 case 4:
                     System.out.println("Rediger " + swimmer.getMail() + " eller tryk enter for at fortryde");
@@ -287,19 +288,19 @@ public class UserInterface {
             }
         }
     }
-
-
-    private void showAllSwimmers(){
-        for(Swimmer swimmer : controller.getSwimmerList()){
+    
+    
+    private void showAllSwimmers() {
+        for (Swimmer swimmer : controller.getSwimmerList()) {
             System.out.println(swimmer.getName() + " " + swimmer.getCreationDate());
         }
     }
-
+    
     private boolean yesOrNoToBoolean(String yesOrNo) {
         boolean answer = false;
-        if (yesOrNo.equalsIgnoreCase("ja")){
+        if (yesOrNo.equalsIgnoreCase("ja")) {
             answer = true;
-        } else if (yesOrNo.equalsIgnoreCase("nej")){
+        } else if (yesOrNo.equalsIgnoreCase("nej")) {
             answer = false;
         } else {
             System.out.println("Forkert input.");
@@ -307,7 +308,7 @@ public class UserInterface {
         }
         return answer;
     }
-
+    
     private int readInt() {
         while (!scanner.hasNextInt()) {
             String text = scanner.next();
@@ -318,17 +319,17 @@ public class UserInterface {
         scanner.nextLine();
         return result;
     }
-
+    
     //Sørger for at input ikke er tomt. Strukturen i readInt virker ikke for string af en eller anden grund.
-    private String readString(){
+    private String readString() {
         String readString;
-        do{
-        readString = scanner.nextLine();
-        if(readString.isEmpty()){
-            System.out.println("Input må ikke være tom");
+        do {
+            readString = scanner.nextLine();
+            if (readString.isEmpty()) {
+                System.out.println("Input må ikke være tom");
+            }
         }
-        }
-        while(readString.isEmpty());
+        while (readString.isEmpty());
         return readString;
     }
 }
