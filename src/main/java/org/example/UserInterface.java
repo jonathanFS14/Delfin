@@ -75,9 +75,11 @@ public class UserInterface {
     private void archiveSwimmer() {
         System.out.println("Indtast medlem der skal arkiveres");
         String searchParameter = scanner.nextLine();
+
+        //TODO Flyt logik ud til controlleren
         
         ArrayList<Swimmer> localSwimmerList = controller.searchForMembers(searchParameter);
-        
+
         if (localSwimmerList.isEmpty()) {
             System.out.println("Kunne ikke finde medlemmet");
         } else {
@@ -85,10 +87,10 @@ public class UserInterface {
             for (Swimmer swimmer : localSwimmerList) {
                 System.out.println(localSwimmerList.indexOf(swimmer) + 1 + ". " + swimmer.getName());
             }
-        }
+        } // else: hvis der kun er ét resultat
         int chooseSwimmer = readInt();
         Swimmer swimmer = localSwimmerList.get(chooseSwimmer - 1);
-        
+
         swimmer.setArchived(true);
         swimmer.setHasPaid(false);
         System.out.println(swimmer.getName() + " er nu arkiveret.");
@@ -123,26 +125,27 @@ public class UserInterface {
         String phoneNumber;
         String mail;
         String birthdayString;
-        LocalDate birthday;
         boolean isCompetitor;
         boolean isStudent;
         boolean userChoice;
-        
-        System.out.println("Indtast svømmerens navn");
-        navn = readString();
-        System.out.println("Indtast svømmerens addresse");
-        address = readString();
-        System.out.println("Indtast svømmerens telefonnummer");
-        phoneNumber = readString();
-        System.out.println("Indtast svømmerens mail");
-        mail = readString();
-        System.out.println("Indtast svømmerens fødselsdato (på formen ÅÅÅÅ-MM-DD");
-        birthdayString = readString();
-        LocalDate birthday = LocalDate.parse(birthdayString);
-        System.out.println("Er det en konkurrencesvømmer? ja/nej");
-        isCompetitor = yesOrNoToBoolean();
-        System.out.println("Er svømmeren studerende?");
-        isStudent = yesOrNoToBoolean();
+    
+        LocalDate birthday;
+        do {
+            System.out.println("Indtast svømmerens navn");
+            navn = readString();
+            System.out.println("Indtast svømmerens addresse");
+            address = readString();
+            System.out.println("Indtast svømmerens telefonnummer");
+            phoneNumber = readString();
+            System.out.println("Indtast svømmerens mail");
+            mail = readString();
+            System.out.println("Indtast svømmerens fødselsdato (på formen ÅÅÅÅ-MM-DD");
+            birthdayString = readString();
+            birthday = LocalDate.parse(birthdayString);
+            System.out.println("Er det en konkurrencesvømmer? ja/nej");
+            isCompetitor = yesOrNoToBoolean();
+            System.out.println("Er svømmeren studerende?");
+            isStudent = yesOrNoToBoolean();
         
             System.out.println("\nDu er ved at tilføje følgende svømmer:" +
                     "\nNavn: " + navn +
@@ -153,7 +156,7 @@ public class UserInterface {
                     "\nEr konkurrencesvømmer: " + booleanToYesOrNo(isCompetitor) +
                     "\nEr studerende: " + booleanToYesOrNo(isStudent) +
                     "\n\nBekræft venligst (Ja/Nej) ");
-            userChoice = yesOrNoToBoolean(readString());
+            userChoice = yesOrNoToBoolean();
         
         } while (!userChoice);
     

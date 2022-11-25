@@ -14,10 +14,10 @@ public class Controller {
     }
     
     public void createSwimmer(String name, String address, String phoneNumber, String mail, LocalDate birthday, boolean isCompetitor, boolean isStudent) {
+        // TODO memberID + evt swimmer oprettelse skal håndteres af databasen
         int memberID = database.getSwimmerList().size();
-        Integer.parseInt(String.format("%03d", memberID));
-        
         Swimmer swimmer = new Swimmer(name, address, phoneNumber, mail, birthday, memberID, isCompetitor, isStudent);
+
         database.addSwimmerToDatabase(swimmer);
     }
     
