@@ -40,7 +40,7 @@ public class Filehandler {
         }
         return swimmerListFile;
     }
-    
+    //lol
     public void overwriteSwimmerDatabase(ArrayList<Swimmer> swimmerList) {
         try {
             PrintStream out = new PrintStream(fileName);
