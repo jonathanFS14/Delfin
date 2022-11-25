@@ -18,7 +18,7 @@ public class UserInterface {
         userMenu();
     }
 
-    public void initialLoad(){
+    private void initialLoad(){
         controller.initialLoad();
     }
     public void endProgram(){
@@ -289,11 +289,11 @@ public class UserInterface {
     }
 
 
-private void showAllSwimmers(){
+    private void showAllSwimmers(){
         for(Swimmer swimmer : controller.getSwimmerList()){
             System.out.println(swimmer.getName() + " " + swimmer.getCreationDate());
         }
-}
+    }
 
     private boolean yesOrNoToBoolean(String yesOrNo) {
         boolean answer = false;
