@@ -18,11 +18,11 @@ public class UserInterface {
         userMenu();
     }
     
-    public void initialLoad() {
+    private void initialLoad() {
         controller.initialLoad();
     }
     
-    public void endProgram() {
+    private void endProgram() {
         System.out.println("\n Lukker programmet");
         controller.overwriteSwimmerDatabase();
         System.exit(0);
