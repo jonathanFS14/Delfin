@@ -138,9 +138,9 @@ public class UserInterface {
         birthdayString = readString();
         LocalDate birthday = LocalDate.parse(birthdayString);
         System.out.println("Er det en konkurrencesvømmer? ja/nej");
-        isCompetitor = yesOrNoToBoolean(readString());
+        isCompetitor = yesOrNoToBoolean();
         System.out.println("Er svømmeren studerende?");
-        isStudent = yesOrNoToBoolean(readString());
+        isStudent = yesOrNoToBoolean();
         
         controller.createSwimmer(navn, address, phoneNumber, mail, birthday, isCompetitor, isStudent);
     }
@@ -321,19 +321,7 @@ public class UserInterface {
             System.out.println(swimmer.getName() + " " + swimmer.getCreationDate());
         }
     }
-    
-    private boolean yesOrNoToBoolean(String yesOrNo) {
-        boolean answer = false;
-        if (yesOrNo.equalsIgnoreCase("ja")) {
-            answer = true;
-        } else if (yesOrNo.equalsIgnoreCase("nej")) {
-            answer = false;
-        } else {
-            System.out.println("Forkert input.");
-            // TODO burde køre i loop sådan at man skal prøve igen hvis input er forkert.
-        }
-        return answer;
-    }*/
+
 
     private boolean yesOrNoToBoolean() {
         boolean answer = false;
