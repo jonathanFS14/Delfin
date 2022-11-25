@@ -123,25 +123,41 @@ public class UserInterface {
         String phoneNumber;
         String mail;
         String birthdayString;
+        LocalDate birthday;
         boolean isCompetitor;
         boolean isStudent;
+        boolean userChoice;
         
-        System.out.println("Indtast svømmerens navn");
-        navn = readString();
-        System.out.println("Indtast svømmerens addresse");
-        address = readString();
-        System.out.println("Indtast svømmerens telefonnummer");
-        phoneNumber = readString();
-        System.out.println("Indtast svømmerens mail");
-        mail = readString();
-        System.out.println("Indtast svømmerens fødselsdato (på formen ÅÅÅÅ-MM-DD");
-        birthdayString = readString();
-        LocalDate birthday = LocalDate.parse(birthdayString);
-        System.out.println("Er det en konkurrencesvømmer? ja/nej");
-        isCompetitor = yesOrNoToBoolean(readString());
-        System.out.println("Er svømmeren studerende?");
-        isStudent = yesOrNoToBoolean(readString());
+        do {
+            System.out.println("Indtast svømmerens navn");
+            navn = readString();
+            System.out.println("Indtast svømmerens addresse");
+            address = readString();
+            System.out.println("Indtast svømmerens telefonnummer");
+            phoneNumber = readString();
+            System.out.println("Indtast svømmerens mail");
+            mail = readString();
+            System.out.println("Indtast svømmerens fødselsdato (på formen ÅÅÅÅ-MM-DD");
+            birthdayString = readString();
+            birthday = LocalDate.parse(birthdayString);
+            System.out.println("Er det en konkurrencesvømmer? ja/nej");
+            isCompetitor = yesOrNoToBoolean(readString());
+            System.out.println("Er svømmeren studerende?");
+            isStudent = yesOrNoToBoolean(readString());
         
+            System.out.println("\nDu er ved at tilføje følgende svømmer:" +
+                    "\nNavn: " + navn +
+                    "\nAddresse: " + address +
+                    "\nTelefonnr: " + phoneNumber +
+                    "\nMail: " + mail +
+                    "\nFødselsdato: " + birthdayString +
+                    "\nEr konkurrencesvømmer: " + booleanToYesOrNo(isCompetitor) +
+                    "\nEr studerende: " + booleanToYesOrNo(isStudent) +
+                    "\n\nBekræft venligst (Ja/Nej) ");
+            userChoice = yesOrNoToBoolean(readString());
+        
+        } while (!userChoice);
+    
         controller.createSwimmer(navn, address, phoneNumber, mail, birthday, isCompetitor, isStudent);
     }
     
@@ -307,6 +323,18 @@ public class UserInterface {
             // TODO burde køre i loop sådan at man skal prøve igen hvis input er forkert.
         }
         return answer;
+    }
+    
+    private String booleanToYesOrNo(Boolean bool) {
+        String answer = null;
+        if (bool)
+            answer = "Ja";
+        else if (!bool)
+            answer = "Nej";
+        else
+            System.out.println("Forkert input.");
+        return answer;
+        
     }
     
     private int readInt() {
