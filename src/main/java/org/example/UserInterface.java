@@ -1,7 +1,9 @@
 package org.example;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class UserInterface {
@@ -126,7 +128,6 @@ public class UserInterface {
         boolean isCompetitor;
         boolean isStudent;
         boolean userChoice;
-    
         LocalDate birthday;
         do {
             System.out.println("Indtast svømmerens navn");
@@ -140,11 +141,12 @@ public class UserInterface {
             System.out.println("Indtast svømmerens fødselsdato (på formen ÅÅÅÅ-MM-DD");
             birthdayString = readString();
             birthday = LocalDate.parse(birthdayString);
+            validateBirthday(birthday);
             System.out.println("Er det en konkurrencesvømmer? ja/nej");
             isCompetitor = yesOrNoToBoolean();
             System.out.println("Er svømmeren studerende?");
             isStudent = yesOrNoToBoolean();
-        
+
             System.out.println("\nDu er ved at tilføje følgende svømmer:" +
                     "\nNavn: " + navn +
                     "\nAddresse: " + address +
@@ -155,12 +157,18 @@ public class UserInterface {
                     "\nEr studerende: " + booleanToYesOrNo(isStudent) +
                     "\n\nBekræft venligst (Ja/Nej) ");
             userChoice = yesOrNoToBoolean();
-        
+
         } while (!userChoice);
-    
+
         controller.createSwimmer(navn, address, phoneNumber, mail, birthday, isCompetitor, isStudent);
     }
-    
+
+    //TODO validate birthday skal udvides så man ikke kan taste forkert, lige nu kan man taste alt men ÅÅÅÅ-MM-DD
+    private void validateBirthday(LocalDate birthday){
+    if(Period.between(birthday,LocalDate.now()).isNegative()) {
+        System.out.println("den valgte fødselsdag er ikke mulig");
+    }
+    }
     
     private void editSwimmer() {
         System.out.println("Indtast medlem der skal redigeres");
@@ -329,21 +337,21 @@ public class UserInterface {
             }
         } while (inputStudyStatus != 1 && inputStudyStatus != 2 && inputStudyStatus != 3);
     }
-
+    
+    
     private void showAllSwimmers() {
         for (Swimmer swimmer : controller.getSwimmerList()) {
             System.out.println(swimmer.getName() + " " + swimmer.getCreationDate());
         }
     }
-
-
+    
     private boolean yesOrNoToBoolean() {
         boolean answer = false;
         int check; //Er der en bedre måde at loop løkken?
         String yesOrNo;
         do {
             yesOrNo = scanner.nextLine();
-            switch (yesOrNo) {
+            switch (yesOrNo.toLowerCase()) {
                 case "ja", "yes", "j", "y" -> {
                     answer = true;
                     check = 1;
@@ -361,7 +369,7 @@ public class UserInterface {
         while (check == 0);
         return answer;
     }
-    
+
     private String booleanToYesOrNo(Boolean bool) {
         String answer = null;
         if (bool)
@@ -370,9 +378,9 @@ public class UserInterface {
             answer = "Nej";
         else
             System.out.println("Forkert input.");
+            // TODO burde køre i loop sådan at man skal prøve igen hvis input er forkert.
         return answer;
-        
-    }
+        }
     
     private int readInt() {
         while (!scanner.hasNextInt()) {
