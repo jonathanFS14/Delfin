@@ -75,8 +75,6 @@ public class UserInterface {
     private void archiveSwimmer() {
         System.out.println("Indtast medlem der skal arkiveres");
         String searchParameter = scanner.nextLine();
-
-        //TODO Flyt logik ud til controlleren
         
         ArrayList<Swimmer> localSwimmerList = controller.searchForMembers(searchParameter);
 
@@ -194,7 +192,6 @@ public class UserInterface {
             int menuInput = readInt();
             
             switch (menuInput) {
-                //TODO Lav hver switch til sin egen hjælpeemtode.
                 case 1:
                     editSwimmerName(swimmer);
                     break;
@@ -243,7 +240,6 @@ public class UserInterface {
     }
 
     private void editSwimmerPhoneNumber(Swimmer swimmer) {
-        //TODO test om dette virker - vil sikre der ikke kan komme bogstaver i telefonnummeret.
         System.out.println("Rediger " + swimmer.getPhoneNumber() + " eller tryk enter for at fortryde");
         String newPhoneNumber = readString();
         if (!newPhoneNumber.isEmpty()) {
