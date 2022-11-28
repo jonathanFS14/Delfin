@@ -249,7 +249,7 @@ public class UserInterface {
 
     private void editSwimmerPhoneNumber(Swimmer swimmer) {
         System.out.println("Rediger " + swimmer.getPhoneNumber() + " eller tryk enter for at fortryde");
-        String newPhoneNumber = readString();
+        String newPhoneNumber = scanner.nextLine();
         if (!newPhoneNumber.isEmpty()) {
             swimmer.setPhoneNumber(newPhoneNumber);
         }
