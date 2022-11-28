@@ -140,8 +140,9 @@ public class UserInterface {
             mail = readString();
             System.out.println("Indtast svømmerens fødselsdato (på formen ÅÅÅÅ-MM-DD");
             birthdayString = readString();
+            validateBirthdayString(readString());
             birthday = LocalDate.parse(birthdayString);
-            validateBirthday(birthday);
+            validateBirthdayLocaleDate(birthday);
             System.out.println("Er det en konkurrencesvømmer? ja/nej");
             isCompetitor = yesOrNoToBoolean();
             System.out.println("Er svømmeren studerende?");
@@ -164,10 +165,18 @@ public class UserInterface {
     }
 
     //TODO validate birthday skal udvides så man ikke kan taste forkert, lige nu kan man taste alt men ÅÅÅÅ-MM-DD
-    private void validateBirthday(LocalDate birthday){
-    if(Period.between(birthday,LocalDate.now()).isNegative()) {
+    private void validateBirthdayLocaleDate(LocalDate birthday){
+    if(Period.between(birthday,LocalDate.now()).isNegative())
         System.out.println("den valgte fødselsdag er ikke mulig");
     }
+    private void validateBirthdayString (String readString) {
+        do {
+            try {
+                LocalDate.parse(readString);
+            } catch (Exception e) {
+                System.out.println("den valgte fødselsdag er ikke mulig");
+            }
+        } while ()
     }
     
     private void editSwimmer() {
