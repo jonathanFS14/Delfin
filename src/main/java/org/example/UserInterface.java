@@ -126,24 +126,40 @@ public class UserInterface {
         String birthdayString;
         boolean isCompetitor;
         boolean isStudent;
-        
-        System.out.println("Indtast svømmerens navn");
-        navn = readString();
-        System.out.println("Indtast svømmerens addresse");
-        address = readString();
-        System.out.println("Indtast svømmerens telefonnummer");
-        phoneNumber = readString();
-        System.out.println("Indtast svømmerens mail");
-        mail = readString();
-        System.out.println("Indtast svømmerens fødselsdato (på formen ÅÅÅÅ-MM-DD");
-        birthdayString = readString();
-        LocalDate birthday = LocalDate.parse(birthdayString);
-        validateBirthday(birthday);
-        System.out.println("Er det en konkurrencesvømmer? ja/nej");
-        isCompetitor = yesOrNoToBoolean(readString());
-        System.out.println("Er svømmeren studerende?");
-        isStudent = yesOrNoToBoolean(readString());
-        
+        boolean userChoice;
+
+        LocalDate birthday;
+        do {
+            System.out.println("Indtast svømmerens navn");
+            navn = readString();
+            System.out.println("Indtast svømmerens addresse");
+            address = readString();
+            System.out.println("Indtast svømmerens telefonnummer");
+            phoneNumber = readString();
+            System.out.println("Indtast svømmerens mail");
+            mail = readString();
+            System.out.println("Indtast svømmerens fødselsdato (på formen ÅÅÅÅ-MM-DD");
+            birthdayString = readString();
+            birthday = LocalDate.parse(birthdayString);
+            validateBirthday(birthday);
+            System.out.println("Er det en konkurrencesvømmer? ja/nej");
+            isCompetitor = yesOrNoToBoolean();
+            System.out.println("Er svømmeren studerende?");
+            isStudent = yesOrNoToBoolean();
+
+            System.out.println("\nDu er ved at tilføje følgende svømmer:" +
+                    "\nNavn: " + navn +
+                    "\nAddresse: " + address +
+                    "\nTelefonnr: " + phoneNumber +
+                    "\nMail: " + mail +
+                    "\nFødselsdato: " + birthdayString +
+                    "\nEr konkurrencesvømmer: " + booleanToYesOrNo(isCompetitor) +
+                    "\nEr studerende: " + booleanToYesOrNo(isStudent) +
+                    "\n\nBekræft venligst (Ja/Nej) ");
+            userChoice = yesOrNoToBoolean();
+
+        } while (!userChoice);
+
         controller.createSwimmer(navn, address, phoneNumber, mail, birthday, isCompetitor, isStudent);
     }
 
@@ -186,106 +202,25 @@ public class UserInterface {
             switch (menuInput) {
                 //TODO Lav hver switch til sin egen hjælpeemtode.
                 case 1:
-                    System.out.println("Rediger " + swimmer.getName() + " eller tryk enter for at fortryde");
-                    String newName = scanner.nextLine();
-                    if (!newName.isEmpty()) {
-                        swimmer.setName(newName);
-                    }
+                    editSwimmerName(swimmer);
                     break;
                 case 2:
-                    System.out.println("Rediger " + swimmer.getAddress() + " eller tryk enter for at fortryde");
-                    String newAddress = scanner.nextLine();
-                    if (!newAddress.isEmpty()) {
-                        swimmer.setAddress(newAddress);
-                    }
+                    editSwimmerAddress(swimmer);
                     break;
                 case 3:
-                    //TODO test om dette virker - vil sikre der ikke kan komme bogstaver i telefonnummeret.
-                    System.out.println("Rediger " + swimmer.getPhoneNumber() + " eller tryk enter for at fortryde");
-                    String newPhoneNumber = readString();
-                    if (!newPhoneNumber.isEmpty()) {
-                        swimmer.setPhoneNumber(newPhoneNumber);
-                    }
-                    
+                    editSwimmerPhoneNumber(swimmer);
                     break;
                 case 4:
-                    System.out.println("Rediger " + swimmer.getMail() + " eller tryk enter for at fortryde");
-                    String newMail = scanner.nextLine();
-                    if (!newMail.isEmpty()) {
-                        swimmer.setAddress(newMail);
-                    }
+                    editSwimmerMail(swimmer);
                     break;
                 case 5:
-                    System.out.println("Sæt" + swimmer.getName() + "'s aktivitetsstatus");
-                    int inputActiveStatus;
-                    do {
-                        System.out.println("""
-                                1. Aktivt medlemsskab
-                                2. Passivt medlemsskab
-                                3. fortryd
-                                """);
-                        inputActiveStatus = readInt();
-                        switch (inputActiveStatus) {
-                            case 1:
-                                swimmer.setActive(true);
-                                break;
-                            case 2:
-                                swimmer.setActive(false);
-                                break;
-                            case 3:
-                                System.out.println("Vender tilbage");
-                            default:
-                                System.out.println("ugyldigt input, prøv igen");
-                        }
-                    } while (inputActiveStatus != 1 && inputActiveStatus != 2 && inputActiveStatus != 3);
+                    editSwimmerActiveStatus(swimmer);
                     break;
                 case 6:
-                    System.out.println("Sæt" + swimmer.getName() + "'s konkurrencestatus");
-                    int inputCompetitionStatus;
-                    do {
-                        System.out.println("""
-                                1. Konkurrencesvømmer
-                                2. Motionssvømmer
-                                3. fortryd
-                                """);
-                        inputCompetitionStatus = readInt();
-                        switch (inputCompetitionStatus) {
-                            case 1:
-                                swimmer.setCompetitor(true);
-                                break;
-                            case 2:
-                                swimmer.setCompetitor(false);
-                                break;
-                            case 3:
-                                System.out.println("Vender tilbage");
-                            default:
-                                System.out.println("ugyldigt input, prøv igen");
-                        }
-                    } while (inputCompetitionStatus != 1 && inputCompetitionStatus != 2 && inputCompetitionStatus != 3);
+                    editSwimmerCompetitionStatus(swimmer);
                     break;
                 case 7:
-                    System.out.println("Sæt" + swimmer.getName() + "'s studiestatus");
-                    int inputStudyStatus;
-                    do {
-                        System.out.println("""
-                                1. Medlem er studerende
-                                2. Medlem er ikke studerende
-                                3. fortryd
-                                """);
-                        inputStudyStatus = readInt();
-                        switch (inputStudyStatus) {
-                            case 1:
-                                swimmer.setStudent(true);
-                                break;
-                            case 2:
-                                swimmer.setStudent(false);
-                                break;
-                            case 3:
-                                System.out.println("Vender tilbage");
-                            default:
-                                System.out.println("ugyldigt input, prøv igen");
-                        }
-                    } while (inputStudyStatus != 1 && inputStudyStatus != 2 && inputStudyStatus != 3);
+                    editStudyStatus(swimmer);
                     break;
                 case 9:
                     System.out.println("Vender tilbage til menuen");
@@ -295,6 +230,114 @@ public class UserInterface {
                     break;
             }
         }
+    }
+
+    private void editSwimmerName(Swimmer swimmer) {
+        System.out.println("Rediger " + swimmer.getName() + " eller tryk enter for at fortryde");
+        String newName = scanner.nextLine();
+        if (!newName.isEmpty()) {
+            swimmer.setName(newName);
+        }
+    }
+
+    private void editSwimmerAddress(Swimmer swimmer) {
+        System.out.println("Rediger " + swimmer.getAddress() + " eller tryk enter for at fortryde");
+        String newAddress = scanner.nextLine();
+        if (!newAddress.isEmpty()) {
+            swimmer.setAddress(newAddress);
+        }
+    }
+
+    private void editSwimmerPhoneNumber(Swimmer swimmer) {
+        //TODO test om dette virker - vil sikre der ikke kan komme bogstaver i telefonnummeret.
+        System.out.println("Rediger " + swimmer.getPhoneNumber() + " eller tryk enter for at fortryde");
+        String newPhoneNumber = readString();
+        if (!newPhoneNumber.isEmpty()) {
+            swimmer.setPhoneNumber(newPhoneNumber);
+        }
+    }
+
+    private void editSwimmerMail(Swimmer swimmer){
+        System.out.println("Rediger " + swimmer.getMail() + " eller tryk enter for at fortryde");
+        String newMail = scanner.nextLine();
+        if (!newMail.isEmpty()) {
+            swimmer.setMail(newMail);
+        }
+    }
+
+    private void editSwimmerActiveStatus(Swimmer swimmer) {
+        System.out.println("Sæt" + swimmer.getName() + "'s aktivitetsstatus");
+        int inputActiveStatus;
+        do {
+            System.out.println("""
+                                1. Aktivt medlemsskab
+                                2. Passivt medlemsskab
+                                3. fortryd
+                                """);
+            inputActiveStatus = readInt();
+            switch (inputActiveStatus) {
+                case 1:
+                    swimmer.setActive(true);
+                    break;
+                case 2:
+                    swimmer.setActive(false);
+                    break;
+                case 3:
+                    System.out.println("Vender tilbage");
+                default:
+                    System.out.println("ugyldigt input, prøv igen");
+            }
+        } while (inputActiveStatus != 1 && inputActiveStatus != 2 && inputActiveStatus != 3);
+    }
+
+    private void editSwimmerCompetitionStatus(Swimmer swimmer) {
+        System.out.println("Sæt" + swimmer.getName() + "'s konkurrencestatus");
+        int inputCompetitionStatus;
+        do {
+            System.out.println("""
+                                1. Konkurrencesvømmer
+                                2. Motionssvømmer
+                                3. fortryd
+                                """);
+            inputCompetitionStatus = readInt();
+            switch (inputCompetitionStatus) {
+                case 1:
+                    swimmer.setCompetitor(true);
+                    break;
+                case 2:
+                    swimmer.setCompetitor(false);
+                    break;
+                case 3:
+                    System.out.println("Vender tilbage");
+                default:
+                    System.out.println("ugyldigt input, prøv igen");
+            }
+        } while (inputCompetitionStatus != 1 && inputCompetitionStatus != 2 && inputCompetitionStatus != 3);
+    }
+
+    private void editStudyStatus(Swimmer swimmer) {
+        System.out.println("Sæt" + swimmer.getName() + "'s studiestatus");
+        int inputStudyStatus;
+        do {
+            System.out.println("""
+                                1. Medlem er studerende
+                                2. Medlem er ikke studerende
+                                3. fortryd
+                                """);
+            inputStudyStatus = readInt();
+            switch (inputStudyStatus) {
+                case 1:
+                    swimmer.setStudent(true);
+                    break;
+                case 2:
+                    swimmer.setStudent(false);
+                    break;
+                case 3:
+                    System.out.println("Vender tilbage");
+                default:
+                    System.out.println("ugyldigt input, prøv igen");
+            }
+        } while (inputStudyStatus != 1 && inputStudyStatus != 2 && inputStudyStatus != 3);
     }
     
     
@@ -306,11 +349,36 @@ public class UserInterface {
     
     private boolean yesOrNoToBoolean(String yesOrNo) {
         boolean answer = false;
-        if (yesOrNo.equalsIgnoreCase("ja")) {
-            answer = true;
-        } else if (yesOrNo.equalsIgnoreCase("nej")) {
-            answer = false;
-        } else {
+        int check; //Er der en bedre måde at loop løkken?
+        String yesOrNo;
+        do {
+            yesOrNo = scanner.nextLine();
+            switch (yesOrNo) {
+                case "ja", "yes", "j", "y" -> {
+                    answer = true;
+                    check = 1;
+                }
+                case "nej", "no", "n" ->{
+                    answer = false;
+                    check = 1;
+                }
+                default -> {
+                    System.out.println("Ugyldig input");
+                    check = 0;
+                }
+            }
+        }
+        while (check == 0);
+        return answer;
+    }
+
+    private String booleanToYesOrNo(Boolean bool) {
+        String answer = null;
+        if (bool)
+            answer = "Ja";
+        else if (!bool)
+            answer = "Nej";
+        else
             System.out.println("Forkert input.");
             // TODO burde køre i loop sådan at man skal prøve igen hvis input er forkert.
         }

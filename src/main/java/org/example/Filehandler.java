@@ -18,7 +18,7 @@ public class Filehandler {
             
             while (sc.hasNextLine()) {
                 String linje = sc.nextLine();
-                String[] attributes = linje.split(",");
+                String[] attributes = linje.split(";");
                 Swimmer swimmer = new Swimmer(
                         attributes[0], // name
                         attributes[1], // address
@@ -53,10 +53,10 @@ public class Filehandler {
     }
     
     private String toFileWriter(Swimmer swimmer) {
-        return (swimmer.getName() + "," + swimmer.getAddress() + "," + swimmer.getPhoneNumber() + "," +
-                swimmer.getMail() + "," + swimmer.getBirthday() + "," + swimmer.getCreationDate() + "," +
-                swimmer.getMemberID() + "," + swimmer.isHasPaid() + "," + swimmer.isActive() + "," +
-                swimmer.isCompetitor() + "," + swimmer.isStudent() + "," + swimmer.isArchived());
+        return (swimmer.getName() + ";" + swimmer.getAddress() + ";" + swimmer.getPhoneNumber() + ";" +
+                swimmer.getMail() + ";" + swimmer.getBirthday() + ";" + swimmer.getCreationDate() + ";" +
+                swimmer.getMemberID() + ";" + swimmer.isHasPaid() + ";" + swimmer.isActive() + ";" +
+                swimmer.isCompetitor() + ";" + swimmer.isStudent() + ";" + swimmer.isArchived());
     }
     
 }
