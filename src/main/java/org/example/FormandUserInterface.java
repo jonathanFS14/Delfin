@@ -3,19 +3,18 @@ package org.example;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Scanner;
 
-public class UserInterface {
+public class FormandUserInterface {
     Scanner scanner;
     Controller controller;
     
-    public UserInterface() {
+    public FormandUserInterface() {
         scanner = new Scanner(System.in);
         controller = new Controller();
     }
     
-    public void startProgram() {
+    public void formandUI() {
         initialLoad();
         userMenu();
     }
