@@ -1,5 +1,6 @@
 package org.example;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Database {
@@ -13,6 +14,11 @@ public class Database {
     
     public void addSwimmerToDatabase(Swimmer swimmer) {
         swimmerList.add(swimmer);
+    }
+    public void createSwimmer(String name, String address, String phoneNumber, String mail, LocalDate birthday, boolean isCompetitor, boolean isStudent){
+        int memberID = getSwimmerList().size();
+        Swimmer swimmer = new Swimmer(name, address, phoneNumber, mail, birthday, memberID, isCompetitor, isStudent);
+        addSwimmerToDatabase(swimmer);
     }
     
     //Kan søge både med medlemmets navn og deres medlemsnummer
