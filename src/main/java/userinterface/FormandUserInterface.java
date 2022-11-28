@@ -1,4 +1,7 @@
-package org.example;
+package userinterface;
+
+import domain.Controller;
+import domain.Swimmer;
 
 import java.time.LocalDate;
 import java.time.Period;

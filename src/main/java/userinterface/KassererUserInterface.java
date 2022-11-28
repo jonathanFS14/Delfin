@@ -1,4 +1,6 @@
-package org.example;
+package userinterface;
+
+import domain.Controller;
 
 import java.util.Scanner;
 

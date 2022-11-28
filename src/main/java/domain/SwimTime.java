@@ -1,4 +1,4 @@
-package org.example;
+package domain;
 
 public class SwimTime {
     

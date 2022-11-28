@@ -1,4 +1,6 @@
-package org.example;
+package main;
+
+import userinterface.MainUI;
 
 public class Main {
     public static void main(String[] args) {

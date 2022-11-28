@@ -1,4 +1,4 @@
-package org.example;
+package domain;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

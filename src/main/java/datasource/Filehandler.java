@@ -1,4 +1,6 @@
-package org.example;
+package datasource;
+
+import domain.Swimmer;
 
 import java.io.File;
 import java.io.IOException;
