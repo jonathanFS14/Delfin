@@ -3,23 +3,25 @@ package org.example;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Scanner;
 
-public class UserInterface {
+public class FormandUserInterface {
     Scanner scanner;
     Controller controller;
-    
-    public UserInterface() {
+    MainUI mainUI;
+
+    public FormandUserInterface() {
         scanner = new Scanner(System.in);
         controller = new Controller();
+        mainUI = new MainUI();
     }
     
-    public void startProgram() {
+
+    public void formandUI() {
         initialLoad();
         userMenu();
     }
-    
+
     private void initialLoad() {
         controller.initialLoad();
     }
@@ -413,6 +415,20 @@ public class UserInterface {
         }
         while (readString.isEmpty());
         return readString;
+    }
+
+    public void returnToMainUI() {
+        int input;
+        System.out.println("""
+                Vil du vende tilbage til login skærmen?
+                1. Ja
+                2. Nej""");
+        input = scanner.nextInt();
+        switch (input){
+            case 1 -> mainUI.login();
+            case 2 -> userMenu();
+        }
+
     }
 }
 
