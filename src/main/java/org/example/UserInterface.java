@@ -3,6 +3,7 @@ package org.example;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class UserInterface {
@@ -129,7 +130,6 @@ public class UserInterface {
         boolean isCompetitor;
         boolean isStudent;
         boolean userChoice;
-
         LocalDate birthday;
         do {
             System.out.println("Indtast svømmerens navn");
@@ -349,13 +349,13 @@ public class UserInterface {
         }
     }
     
-    private boolean yesOrNoToBoolean(String yesOrNo) {
+    private boolean yesOrNoToBoolean() {
         boolean answer = false;
         int check; //Er der en bedre måde at loop løkken?
         String yesOrNo;
         do {
             yesOrNo = scanner.nextLine();
-            switch (yesOrNo) {
+            switch (yesOrNo.toLowerCase()) {
                 case "ja", "yes", "j", "y" -> {
                     answer = true;
                     check = 1;
@@ -383,9 +383,8 @@ public class UserInterface {
         else
             System.out.println("Forkert input.");
             // TODO burde køre i loop sådan at man skal prøve igen hvis input er forkert.
-        }
         return answer;
-    }
+        }
     
     private int readInt() {
         while (!scanner.hasNextInt()) {
