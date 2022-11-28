@@ -76,9 +76,11 @@ public class UserInterface {
     private void archiveSwimmer() {
         System.out.println("Indtast medlem der skal arkiveres");
         String searchParameter = scanner.nextLine();
+
+        //TODO Flyt logik ud til controlleren
         
         ArrayList<Swimmer> localSwimmerList = controller.searchForMembers(searchParameter);
-        
+
         if (localSwimmerList.isEmpty()) {
             System.out.println("Kunne ikke finde medlemmet");
         } else {
@@ -86,10 +88,10 @@ public class UserInterface {
             for (Swimmer swimmer : localSwimmerList) {
                 System.out.println(localSwimmerList.indexOf(swimmer) + 1 + ". " + swimmer.getName());
             }
-        }
+        } // else: hvis der kun er ét resultat
         int chooseSwimmer = readInt();
         Swimmer swimmer = localSwimmerList.get(chooseSwimmer - 1);
-        
+
         swimmer.setArchived(true);
         swimmer.setHasPaid(false);
         System.out.println(swimmer.getName() + " er nu arkiveret.");
