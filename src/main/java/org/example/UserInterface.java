@@ -1,6 +1,7 @@
 package org.example;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -137,6 +138,7 @@ public class UserInterface {
         System.out.println("Indtast svømmerens fødselsdato (på formen ÅÅÅÅ-MM-DD");
         birthdayString = readString();
         LocalDate birthday = LocalDate.parse(birthdayString);
+        validateBirthday(birthday);
         System.out.println("Er det en konkurrencesvømmer? ja/nej");
         isCompetitor = yesOrNoToBoolean(readString());
         System.out.println("Er svømmeren studerende?");
@@ -144,7 +146,13 @@ public class UserInterface {
         
         controller.createSwimmer(navn, address, phoneNumber, mail, birthday, isCompetitor, isStudent);
     }
-    
+
+    //TODO validate birthday skal udvides så man ikke kan taste forkert, lige nu kan man taste alt men ÅÅÅÅ-MM-DD
+    private void validateBirthday(LocalDate birthday){
+    if(Period.between(birthday,LocalDate.now()).isNegative()) {
+        System.out.println("den valgte fødselsdag er ikke mulig");
+    }
+    }
     
     private void editSwimmer() {
         System.out.println("Indtast medlem der skal redigeres");
