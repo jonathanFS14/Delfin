@@ -8,12 +8,11 @@ import java.util.Scanner;
 public class FormandUserInterface {
     Scanner scanner;
     Controller controller;
-    MainUI mainUI;
+
 
     public FormandUserInterface() {
         scanner = new Scanner(System.in);
         controller = new Controller();
-        mainUI = new MainUI();
     }
     
 
@@ -35,9 +34,7 @@ public class FormandUserInterface {
     private void userMenu() {
         int userChoice;
         do {
-            System.out.println("""
-                    Velkommen til Delfinen svømmeklub
-                                    
+            System.out.println("""                
                     Hvad vil du gøre?                       
                     1. Opret ny svømmer/ gendan gammel svømmer
                     2. Rediger en eksisterende svømmer
@@ -126,12 +123,11 @@ public class FormandUserInterface {
         String address;
         String phoneNumber;
         String mail;
-        String birthdayString;
         boolean isCompetitor;
         boolean isStudent;
-        boolean userChoice;
+
         LocalDate birthday;
-        do {
+
             System.out.println("Indtast svømmerens navn");
             navn = readString();
             System.out.println("Indtast svømmerens addresse");
@@ -141,10 +137,7 @@ public class FormandUserInterface {
             System.out.println("Indtast svømmerens mail");
             mail = readString();
             System.out.println("Indtast svømmerens fødselsdato (på formen ÅÅÅÅ-MM-DD");
-            birthdayString = readString();
-            validateBirthdayString(readString());
-            birthday = LocalDate.parse(birthdayString);
-            validateBirthdayLocaleDate(birthday);
+            birthday = validateBirthdayString();
             System.out.println("Er det en konkurrencesvømmer? ja/nej");
             isCompetitor = yesOrNoToBoolean();
             System.out.println("Er svømmeren studerende?");
@@ -155,30 +148,34 @@ public class FormandUserInterface {
                     "\nAddresse: " + address +
                     "\nTelefonnr: " + phoneNumber +
                     "\nMail: " + mail +
-                    "\nFødselsdato: " + birthdayString +
+                    "\nFødselsdato: " + birthday +
                     "\nEr konkurrencesvømmer: " + booleanToYesOrNo(isCompetitor) +
                     "\nEr studerende: " + booleanToYesOrNo(isStudent) +
                     "\n\nBekræft venligst (Ja/Nej) ");
-            userChoice = yesOrNoToBoolean();
-
-        } while (!userChoice);
-
-        controller.createSwimmer(navn, address, phoneNumber, mail, birthday, isCompetitor, isStudent);
+            if(yesOrNoToBoolean()){
+        controller.createSwimmer(navn, address, phoneNumber, mail, birthday, isCompetitor, isStudent);}
     }
 
-    //TODO validate birthday skal udvides så man ikke kan taste forkert, lige nu kan man taste alt men ÅÅÅÅ-MM-DD
-    private void validateBirthdayLocaleDate(LocalDate birthday){
-    if(Period.between(birthday,LocalDate.now()).isNegative())
-        System.out.println("den valgte fødselsdag er ikke mulig");
+    private boolean validateBirthdayLocaleDate(LocalDate birthday){
+    return Period.between(birthday,LocalDate.now()).isNegative();
     }
-    private void validateBirthdayString (String readString) {
+    private LocalDate validateBirthdayString () {
+        LocalDate localDate = null;
+        String input;
         do {
+            input = readString();
             try {
-                LocalDate.parse(readString);
+                localDate = LocalDate.parse(input);
+                if(validateBirthdayLocaleDate(localDate)){
+                    System.out.println("den valgte fødselsdag er ikke mulig");
+                    localDate = null;
+                }
             } catch (Exception e) {
                 System.out.println("den valgte fødselsdag er ikke mulig");
             }
-        } while ()
+
+        } while (localDate == null);
+            return localDate;
     }
     
     private void editSwimmer() {
@@ -417,7 +414,7 @@ public class FormandUserInterface {
         return readString;
     }
 
-    public void returnToMainUI() {
+  /*  public void returnToMainUI() {
         int input;
         System.out.println("""
                 Vil du vende tilbage til login skærmen?
@@ -429,6 +426,6 @@ public class FormandUserInterface {
             case 2 -> userMenu();
         }
 
-    }
+    }*/
 }
 
