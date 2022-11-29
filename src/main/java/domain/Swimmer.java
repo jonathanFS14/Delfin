@@ -17,10 +17,13 @@ public class Swimmer {
     private boolean isCompetitor;
     private boolean isStudent;
     private boolean isArchived;
+    private LocalDate paymentDate;
     private ArrayList<SwimTime> competitionResults;
     private ArrayList<SwimTime> trainingResults;
-    
-    
+
+
+
+
     public Swimmer(String name, String address, String phoneNumber, String mail, LocalDate birthday, int memberID, boolean isCompetitor, boolean isStudent) {
         this.name = name;
         this.address = address;
@@ -34,12 +37,13 @@ public class Swimmer {
         this.isCompetitor = isCompetitor;
         this.isStudent = isStudent;
         isArchived = false;
+        paymentDate = LocalDate.parse("2000-01-01");
         competitionResults = new ArrayList<SwimTime>();
         trainingResults = new ArrayList<SwimTime>();
     }
     
     //Denne constructor bruges når der skal læses fra filen i filehandler så alle attributer kommer med.
-    public Swimmer(String name, String address, String phoneNumber, String mail, LocalDate birthday, LocalDate creationDate, int memberID, boolean hasPaid, boolean isActive, boolean isCompetitor, boolean isStudent, boolean isArchived) {
+    public Swimmer(String name, String address, String phoneNumber, String mail, LocalDate birthday, LocalDate creationDate, int memberID, boolean hasPaid, boolean isActive, boolean isCompetitor, boolean isStudent, boolean isArchived, LocalDate paymentDate) {
         this.name = name;
         this.address = address;
         this.phoneNumber = phoneNumber;
@@ -52,10 +56,19 @@ public class Swimmer {
         this.isCompetitor = isCompetitor;
         this.isStudent = isStudent;
         this.isArchived = isArchived;
+        paymentDate = LocalDate.parse("2000-01-01");
         competitionResults = new ArrayList<SwimTime>();
         trainingResults = new ArrayList<SwimTime>();
     }
-    
+
+    public Swimmer() {
+
+    }
+
+    public LocalDate getPaymentDate() {
+        return paymentDate;
+    }
+
     public String getName() {
         return name;
     }
@@ -104,14 +117,15 @@ public class Swimmer {
         return memberID;
     }
     
-    public boolean isHasPaid() {
+    public boolean getHasPaid() {
         return hasPaid;
     }
     
     public void setHasPaid(boolean hasPaid) {
         this.hasPaid = hasPaid;
     }
-    
+
+
     public boolean isActive() {
         return isActive;
     }
@@ -143,6 +157,11 @@ public class Swimmer {
     public void setArchived(boolean archived) {
         isArchived = archived;
     }
+
+    public void setPaymentDate(LocalDate paymentDate) {
+        this.paymentDate = paymentDate;
+    }
+
     
     public ArrayList<SwimTime> getCompetitionResults() {
         return competitionResults;

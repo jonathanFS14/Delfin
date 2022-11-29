@@ -33,7 +33,9 @@ public class Filehandler {
                         Boolean.parseBoolean(attributes[8]), // isActive
                         Boolean.parseBoolean(attributes[9]), // isCompetitor
                         Boolean.parseBoolean(attributes[10]), // isStudent
-                        Boolean.parseBoolean(attributes[11]) // isArchived
+                        Boolean.parseBoolean(attributes[11]), // isArchived
+                        LocalDate.parse(attributes[12]) // paymentDate
+
                 );
                 swimmerListFile.add(swimmer);
             }
@@ -42,7 +44,7 @@ public class Filehandler {
         }
         return swimmerListFile;
     }
-    //lol
+
     public void overwriteSwimmerDatabase(ArrayList<Swimmer> swimmerList) {
         try {
             PrintStream out = new PrintStream(fileName);
@@ -57,8 +59,9 @@ public class Filehandler {
     private String toFileWriter(Swimmer swimmer) {
         return (swimmer.getName() + ";" + swimmer.getAddress() + ";" + swimmer.getPhoneNumber() + ";" +
                 swimmer.getMail() + ";" + swimmer.getBirthday() + ";" + swimmer.getCreationDate() + ";" +
-                swimmer.getMemberID() + ";" + swimmer.isHasPaid() + ";" + swimmer.isActive() + ";" +
-                swimmer.isCompetitor() + ";" + swimmer.isStudent() + ";" + swimmer.isArchived());
+                swimmer.getMemberID() + ";" + swimmer.getHasPaid() + ";" + swimmer.isActive() + ";" +
+                swimmer.isCompetitor() + ";" + swimmer.isStudent() + ";" + swimmer.isArchived()) + ";" +
+                swimmer.getPaymentDate();
     }
     
 }
