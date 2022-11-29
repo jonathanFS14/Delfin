@@ -77,7 +77,6 @@ public class KassererUserInterface {
             System.out.println("Kunne ikke finde medlemmet");
         }
 
-
     }
 
     private void showExpectedIncome() {
@@ -89,7 +88,12 @@ public class KassererUserInterface {
 
     private void initialLoad() {
         controller.initialLoad();
-        
+        for (Swimmer swimmer: controller.getSwimmerList()) {
+            if (swimmer.getPaymentDate().plusYears(1).isBefore(LocalDate.now()))
+                swimmer.setHasPaid(false);
+
+        }
+
     }
 
     private void editSwimmerHasPaid() {
