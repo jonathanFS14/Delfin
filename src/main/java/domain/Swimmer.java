@@ -56,7 +56,7 @@ public class Swimmer {
         this.isCompetitor = isCompetitor;
         this.isStudent = isStudent;
         this.isArchived = isArchived;
-        paymentDate = LocalDate.parse("2000-01-01");
+        this.paymentDate = paymentDate;
         competitionResults = new ArrayList<SwimTime>();
         trainingResults = new ArrayList<SwimTime>();
     }
