@@ -91,5 +91,11 @@ public class Database {
             }
         }
     }
-    
+
+    public ArrayList<Swimmer> getJuniorTeam() {
+        return juniorTeam;
+    }
+    public ArrayList<Swimmer>getSeniorTeam(){
+    return seniorTeam;
+    }
 }

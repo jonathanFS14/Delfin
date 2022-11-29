@@ -42,5 +42,12 @@ public class Controller {
     public void setCompetitorsToTeams(){
         database.setCompetitorsToTeams();
     }
+
+    public ArrayList<Swimmer>getSeniorTeam(){
+        return database.getSeniorTeam();
+    }
+    public ArrayList<Swimmer>getJuniorTeam(){
+        return database.getJuniorTeam();
+    }
     
 }
