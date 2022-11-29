@@ -1,8 +1,5 @@
 package domain;
 import datasource.Filehandler;
-import userinterface.FormandUserInterface;
-import userinterface.KassererUserInterface;
-import userinterface.TrainerUserInterface;
 import java.time.LocalDate;
 import java.util.ArrayList;
 public class Controller {
@@ -10,16 +7,12 @@ public class Controller {
     Database database;
     Filehandler filehandler;
 
-    FormandUserInterface formandUserInterface;
-    KassererUserInterface kassererUserInterface;
-    TrainerUserInterface trainerUserInterface;
+
     
     public Controller() {
         database = new Database();
         filehandler = new Filehandler();
-        formandUserInterface = new FormandUserInterface();
-        kassererUserInterface = new KassererUserInterface();
-        trainerUserInterface = new TrainerUserInterface();
+
     }
     
     public void createSwimmer(String name, String address, String phoneNumber, String mail, LocalDate birthday, boolean isCompetitor, boolean isStudent) {
@@ -57,14 +50,5 @@ public class Controller {
         return database.getJuniorTeam();
     }
 
-    public void formandUI(){
-        formandUserInterface.formandUI();
-    }
-    public void trainerUI(){
-        trainerUserInterface.trainerUI();
-    }
-    public void kassererUI(){
-        kassererUserInterface.kassererUI();
-    }
     
 }

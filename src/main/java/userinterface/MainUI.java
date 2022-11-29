@@ -4,14 +4,16 @@ import domain.Controller;
 
 import java.util.Scanner;
 
-public class MainUI {
+public class MainUI extends SuperUI {
 
-    Scanner scanner;
-    Controller controller;
+    FormandUserInterface formandUserInterface;
+    KassererUserInterface kassererUserInterface;
+    TrainerUserInterface trainerUserInterface;
 
-    public MainUI() {
-        scanner = new Scanner(System.in);
-        controller = new Controller();
+    public MainUI(){
+        formandUserInterface = new FormandUserInterface();
+        kassererUserInterface = new KassererUserInterface();
+        trainerUserInterface = new TrainerUserInterface();
     }
 
     public void login() {
@@ -25,9 +27,9 @@ public class MainUI {
                     9. Luk programmet""");
             input = scanner.nextInt();
             switch (input) {
-                case 1 -> controller.formandUI();
-                case 2 -> controller.kassererUI();
-                case 3 -> controller.trainerUI();
+                case 1 -> formandUserInterface.formandUI();
+                case 2 -> kassererUserInterface.kassererUI();
+                case 3 -> trainerUserInterface.trainerUI();
                 case 9 -> endProgram();
                 default -> System.out.println("Ugyldigt Input");
             }
@@ -60,29 +62,7 @@ public class MainUI {
         while (input != 1 && input != 2);
     }
 
-    protected int readInt() {
-        while (!scanner.hasNextInt()) {
-            String text = scanner.next();
-            System.out.println(text + " er ugyldig input, indtast igen.");
-        }
-        int result;
-        result = scanner.nextInt();
-        scanner.nextLine();
-        return result;
-    }
 
-    //Sørger for at input ikke er tomt. Strukturen i readInt virker ikke for string af en eller anden grund.
-    protected String readString() {
-        String readString;
-        do {
-            readString = scanner.nextLine();
-            if (readString.isEmpty()) {
-                System.out.println("Input må ikke være tom");
-            }
-        }
-        while (readString.isEmpty());
-        return readString;
-    }
 
 /*     public void returnToMainUI() {
           int input;

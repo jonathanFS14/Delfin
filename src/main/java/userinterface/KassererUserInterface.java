@@ -4,7 +4,7 @@ import domain.Controller;
 
 import java.util.Scanner;
 
-public class KassererUserInterface extends MainUI {
+public class KassererUserInterface extends SuperUI {
 
     public void kassererUI() {
         initialLoad();

@@ -4,7 +4,7 @@ import domain.Swimmer;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-public class TrainerUserInterface extends MainUI{
+public class TrainerUserInterface extends SuperUI{
 
 
     public void trainerUI() {

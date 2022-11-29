@@ -8,7 +8,7 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class FormandUserInterface extends MainUI {
+public class FormandUserInterface extends SuperUI {
 
     public void formandUI() {
         initialLoad();
