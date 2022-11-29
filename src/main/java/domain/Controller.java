@@ -38,5 +38,9 @@ public class Controller {
     public void initialLoad() {
         database.setSwimmerDatabase(filehandler.retrieveSwimmerDatabase());
     }
+
+    public void setCompetitorsToTeams(){
+        database.setCompetitorsToTeams();
+    }
     
 }

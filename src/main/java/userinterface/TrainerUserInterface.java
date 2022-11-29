@@ -1,9 +1,7 @@
 package userinterface;
-
 import domain.Controller;
 
 import java.util.Scanner;
-
 public class TrainerUserInterface {
     Scanner scanner;
     Controller controller;
@@ -14,11 +12,23 @@ public class TrainerUserInterface {
     }
 
     public void trainerUI() {
-        initialLoad();
-        //userMenu();
+        controller.initialLoad();
+        controller.setCompetitorsToTeams();
+        userMenu();
     }
 
-    private void initialLoad() {
-        controller.initialLoad();
+    public void userMenu(){
+        System.out.println("""                
+                    Hvad vil du gøre?                       
+                   1. Se hold
+                   2.
+                    """);
+    }
+
+    public void sehold(){
+        System.out.println("""
+                hvilket hold vil du se?
+                1.
+                """);
     }
 }

@@ -1,15 +1,22 @@
 package domain;
 
 import java.time.LocalDate;
+import java.time.Period;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 public class Database {
     private ArrayList<Swimmer> swimmerList;
     private ArrayList<Swimmer> swimmerSearchList;
-    
+    private ArrayList<Swimmer> seniorTeam;
+    private ArrayList<Swimmer> juniorTeam;
+
+
     public Database() {
         swimmerList = new ArrayList<>();
         swimmerSearchList = new ArrayList<>();
+        seniorTeam = new ArrayList<>();
+        juniorTeam = new ArrayList<>();
     }
     
     public void addSwimmerToDatabase(Swimmer swimmer) {
@@ -60,6 +67,29 @@ public class Database {
     
     public void setSwimmerDatabase(ArrayList<Swimmer> swimmerList) {
         this.swimmerList = swimmerList;
+    }
+
+    private ArrayList<Swimmer> getCompetitorList(){
+        ArrayList<Swimmer> competitorList = new ArrayList<>();
+        for(Swimmer swimmer : swimmerList){
+            if(swimmer.isCompetitor()){
+                competitorList.add(swimmer);
+            }
+        }
+        return competitorList;
+    }
+
+    public void setCompetitorsToTeams(){
+        ArrayList<Swimmer>competitorList = getCompetitorList();
+        for(Swimmer swimmer : competitorList){
+            long years = ChronoUnit.YEARS.between( swimmer.getBirthday(),LocalDate.now());
+            if (years >= 18){
+               seniorTeam.add(swimmer);
+            }
+            else {
+                juniorTeam.add(swimmer);
+            }
+        }
     }
     
 }
