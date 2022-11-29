@@ -9,15 +9,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class FormandUserInterface extends MainUI {
-    Scanner scanner;
-    Controller controller;
 
 
-    public FormandUserInterface() {
-        scanner = new Scanner(System.in);
-        controller = new Controller();
-    }
-    
 
     public void formandUI() {
         initialLoad();
@@ -393,21 +386,6 @@ public class FormandUserInterface extends MainUI {
             // TODO burde køre i loop sådan at man skal prøve igen hvis input er forkert.
         return answer;
         }
-    
 
-
-  /*  public void returnToMainUI() {
-        int input;
-        System.out.println("""
-                Vil du vende tilbage til login skærmen?
-                1. Ja
-                2. Nej""");
-        input = scanner.nextInt();
-        switch (input){
-            case 1 -> mainUI.login();
-            case 2 -> userMenu();
-        }
-
-    }*/
 }
 

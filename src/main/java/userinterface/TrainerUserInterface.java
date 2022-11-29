@@ -4,14 +4,8 @@ import domain.Swimmer;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-public class TrainerUserInterface extends MainUI {
-    Scanner scanner;
-    Controller controller;
+public class TrainerUserInterface extends MainUI{
 
-    public TrainerUserInterface() {
-        scanner = new Scanner(System.in);
-        controller = new Controller();
-    }
 
     public void trainerUI() {
         controller.initialLoad();
@@ -20,32 +14,41 @@ public class TrainerUserInterface extends MainUI {
     }
 
     public void userMenu(){
-        System.out.println("""                
-                    Hvad vil du gøre?                       
-                   1. Se hold
-                   2. 
-                    """);
-        int userchoice = readInt();
-        switch (userchoice) {
-            case 1 -> showTeamMenu();
-            
+        int userchoice;
+        do {
+            System.out.println("""                
+                     Hvad vil du gøre?                       
+                    1. Se hold
+                    2. Vend tilbage til hoved menu
+                     """);
+            userchoice = readInt();
+            switch (userchoice) {
+                case 1 -> showTeamMenu();
+                case 2 -> System.out.println("");
+                default -> System.out.println("Ugyldig input");
+            }
         }
+        while (userchoice!=9);
     }
 
     public void showTeamMenu(){
-        System.out.println("""
-                hvilket hold vil du se?
-                1. Senior holdet
-                2. Junior holdet
-                3. Vend tilbage
-                """);
-        int userChoice = readInt();
-        switch (userChoice) {
-            case 1 -> printTeam(controller.getSeniorTeam());
-            case 2 -> printTeam(controller.getJuniorTeam());
-            case 3 -> userMenu();
-            default -> System.out.println("Ugyldig input");
+        int userChoice;
+        do {
+            System.out.println("""
+                    hvilket hold vil du se?
+                    1. Senior holdet
+                    2. Junior holdet
+                    3. Vend tilbage
+                    """);
+            userChoice = scanner.nextInt();
+            switch (userChoice) {
+                case 1 -> printTeam(controller.getSeniorTeam());
+                case 2 -> printTeam(controller.getJuniorTeam());
+                case 3 -> userMenu();
+                default -> System.out.println("Ugyldig input");
+            }
         }
+        while(userChoice!=1 || userChoice!=2 || userChoice!=3);
     }
 
     private void printTeam(ArrayList<Swimmer> teamList){
