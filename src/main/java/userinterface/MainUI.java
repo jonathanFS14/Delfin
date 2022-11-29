@@ -41,7 +41,7 @@ public class MainUI {
                 1. ja
                 2. nej""");
         do {
-            input = scanner.nextInt();
+            input = readInt();
             switch (input) {
                 case 1:
                     System.out.println("På gensyn");
@@ -57,5 +57,28 @@ public class MainUI {
             }
         }
         while(input!=1 && input!=2);
+    }
+
+    protected int readInt() {
+        while (!scanner.hasNextInt()) {
+            String text = scanner.next();
+            System.out.println(text + " er ugyldig input, indtast igen.");
+        }
+        int result;
+        result = scanner.nextInt();
+        scanner.nextLine();
+        return result;
+    }
+    //Sørger for at input ikke er tomt. Strukturen i readInt virker ikke for string af en eller anden grund.
+    protected String readString() {
+        String readString;
+        do {
+            readString = scanner.nextLine();
+            if (readString.isEmpty()) {
+                System.out.println("Input må ikke være tom");
+            }
+        }
+        while (readString.isEmpty());
+        return readString;
     }
 }

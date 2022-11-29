@@ -4,7 +4,7 @@ import domain.Controller;
 
 import java.util.Scanner;
 
-public class KassererUserInterface {
+public class KassererUserInterface extends MainUI {
     Scanner scanner;
     Controller controller;
 

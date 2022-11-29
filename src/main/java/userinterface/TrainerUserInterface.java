@@ -4,7 +4,7 @@ import domain.Swimmer;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-public class TrainerUserInterface {
+public class TrainerUserInterface extends MainUI {
     Scanner scanner;
     Controller controller;
 
@@ -28,8 +28,8 @@ public class TrainerUserInterface {
         int userchoice = readInt();
         switch (userchoice) {
             case 1 -> showTeamMenu();
+            
         }
-
     }
 
     public void showTeamMenu(){
@@ -53,29 +53,5 @@ public class TrainerUserInterface {
         for(Swimmer swimmer : teamList){
             System.out.println(++i + ". " + swimmer.getName());
         }
-    }
-
-    private int readInt() {
-        while (!scanner.hasNextInt()) {
-            String text = scanner.next();
-            System.out.println(text + " er ugyldig input, indtast igen.");
-        }
-        int result;
-        result = scanner.nextInt();
-        scanner.nextLine();
-        return result;
-    }
-
-    //Sørger for at input ikke er tomt. Strukturen i readInt virker ikke for string af en eller anden grund.
-    private String readString() {
-        String readString;
-        do {
-            readString = scanner.nextLine();
-            if (readString.isEmpty()) {
-                System.out.println("Input må ikke være tom");
-            }
-        }
-        while (readString.isEmpty());
-        return readString;
     }
 }

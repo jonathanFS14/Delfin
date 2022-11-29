@@ -8,7 +8,7 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class FormandUserInterface {
+public class FormandUserInterface extends MainUI {
     Scanner scanner;
     Controller controller;
 
@@ -27,8 +27,9 @@ public class FormandUserInterface {
     private void initialLoad() {
         controller.initialLoad();
     }
-    
-    private void endProgram() {
+
+
+    private void exitProgram() {
         System.out.println("\n Lukker programmet");
         controller.overwriteSwimmerDatabase();
         System.exit(0);
@@ -51,7 +52,7 @@ public class FormandUserInterface {
                 case 2 -> editSwimmer();
                 case 3 -> showAllSwimmers();
                 case 8 -> archiveSwimmer();
-                case 9 -> endProgram();
+                case 9 -> exitProgram();
                 default -> System.out.println("Ugyldigt valg");
             }
         } while (userChoice != 9);
@@ -393,29 +394,7 @@ public class FormandUserInterface {
         return answer;
         }
     
-    private int readInt() {
-        while (!scanner.hasNextInt()) {
-            String text = scanner.next();
-            System.out.println(text + " er ugyldig input, indtast igen.");
-        }
-        int result;
-        result = scanner.nextInt();
-        scanner.nextLine();
-        return result;
-    }
-    
-    //Sørger for at input ikke er tomt. Strukturen i readInt virker ikke for string af en eller anden grund.
-    private String readString() {
-        String readString;
-        do {
-            readString = scanner.nextLine();
-            if (readString.isEmpty()) {
-                System.out.println("Input må ikke være tom");
-            }
-        }
-        while (readString.isEmpty());
-        return readString;
-    }
+
 
   /*  public void returnToMainUI() {
         int input;
