@@ -10,6 +10,7 @@ public class Database {
     private ArrayList<Swimmer> swimmerSearchList;
     private ArrayList<Swimmer> seniorTeam;
     private ArrayList<Swimmer> juniorTeam;
+    private ArrayList<SwimTime> swimTimeList;
 
 
     public Database() {
@@ -17,6 +18,7 @@ public class Database {
         swimmerSearchList = new ArrayList<>();
         seniorTeam = new ArrayList<>();
         juniorTeam = new ArrayList<>();
+        swimTimeList = new ArrayList<>();
     }
     
     public void addSwimmerToDatabase(Swimmer swimmer) {
@@ -82,7 +84,7 @@ public class Database {
     public void setCompetitorsToTeams(){
         ArrayList<Swimmer>competitorList = getCompetitorList();
         for(Swimmer swimmer : competitorList){
-            long years = ChronoUnit.YEARS.between( swimmer.getBirthday(),LocalDate.now());
+            long years = ChronoUnit.YEARS.between(swimmer.getBirthday(),LocalDate.now());
             if (years >= 18){
                seniorTeam.add(swimmer);
             }
@@ -92,10 +94,15 @@ public class Database {
         }
     }
 
+
+
     public ArrayList<Swimmer> getJuniorTeam() {
         return juniorTeam;
     }
     public ArrayList<Swimmer>getSeniorTeam(){
     return seniorTeam;
+    }
+    public ArrayList<SwimTime>getSwimTimeList(){
+        return swimTimeList;
     }
 }

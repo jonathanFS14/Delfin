@@ -18,8 +18,7 @@ public class Swimmer {
     private boolean isStudent;
     private boolean isArchived;
     private LocalDate paymentDate;
-    private ArrayList<SwimTime> competitionResults;
-    private ArrayList<SwimTime> trainingResults;
+
 
 
 
@@ -38,8 +37,7 @@ public class Swimmer {
         this.isStudent = isStudent;
         isArchived = false;
         paymentDate = LocalDate.parse("2000-01-01");
-        competitionResults = new ArrayList<SwimTime>();
-        trainingResults = new ArrayList<SwimTime>();
+
     }
     
     //Denne constructor bruges når der skal læses fra filen i filehandler så alle attributer kommer med.
@@ -57,11 +55,6 @@ public class Swimmer {
         this.isStudent = isStudent;
         this.isArchived = isArchived;
         this.paymentDate = paymentDate;
-        competitionResults = new ArrayList<SwimTime>();
-        trainingResults = new ArrayList<SwimTime>();
-    }
-
-    public Swimmer() {
 
     }
 
@@ -162,14 +155,7 @@ public class Swimmer {
         this.paymentDate = paymentDate;
     }
 
-    
-    public ArrayList<SwimTime> getCompetitionResults() {
-        return competitionResults;
-    }
-    
-    public ArrayList<SwimTime> getTrainingResults() {
-        return trainingResults;
-    }
+
     
     
 }
