@@ -34,7 +34,9 @@ public class Controller {
     public void overwriteSwimmerDatabase() {
         filehandler.overwriteSwimmerDatabase(database.getSwimmerList());
     }
-    
+    public void overwriteSwimTimeDatabase(){
+        filehandler.overwriteSwimTimeDatabase(database.getSwimTimeList());
+    }
     public void initialLoad() {
         database.setSwimmerDatabase(filehandler.retrieveSwimmerDatabase());
         database.setSwimTimeDatabase(filehandler.retrieveSwimTimeDatabase());
