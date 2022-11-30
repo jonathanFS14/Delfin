@@ -37,6 +37,7 @@ public class Controller {
     
     public void initialLoad() {
         database.setSwimmerDatabase(filehandler.retrieveSwimmerDatabase());
+        database.setSwimTimeDatabase(filehandler.retrieveSwimTimeDatabase());
     }
 
     public void setCompetitorsToTeams(){
@@ -49,6 +50,7 @@ public class Controller {
     public ArrayList<Swimmer>getJuniorTeam(){
         return database.getJuniorTeam();
     }
+
 
     
 }

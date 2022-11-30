@@ -71,6 +71,9 @@ public class Database {
         this.swimmerList = swimmerList;
     }
 
+    public void setSwimTimeDatabase(ArrayList<SwimTime>swimTimeList){
+        this.swimTimeList = swimTimeList;
+    }
     private ArrayList<Swimmer> getCompetitorList(){
         ArrayList<Swimmer> competitorList = new ArrayList<>();
         for(Swimmer swimmer : swimmerList){
