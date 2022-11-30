@@ -43,7 +43,7 @@ public class KassererUserInterface extends SuperUI {
 
         ArrayList<Swimmer> localSwimmerList = controller.searchForMembers(searchParameter);
         Swimmer swimmer = null;
-
+        // TODO Hvis der kun er én swimmer på listen, behøver vi ikke kigge hele listen igennem og vælge rigtig swimmer
             if (!localSwimmerList.isEmpty()) {
                 System.out.println("Vælg hvem du vil tjekke ");
                 for (Swimmer s : localSwimmerList) {
@@ -91,7 +91,7 @@ public class KassererUserInterface extends SuperUI {
 
     private void editSwimmerHasPaid() {
         System.out.println("Indtast medlem der skal redigeres");
-
+        // TODO print confirmations ...
         Swimmer swimmer = searchForMember(scanner.nextLine());
 
         if (swimmer != null) {
@@ -123,27 +123,5 @@ public class KassererUserInterface extends SuperUI {
         }
     }
 
-    private int readInt() {
-        while (!scanner.hasNextInt()) {
-            String text = scanner.next();
-            System.out.println(text + " er ugyldig input, indtast igen.");
-        }
-        int result;
-        result = scanner.nextInt();
-        scanner.nextLine();
-        return result;
-    }
-
-    private String readString() {
-        String readString;
-        do {
-            readString = scanner.nextLine();
-            if (readString.isEmpty()) {
-                System.out.println("Input må ikke være tom");
-            }
-        }
-        while (readString.isEmpty());
-        return readString;
-    }
 
 }
