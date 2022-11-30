@@ -1,5 +1,7 @@
 package datasource;
 
+import domain.Events;
+import domain.SwimTime;
 import domain.Swimmer;
 
 import java.io.File;
@@ -11,12 +13,12 @@ import java.util.Scanner;
 
 public class Filehandler {
     
-    String fileName = "swimmerDatabase.csv";
+    String swimmerFileDatabase = "swimmerDatabase.csv";
     
     public ArrayList<Swimmer> retrieveSwimmerDatabase() {
         ArrayList<Swimmer> swimmerListFile = new ArrayList<Swimmer>();
         try {
-            Scanner sc = new Scanner(new File(fileName));
+            Scanner sc = new Scanner(new File(swimmerFileDatabase));
             
             while (sc.hasNextLine()) {
                 String linje = sc.nextLine();
@@ -47,21 +49,62 @@ public class Filehandler {
 
     public void overwriteSwimmerDatabase(ArrayList<Swimmer> swimmerList) {
         try {
-            PrintStream out = new PrintStream(fileName);
+            PrintStream out = new PrintStream(swimmerFileDatabase);
             for (Swimmer swimmer : swimmerList) {
-                out.println(toFileWriter(swimmer));
+                out.println(swimmerToFileWriter(swimmer));
             }
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
     }
     
-    private String toFileWriter(Swimmer swimmer) {
+    private String swimmerToFileWriter(Swimmer swimmer) {
         return (swimmer.getName() + ";" + swimmer.getAddress() + ";" + swimmer.getPhoneNumber() + ";" +
                 swimmer.getMail() + ";" + swimmer.getBirthday() + ";" + swimmer.getCreationDate() + ";" +
                 swimmer.getMemberID() + ";" + swimmer.getHasPaid() + ";" + swimmer.isActive() + ";" +
                 swimmer.isCompetitor() + ";" + swimmer.isStudent() + ";" + swimmer.isArchived()) + ";" +
                 swimmer.getPaymentDate();
     }
-    
+
+    String swimTimeFileDatabase = "SwimTimeDatabase.csv";
+
+    public ArrayList<SwimTime> retrieveSwimTimeDatabase() {
+        ArrayList<SwimTime> swimTimeListFile = new ArrayList<>();
+        try {
+            Scanner sc = new Scanner(new File(swimTimeFileDatabase));
+
+            while (sc.hasNextLine()) {
+                String linje = sc.nextLine();
+                String[] attributes = linje.split(";");
+                SwimTime swimTime = new SwimTime(
+                        Integer.parseInt(attributes[0]),
+                        Double.parseDouble(attributes[1]),
+                        Events.valueOf(attributes[2]),
+                        attributes[3]
+                );
+                swimTimeListFile.add(swimTime);
+            }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+        return swimTimeListFile;
+    }
+    public void overwriteSwimTimeDatabase(ArrayList<SwimTime> swimTimeList) {
+        try {
+            PrintStream out = new PrintStream(swimTimeFileDatabase);
+            for (SwimTime swimTime : swimTimeList) {
+                out.println(swimTimeToFileWriter(swimTime));
+            }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private String swimTimeToFileWriter(SwimTime swimTime){
+        return swimTime.getMemberID() + ";"
+                + swimTime.getTime()+ ";"
+                + swimTime.getEvent( ) + ";"
+                + swimTime.getPlaceSet() + ";";
+    }
+
 }

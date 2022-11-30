@@ -51,6 +51,15 @@ public class TrainerUserInterface extends SuperUI{
         while(userChoice!=1 || userChoice!=2 || userChoice!=3);
     }
 
+    /*
+    Træner søger og vælger medlem
+    træner vælger om det er stævnetid eller træningstid
+    hvis det er stævnetid skal han skrive tid, stævne og disciplin
+    hvis det er træningstid skal han kun skrive tid og disciplin
+    gemmes i en seperat csv fil
+    når der læses fra csv filen kobles den til svømmeren via memberID
+     */
+
     private void printTeam(ArrayList<Swimmer> teamList){
         for(Swimmer swimmer : teamList){
             System.out.println(teamList.indexOf(swimmer) + 1 + ". " + swimmer.getName());

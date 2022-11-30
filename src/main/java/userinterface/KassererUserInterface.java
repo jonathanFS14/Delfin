@@ -123,27 +123,5 @@ public class KassererUserInterface extends SuperUI {
         }
     }
 
-    private int readInt() {
-        while (!scanner.hasNextInt()) {
-            String text = scanner.next();
-            System.out.println(text + " er ugyldig input, indtast igen.");
-        }
-        int result;
-        result = scanner.nextInt();
-        scanner.nextLine();
-        return result;
-    }
-
-    private String readString() {
-        String readString;
-        do {
-            readString = scanner.nextLine();
-            if (readString.isEmpty()) {
-                System.out.println("Input må ikke være tom");
-            }
-        }
-        while (readString.isEmpty());
-        return readString;
-    }
 
 }
