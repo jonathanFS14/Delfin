@@ -82,7 +82,7 @@ public class Database {
     public void setCompetitorsToTeams(){
         ArrayList<Swimmer>competitorList = getCompetitorList();
         for(Swimmer swimmer : competitorList){
-            long years = ChronoUnit.YEARS.between( swimmer.getBirthday(),LocalDate.now());
+            long years = ChronoUnit.YEARS.between(swimmer.getBirthday(),LocalDate.now());
             if (years >= 18){
                seniorTeam.add(swimmer);
             }

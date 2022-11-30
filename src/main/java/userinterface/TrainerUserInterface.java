@@ -52,9 +52,8 @@ public class TrainerUserInterface extends SuperUI{
     }
 
     private void printTeam(ArrayList<Swimmer> teamList){
-        int i = 0;
         for(Swimmer swimmer : teamList){
-            System.out.println(++i + ". " + swimmer.getName());
+            System.out.println(teamList.indexOf(swimmer) + 1 + ". " + swimmer.getName());
         }
     }
 }
