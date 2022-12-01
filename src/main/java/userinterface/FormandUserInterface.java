@@ -158,19 +158,8 @@ public class FormandUserInterface extends SuperUI {
     
     private void editSwimmer() {
         System.out.println("Indtast medlem der skal redigeres");
-        String searchParameter = scanner.nextLine();
-        
-        ArrayList<Swimmer> localSwimmerList = controller.searchForMembers(searchParameter);
-        
-        if (localSwimmerList.isEmpty()) {
-            System.out.println("Kunne ikke finde medlemmet");
-        } else {
-            System.out.println("Vælg hvem der skal redigeres");
-            for (Swimmer swimmer : localSwimmerList) {
-                System.out.println(localSwimmerList.indexOf(swimmer) + 1 + ". " + swimmer.getName());
-            }
-            int chooseSwimmer = readInt();
-            Swimmer swimmer = localSwimmerList.get(chooseSwimmer - 1);
+
+            Swimmer swimmer = controller.searchForMember(scanner.nextLine());
             
             System.out.println("""
                     Hvad vil du redigere?
@@ -215,7 +204,6 @@ public class FormandUserInterface extends SuperUI {
                     break;
             }
         }
-    }
 
     private void editSwimmerName(Swimmer swimmer) {
         System.out.println("Rediger " + swimmer.getName() + " eller tryk enter for at fortryde");

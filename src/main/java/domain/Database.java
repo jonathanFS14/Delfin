@@ -37,8 +37,7 @@ public class Database {
     }
     
     //Kan søge både med medlemmets navn og deres medlemsnummer
-    public ArrayList<Swimmer> searchForMembers(String searchParameter) {
-        
+    public Swimmer searchForMember(String searchParameter) {
         swimmerSearchList.clear();
         Swimmer swimmer = null;
 
@@ -47,8 +46,20 @@ public class Database {
                 if(s.getName().toLowerCase().contains(searchParameter.toLowerCase()) || String.valueOf(s.getMemberID()).equals(searchParameter))
                     swimmerSearchList.add(s);
             }
+
+        if (swimmerSearchList.size() > 1) {
+            System.out.println("Vælg hvem du vil tjekke ");
+            for (Swimmer s : swimmerSearchList) {
+                System.out.println(swimmerSearchList.indexOf(s) + 1 + ". " + s.getName());
+            }
+            int chooseSwimmer = scanner.nextInt();
+            swimmer = swimmerSearchList.get(chooseSwimmer - 1);
         }
-        return swimmerSearchList;
+        else if(swimmerSearchList.size() == 1) {
+            swimmer = swimmerSearchList.get(0);
+            System.out.println("Du søgte " + swimmer.getName() + " frem");
+        }
+        return swimmer;
     }
 
  /*   //TODO merge searchformembers med searchformember metoderne
