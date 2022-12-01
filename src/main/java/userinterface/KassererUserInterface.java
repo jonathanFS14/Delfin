@@ -1,16 +1,13 @@
 package userinterface;
 
-import domain.Controller;
 import domain.Swimmer;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 public class KassererUserInterface extends SuperUI {
 
     public void kassererUI() {
-        initialLoad();
+        automaticRestanceCheck();
         int userInput;
         do {
             System.out.println("""

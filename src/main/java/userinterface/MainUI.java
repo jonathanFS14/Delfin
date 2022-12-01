@@ -18,6 +18,7 @@ public class MainUI extends SuperUI {
 
     public void login() {
         int input;
+        controller.initialLoad();
         do {
             System.out.println("""
                     Hvem logger du ind som?
