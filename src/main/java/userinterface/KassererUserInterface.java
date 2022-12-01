@@ -19,6 +19,7 @@ public class KassererUserInterface extends SuperUI {
                 3. Vis oversigt over forventet indtjening
                 4. Vis oversigt over medlemmer i restance
                 
+                8. Log ud
                 9. Afslut Program""");
             userInput = readInt();
 
@@ -27,23 +28,24 @@ public class KassererUserInterface extends SuperUI {
                 case 2 -> checkMembersPaymentStatus();
                 case 3 -> showExpectedIncome();
                 case 4 -> showMembersInRestance();
+                case 8 -> logOut();
                 case 9 -> endProgram();
                 default -> System.out.println("Ugyldigt valg");
             }
-        } while (userInput != 9);
+        } while (true);
     }
 
-    private void endProgram() {
+    /*private void endProgram() {
         System.out.println("\n Lukker programmet");
         controller.overwriteSwimmerDatabase();
         System.exit(0);
-    }
+    }*/
 
     private Swimmer searchForMember(String searchParameter) {
 
         ArrayList<Swimmer> localSwimmerList = controller.searchForMembers(searchParameter);
         Swimmer swimmer = null;
-        // TODO Hvis der kun er én swimmer på listen, behøver vi ikke kigge hele listen igennem og vælge rigtig swimmer
+
             if (!localSwimmerList.isEmpty()) {
                 System.out.println("Vælg hvem du vil tjekke ");
                 for (Swimmer s : localSwimmerList) {
@@ -86,12 +88,25 @@ public class KassererUserInterface extends SuperUI {
                 swimmer.setHasPaid(false);
 
         }
+    }
+
+    public void logOut(){
+        System.out.println("""
+                   Do you want to logOut?
+                   ja/nej
+                   """);
+        boolean input = yesOrNoToBoolean();
+
+        if(input){
+            controller.overwriteSwimmerDatabase();
+            MainUI mainUI = new MainUI();
+            mainUI.login();
+        }
 
     }
 
     private void editSwimmerHasPaid() {
         System.out.println("Indtast medlem der skal redigeres");
-        // TODO print confirmations ...
         Swimmer swimmer = searchForMember(scanner.nextLine());
 
         if (swimmer != null) {

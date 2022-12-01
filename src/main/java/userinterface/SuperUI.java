@@ -71,4 +71,35 @@ public class SuperUI {
 
     //TODO lav en ordentlig endProgram() og logOut()
 
+
+    public void endProgram() {
+        int input;
+        System.out.println("""
+                Er du sikker på du vil forlade programmet?
+                1. ja
+                2. nej""");
+        do {
+            input = readInt();
+            switch (input) {
+                case 1:
+                    overwriteAllToFile();
+                    System.out.println("På gensyn");
+                    System.exit(0);
+                    break;
+                case 2:
+                    System.out.println("Vender tilbage");
+                    break;
+                default:
+                    System.out.println("Ugyldig input");
+                    break;
+            }
+        }
+        while (input != 1 && input != 2);
+    }
+
+    private void overwriteAllToFile(){
+        controller.overwriteSwimmerDatabase();
+        controller.overwriteSwimTimeDatabase();
+    }
+
 }

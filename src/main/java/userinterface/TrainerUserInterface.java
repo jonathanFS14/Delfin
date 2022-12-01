@@ -19,12 +19,15 @@ public class TrainerUserInterface extends SuperUI{
             System.out.println("""                
                      Hvad vil du gøre?                       
                     1. Se hold
-                    2. Vend tilbage til hoved menu
+                    8. Log ud
+                    9. Afslut program
                      """);
             userchoice = readInt();
             switch (userchoice) {
                 case 1 -> showTeamMenu();
-                case 2 -> System.out.println("");
+
+                case 8 -> logOut();
+                case 9 -> endProgram();
                 default -> System.out.println("Ugyldig input");
             }
         }
@@ -68,7 +71,6 @@ public class TrainerUserInterface extends SuperUI{
 
     //TODO gør metoden færdig
     public void logOut(){
-
            System.out.println("""
                    Do you want to logOut?
                    ja/nej
@@ -77,8 +79,10 @@ public class TrainerUserInterface extends SuperUI{
 
                if(input){
                    controller.overwriteSwimTimeDatabase();
-                   //vend tilbage til MainUI
+                   MainUI mainUI = new MainUI();
+                   mainUI.login();
                }
+
        }
 
     }

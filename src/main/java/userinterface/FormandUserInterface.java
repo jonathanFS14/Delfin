@@ -19,12 +19,6 @@ public class FormandUserInterface extends SuperUI {
         controller.initialLoad();
     }
 
-
-    private void exitProgram() {
-        System.out.println("\n Lukker programmet");
-        controller.overwriteSwimmerDatabase();
-        System.exit(0);
-    }
     
     private void userMenu() {
         int userChoice;
@@ -34,7 +28,8 @@ public class FormandUserInterface extends SuperUI {
                     1. Opret ny svømmer/ gendan gammel svømmer
                     2. Rediger en eksisterende svømmer
                     3. Vis alle svømmere
-                    8. Arkivér svømmer (afmeld)                
+                    7. Arkivér svømmer (afmeld)
+                    8. Log ud                
                     9. afslut programmet
                     """);
             userChoice = readInt();
@@ -42,8 +37,9 @@ public class FormandUserInterface extends SuperUI {
                 case 1 -> createSwimmerMenu();
                 case 2 -> editSwimmer();
                 case 3 -> showAllSwimmers();
-                case 8 -> archiveSwimmer();
-                case 9 -> exitProgram();
+                case 7 -> archiveSwimmer();
+                case 8 -> logOut();
+                case 9 -> endProgram();
                 default -> System.out.println("Ugyldigt valg");
             }
         } while (userChoice != 9);
@@ -347,7 +343,21 @@ public class FormandUserInterface extends SuperUI {
             System.out.println(swimmer.getName() + " " + swimmer.getCreationDate());
         }
     }
-    
+
+    public void logOut(){
+        System.out.println("""
+                   Do you want to logOut?
+                   ja/nej
+                   """);
+        boolean input = yesOrNoToBoolean();
+
+        if(input){
+            controller.overwriteSwimmerDatabase();
+            MainUI mainUI = new MainUI();
+            mainUI.login();
+        }
+
+    }
 
 }
 

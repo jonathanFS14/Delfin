@@ -37,31 +37,6 @@ public class MainUI extends SuperUI {
         while (input != 1 && input != 2 && input != 3 && input != 9);
     }
 
-    public void endProgram() {
-        int input;
-        System.out.println("""
-                Er du sikker på du vil forlade programmet?
-                1. ja
-                2. nej""");
-        do {
-            input = readInt();
-            switch (input) {
-                case 1:
-                    System.out.println("På gensyn");
-                    System.exit(0);
-                    break;
-                case 2:
-                    System.out.println("Vender tilbage");
-                    login();
-                    break;
-                default:
-                    System.out.println("Ugyldig input");
-                    break;
-            }
-        }
-        while (input != 1 && input != 2);
-    }
-
 
 
 /*     public void returnToMainUI() {
