@@ -65,4 +65,21 @@ public class TrainerUserInterface extends SuperUI{
             System.out.println(teamList.indexOf(swimmer) + 1 + ". " + swimmer.getName());
         }
     }
-}
+
+    //TODO gør metoden færdig
+    public void logOut(){
+
+           System.out.println("""
+                   Do you want to logOut?
+                   ja/nej
+                   """);
+               boolean input = yesOrNoToBoolean();
+
+               if(input){
+                   controller.overwriteSwimTimeDatabase();
+                   //vend tilbage til MainUI
+               }
+       }
+
+    }
+
