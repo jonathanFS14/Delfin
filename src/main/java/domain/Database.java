@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Scanner;
 
 public class Database {
     private ArrayList<Swimmer> swimmerList;
@@ -11,6 +13,8 @@ public class Database {
     private ArrayList<Swimmer> seniorTeam;
     private ArrayList<Swimmer> juniorTeam;
     private ArrayList<SwimTime> swimTimeList;
+    private ArrayList<Events>eventsList;
+    Scanner scanner;
 
 
     public Database() {
@@ -19,6 +23,8 @@ public class Database {
         seniorTeam = new ArrayList<>();
         juniorTeam = new ArrayList<>();
         swimTimeList = new ArrayList<>();
+        eventsList = new ArrayList<>(Arrays.asList(Events.BUTTERFLY50M, Events.BUTTERFLY100M, Events.CRAWL50M, Events.CRAWL100M,Events.RYGCRAWL50M, Events.RYGCRAWL100M,Events.BRYST50M,Events.BRYST100M,Events.MEDLEY100M));
+        scanner = new Scanner(System.in);
     }
     
     public void addSwimmerToDatabase(Swimmer swimmer) {
@@ -34,18 +40,34 @@ public class Database {
     public ArrayList<Swimmer> searchForMembers(String searchParameter) {
         
         swimmerSearchList.clear();
-        
-        for (Swimmer swimmer : swimmerList) {
-            if (!swimmer.isArchived()) {
-                if (swimmer.getName().toLowerCase().contains(searchParameter.toLowerCase())) {
-                    swimmerSearchList.add(swimmer);
-                } else if (String.valueOf(swimmer.getMemberID()).equals(searchParameter)) {
-                    swimmerSearchList.add(swimmer);
-                }
+        Swimmer swimmer = null;
+
+        for (Swimmer s : swimmerList) {
+            if (!s.isArchived())
+                if(s.getName().toLowerCase().contains(searchParameter.toLowerCase()) || String.valueOf(s.getMemberID()).equals(searchParameter))
+                    swimmerSearchList.add(s);
             }
         }
         return swimmerSearchList;
     }
+
+ /*   //TODO merge searchformembers med searchformember metoderne
+    public Swimmer searchForMember(String searchParameter) {
+
+        Swimmer swimmer = null;
+
+        if (!swimmerList .isEmpty()) {
+            System.out.println("Vælg hvem du vil tjekke ");
+            for (Swimmer s : swimmerList) {
+                System.out.println(swimmerList.indexOf(s) + 1 + ". " + s.getName());
+            }
+            int chooseSwimmer = scanner.nextInt();
+            swimmer = swimmerList.get(chooseSwimmer - 1);
+        }
+
+        return swimmer;
+    }
+    */
     
     public ArrayList<Swimmer> searchForArchived(String searchParameter) {
         
@@ -97,8 +119,6 @@ public class Database {
         }
     }
 
-
-
     public ArrayList<Swimmer> getJuniorTeam() {
         return juniorTeam;
     }
@@ -108,4 +128,6 @@ public class Database {
     public ArrayList<SwimTime>getSwimTimeList(){
         return swimTimeList;
     }
+
+
 }

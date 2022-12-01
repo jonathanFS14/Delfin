@@ -1,5 +1,7 @@
 package userinterface;
 import domain.Controller;
+import domain.Events;
+import domain.SwimTime;
 import domain.Swimmer;
 
 import java.util.ArrayList;
@@ -19,13 +21,16 @@ public class TrainerUserInterface extends SuperUI{
             System.out.println("""                
                      Hvad vil du gøre?                       
                     1. Se hold
+                    2. indtast tid
+                    3. se alle tider for en svømmer
                     8. Log ud
                     9. Afslut program
                      """);
             userchoice = readInt();
             switch (userchoice) {
                 case 1 -> showTeamMenu();
-
+                case 2 -> setTimeForSwimmer();
+                case 3 -> System.out.println("");
                 case 8 -> logOut();
                 case 9 -> endProgram();
                 default -> System.out.println("Ugyldig input");
@@ -54,14 +59,36 @@ public class TrainerUserInterface extends SuperUI{
         while(userChoice!=1 || userChoice!=2 || userChoice!=3);
     }
 
-    /*
-    Træner søger og vælger medlem
-    træner vælger om det er stævnetid eller træningstid
-    hvis det er stævnetid skal han skrive tid, stævne og disciplin
-    hvis det er træningstid skal han kun skrive tid og disciplin
-    gemmes i en seperat csv fil
-    når der læses fra csv filen kobles den til svømmeren via memberID
-     */
+    public void setTimeForSwimmer(){
+        System.out.println("Indtast hvilken svømmer du vil registrere en tid for");
+        String searchParameter = readString();
+        Swimmer swimmer = controller.searchForMember(searchParameter);
+
+        int memberID = swimmer.getMemberID();
+
+        Events event = controller.selectEvent();
+
+        System.out.println("Indtast tid");
+        double swimTime = scanner.nextDouble();
+
+        System.out.println("Indtast stævnet, hvor tiden blev sat (Tryk enter hvis det var en træningstid)");
+        String userInput = scanner.nextLine();
+        String placeSet;
+        if (userInput.isEmpty())
+            placeSet = "Træning";
+        else
+            placeSet = userInput;
+
+        System.out.println("\nDu er ved at tilføje følgende tid til " + swimmer.getName() +
+                "\nTid: " + swimTime +
+                "\nDisciplin: " + event +
+                "\nHvorhenne: " + placeSet +
+                "\n\nBekræft venligst (Ja/Nej) "
+                );
+        if(yesOrNoToBoolean())
+        controller.createSwimTime(memberID,swimTime,event,placeSet);
+    }
+
 
     private void printTeam(ArrayList<Swimmer> teamList){
         for(Swimmer swimmer : teamList){

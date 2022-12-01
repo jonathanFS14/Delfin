@@ -66,20 +66,7 @@ public class FormandUserInterface extends SuperUI {
     
     private void archiveSwimmer() {
         System.out.println("Indtast medlem der skal arkiveres");
-        String searchParameter = scanner.nextLine();
-        
-        ArrayList<Swimmer> localSwimmerList = controller.searchForMembers(searchParameter);
-
-        if (localSwimmerList.isEmpty()) {
-            System.out.println("Kunne ikke finde medlemmet");
-        } else {
-            System.out.println("Vælg hvem der skal arkiveres (indtast tal)");
-            for (Swimmer swimmer : localSwimmerList) {
-                System.out.println(localSwimmerList.indexOf(swimmer) + 1 + ". " + swimmer.getName());
-            }
-        } // else: hvis der kun er ét resultat
-        int chooseSwimmer = readInt();
-        Swimmer swimmer = localSwimmerList.get(chooseSwimmer - 1);
+        Swimmer swimmer = controller.searchForMember(scanner.nextLine());
 
         swimmer.setArchived(true);
         swimmer.setHasPaid(false);

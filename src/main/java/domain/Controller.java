@@ -19,10 +19,6 @@ public class Controller {
         database.createSwimmer(name, address, phoneNumber, mail, birthday, isCompetitor, isStudent);
     }
     
-    public ArrayList<Swimmer> searchForMembers(String searchParameter) {
-        return database.searchForMembers(searchParameter);
-    }
-    
     public ArrayList<Swimmer> searchForArchived(String searchParameter) {
         return database.searchForArchived(searchParameter);
     }
@@ -53,6 +49,17 @@ public class Controller {
         return database.getJuniorTeam();
     }
 
+    public Swimmer searchForMember (String searchName){
+        return database.searchForMember(searchName);
+    }
+
+    public Events selectEvent (){
+      return database.selectEvent();
+    }
+
+    public void createSwimTime(int memberID, double time, Events event, String placeSet){
+        database.createSwimTime(memberID,time,event,placeSet);
+    }
 
     
 }

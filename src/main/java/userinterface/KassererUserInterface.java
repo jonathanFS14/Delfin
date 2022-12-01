@@ -41,26 +41,9 @@ public class KassererUserInterface extends SuperUI {
         System.exit(0);
     }*/
 
-    private Swimmer searchForMember(String searchParameter) {
-
-        ArrayList<Swimmer> localSwimmerList = controller.searchForMembers(searchParameter);
-        Swimmer swimmer = null;
-
-            if (!localSwimmerList.isEmpty()) {
-                System.out.println("Vælg hvem du vil tjekke ");
-                for (Swimmer s : localSwimmerList) {
-                    System.out.println(localSwimmerList.indexOf(s) + 1 + ". " + s.getName());
-                }
-                int chooseSwimmer = readInt();
-                swimmer = localSwimmerList.get(chooseSwimmer - 1);
-            }
-
-        return swimmer;
-    }
-
     private void checkMembersPaymentStatus() {
         System.out.println("Indtast medlem du vil tjekke betalingsstatus på");
-        Swimmer swimmer = searchForMember(scanner.nextLine());
+        Swimmer swimmer = controller.searchForMember(scanner.nextLine());
 
         if (swimmer != null) {
             if (swimmer.getHasPaid()) {
@@ -107,7 +90,7 @@ public class KassererUserInterface extends SuperUI {
 
     private void editSwimmerHasPaid() {
         System.out.println("Indtast medlem der skal redigeres");
-        Swimmer swimmer = searchForMember(scanner.nextLine());
+        Swimmer swimmer = controller.searchForMember(scanner.nextLine());
 
         if (swimmer != null) {
             System.out.println("Sæt " + swimmer.getName() + "'s betalingsstatus");
