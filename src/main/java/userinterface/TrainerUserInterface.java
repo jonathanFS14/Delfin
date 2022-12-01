@@ -10,7 +10,6 @@ public class TrainerUserInterface extends SuperUI{
 
 
     public void trainerUI() {
-        controller.initialLoad();
         controller.setCompetitorsToTeams();
         userMenu();
     }

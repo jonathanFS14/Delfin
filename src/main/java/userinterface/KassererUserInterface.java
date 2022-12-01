@@ -64,8 +64,7 @@ public class KassererUserInterface extends SuperUI {
     }
 
 
-    private void initialLoad() {
-        controller.initialLoad();
+    private void automaticRestanceCheck() {
         for (Swimmer swimmer: controller.getSwimmerList()) {
             if (swimmer.getPaymentDate().plusYears(1).isBefore(LocalDate.now()))
                 swimmer.setHasPaid(false);

@@ -11,13 +11,10 @@ import java.util.Scanner;
 public class FormandUserInterface extends SuperUI {
 
     public void formandUI() {
-        initialLoad();
         userMenu();
     }
 
-    private void initialLoad() {
-        controller.initialLoad();
-    }
+
 
     
     private void userMenu() {

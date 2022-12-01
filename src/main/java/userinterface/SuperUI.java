@@ -8,6 +8,7 @@ public class SuperUI {
     Scanner scanner = new Scanner(System.in);
     Controller controller = new Controller();
 
+
     protected int readInt() {
         while (!scanner.hasNextInt()) {
             String text = scanner.next();
