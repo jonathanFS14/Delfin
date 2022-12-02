@@ -154,8 +154,5 @@ public class Swimmer {
     public void setPaymentDate(LocalDate paymentDate) {
         this.paymentDate = paymentDate;
     }
-
-
-    
     
 }

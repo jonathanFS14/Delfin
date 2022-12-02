@@ -31,6 +31,7 @@ public class MainUI extends SuperUI {
                 case 1 -> formandUserInterface.formandUI();
                 case 2 -> kassererUserInterface.kassererUI();
                 case 3 -> trainerUserInterface.trainerUI();
+                case 4 -> controller.printAllMembers();
                 case 9 -> endProgram();
                 default -> System.out.println("Ugyldigt Input");
             }
