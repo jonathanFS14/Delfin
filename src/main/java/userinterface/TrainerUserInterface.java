@@ -105,7 +105,11 @@ public class TrainerUserInterface extends SuperUI {
     }
 
     private void showSwimmerProfile(){
+        System.out.println("Indtast medlem du vil på");
+        Swimmer swimmer = controller.searchForMember(scanner.nextLine());
+        int swimmerID = swimmer.getMemberID();
 
+        
     }
 
 
