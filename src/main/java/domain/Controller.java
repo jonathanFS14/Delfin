@@ -63,5 +63,38 @@ public class Controller {
         overwriteSwimTimeDatabase();
     }
 
+    public void printAllMembers() {
+        String a, b, c, d, e, f, g, h, i, j, k, l;
+        System.out.println(String.format("┃ %-4s │  %-20s │  %-20s │  %-20s │  %-25s │  %-15s │  %-5s │  %-5s │  %-5s │  %-5s │  %-5s │  %-10s │ ", "ID", "Navn", "Addresse", "Tlf", "Mail", "Fødselsdag", "Betalt", "Aktiv", "Konkurrencesvømmer", "Studerende", "Arkiveret", "Betalingsdato"));
+        for (Swimmer swimmer : getSwimmerList()) {
+            a = String.valueOf(swimmer.getMemberID());
+            b = swimmer.getName();
+            c = swimmer.getAddress();
+            d = swimmer.getPhoneNumber();
+            e = swimmer.getMail();
+            f = swimmer.getBirthday().toString();
+            g = booleanToYesOrNo(swimmer.getHasPaid());
+            h = booleanToYesOrNo(swimmer.isActive());
+            i = booleanToYesOrNo(swimmer.isCompetitor());
+            j = booleanToYesOrNo(swimmer.isStudent());
+            k = booleanToYesOrNo(swimmer.isArchived());
+            l = swimmer.getPaymentDate().toString();
+
+            String s = String.format("┃ %-4s │  %-20s │  %-20s │  %-20s │  %-25s │  %-15s │  %-5s │  %-5s │  %-5s │  %-5s │  %-5s │  %-10s │ ", a, b, c, d, e, f, g, h, i, j, k, l);
+            System.out.println(s);
+
+        }
+    }
+
+    private String booleanToYesOrNo(boolean bool) {
+        String answer = null;
+        if (bool)
+            answer = "Ja";
+        else if (!bool)
+            answer = "Nej";
+        else
+            System.out.println("Forkert input.");
+        return answer;
+    }
     
 }

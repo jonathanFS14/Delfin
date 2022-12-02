@@ -31,7 +31,7 @@ public class FormandUserInterface extends SuperUI {
             switch (userInput) {
                 case 1 -> createSwimmerMenu();
                 case 2 -> editSwimmer();
-                case 3 -> showAllSwimmers();
+                case 3 -> controller.printAllMembers();
                 case 7 -> archiveSwimmer();
                 case 8 -> logOut();
                 case 9 -> endProgram();
@@ -52,7 +52,7 @@ public class FormandUserInterface extends SuperUI {
         switch (input) {
             case 1 -> createNewSwimmer();
             case 2 -> restoreArchivedSwimmer();
-            case 3 -> showAllSwimmers();
+            case 3 -> controller.printAllMembers();
 
             case 8 -> archiveSwimmer();
             case 9 -> System.out.println("Vender tilbage til menuen");
@@ -311,12 +311,6 @@ public class FormandUserInterface extends SuperUI {
         } while (inputStudyStatus != 1 && inputStudyStatus != 2 && inputStudyStatus != 3);
     }
 
-
-    private void showAllSwimmers() {
-        for (Swimmer swimmer : controller.getSwimmerList()) {
-            System.out.println(swimmer.getName() + " " + swimmer.getCreationDate());
-        }
-    }
 
 
 }
