@@ -101,6 +101,17 @@ public class TrainerUserInterface extends SuperUI {
     }
 
     private void showTopFive(){
+        System.out.println("Indtast hvilket hold du ønsker at finde top 5, junior/senior");
+        int userChoice = scanner.nextInt();
+        if (userChoice == 1)
+            printTeam(controller.getJuniorTeam());
+        else if (userChoice == 2) {
+            printTeam(controller.getSeniorTeam());
+
+        }
+
+        
+
 
     }
 
