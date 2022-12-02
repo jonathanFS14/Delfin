@@ -74,7 +74,7 @@ public class TrainerUserInterface extends SuperUI {
 
         System.out.println("Indtast tid");
         double swimTime = scanner.nextDouble();
-
+        scanner.nextLine();
         System.out.println("Indtast stævnet, hvor tiden blev sat (Tryk enter hvis det var en træningstid)");
         String userInput = scanner.nextLine();
         String placeSet;
