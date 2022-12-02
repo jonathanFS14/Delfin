@@ -20,14 +20,14 @@ public class MainUI extends SuperUI {
                     1. Formand
                     2. Kasserer
                     3. Træner
-                    4. Print all members
+                    8. Print all members
                     9. Luk programmet""");
             input = scanner.nextInt();
             switch (input) {
                 case 1 -> formandUserInterface.formandUI();
                 case 2 -> kassererUserInterface.kassererUI();
                 case 3 -> trainerUserInterface.trainerUI();
-                case 4 -> controller.printAllMembers();
+                case 8 -> controller.printAllMembers();
                 case 9 -> endProgram();
                 default -> System.out.println("Ugyldigt Input");
             }
