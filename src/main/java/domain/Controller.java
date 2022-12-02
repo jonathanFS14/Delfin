@@ -60,6 +60,10 @@ public class Controller {
         overwriteSwimTimeDatabase();
     }
 
+    public ArrayList<SwimTime> getSwimTimeList(){
+        return database.getSwimTimeList();
+    }
+
     public void printAllMembers() {
         String a, b, c, d, e, f, g, h, i, j, k, l;
         System.out.println(String.format("┃ %-4s │  %-20s │  %-20s │  %-20s │  %-25s │  %-15s │  %-10s │  %-10s │  %-20s │  %-10s │  %-10s │  %-15s │ ", "ID", "Navn", "Addresse", "Tlf", "Mail", "Fødselsdag", "Betalt", "Aktiv", "Konkurrencesvømmer", "Studerende", "Arkiveret", "Betalingsdato"));

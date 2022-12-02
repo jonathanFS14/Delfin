@@ -105,10 +105,19 @@ public class TrainerUserInterface extends SuperUI {
     }
 
     private void showSwimmerProfile(){
-        System.out.println("Indtast medlem du vil på");
+        System.out.println("Indtast medlem du vil kigge på");
         Swimmer swimmer = controller.searchForMember(scanner.nextLine());
-        int swimmerID = swimmer.getMemberID();
-        
+        int searchID = swimmer.getMemberID();
+        ArrayList<SwimTime> swimTimeList = controller.getSwimTimeList();
+        System.out.println(String.format("┃ %-20s │  %-10s │  %-20s ┃", "Disciplin", "Tid", "Sted"));
+        for (SwimTime s: swimTimeList) {
+            if (searchID == s.getMemberID()) {
+                System.out.println(s.printSwimTime());
+            }
+            
+        }
+
+
     }
 
 
