@@ -17,6 +17,7 @@ public class Controller {
     
     public void createSwimmer(String name, String address, String phoneNumber, String mail, LocalDate birthday, boolean isCompetitor, boolean isStudent) {
         database.createSwimmer(name, address, phoneNumber, mail, birthday, isCompetitor, isStudent);
+        overwriteSwimmerDatabase();
     }
     
     public ArrayList<Swimmer> searchForArchived(String searchParameter) {
@@ -59,6 +60,7 @@ public class Controller {
 
     public void createSwimTime(int memberID, double time, Events event, String placeSet){
         database.createSwimTime(memberID,time,event,placeSet);
+        overwriteSwimTimeDatabase();
     }
 
     

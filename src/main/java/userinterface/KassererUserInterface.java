@@ -7,17 +7,22 @@ import java.time.LocalDate;
 public class KassererUserInterface extends SuperUI {
 
     public void kassererUI() {
+        controller.initialLoad();
         automaticRestanceCheck();
+        userMenu();
+    }
+
+    public void userMenu() {
         int userInput;
         do {
             System.out.println("""
-                1. Ændre et medlems betalingsstatus
-                2. Tjek et medlems betalingsstatus
-                3. Vis oversigt over forventet indtjening
-                4. Vis oversigt over medlemmer i restance
-                
-                8. Log ud
-                9. Afslut Program""");
+                    1. Ændre et medlems betalingsstatus
+                    2. Tjek et medlems betalingsstatus
+                    3. Vis oversigt over forventet indtjening
+                    4. Vis oversigt over medlemmer i restance
+                                    
+                    8. Log ud
+                    9. Afslut Program""");
             userInput = readInt();
 
             switch (userInput) {
@@ -29,14 +34,8 @@ public class KassererUserInterface extends SuperUI {
                 case 9 -> endProgram();
                 default -> System.out.println("Ugyldigt valg");
             }
-        } while (true);
+        } while (userInput != 9 && userInput != 8);
     }
-
-    /*private void endProgram() {
-        System.out.println("\n Lukker programmet");
-        controller.overwriteSwimmerDatabase();
-        System.exit(0);
-    }*/
 
     private void checkMembersPaymentStatus() {
         System.out.println("Indtast medlem du vil tjekke betalingsstatus på");
@@ -62,27 +61,13 @@ public class KassererUserInterface extends SuperUI {
 
 
     private void automaticRestanceCheck() {
-        for (Swimmer swimmer: controller.getSwimmerList()) {
+        for (Swimmer swimmer : controller.getSwimmerList()) {
             if (swimmer.getPaymentDate().plusYears(1).isBefore(LocalDate.now()))
                 swimmer.setHasPaid(false);
 
         }
     }
 
-    public void logOut(){
-        System.out.println("""
-                   Do you want to logOut?
-                   ja/nej
-                   """);
-        boolean input = yesOrNoToBoolean();
-
-        if(input){
-            controller.overwriteSwimmerDatabase();
-            MainUI mainUI = new MainUI();
-            mainUI.login();
-        }
-
-    }
 
     private void editSwimmerHasPaid() {
         System.out.println("Indtast medlem der skal redigeres");
@@ -93,10 +78,10 @@ public class KassererUserInterface extends SuperUI {
             int inputActiveStatus;
             do {
                 System.out.println("""
-                                1. Sæt betalingsstatus til betalt
-                                2. Sæt betalingsstatus til ikke betalt
-                                3. fortryd
-                                """);
+                        1. Sæt betalingsstatus til betalt
+                        2. Sæt betalingsstatus til ikke betalt
+                        3. fortryd
+                        """);
                 inputActiveStatus = readInt();
                 switch (inputActiveStatus) {
                     case 1:

@@ -32,6 +32,7 @@ public class SuperUI {
         while (readString.isEmpty());
         return readString;
     }
+
     protected boolean yesOrNoToBoolean() {
         boolean answer = false;
         int check; //Er der en bedre måde at loop løkken?
@@ -43,7 +44,7 @@ public class SuperUI {
                     answer = true;
                     check = 1;
                 }
-                case "nej", "no", "n" ->{
+                case "nej", "no", "n" -> {
                     answer = false;
                     check = 1;
                 }
@@ -83,7 +84,6 @@ public class SuperUI {
             input = readInt();
             switch (input) {
                 case 1:
-                    overwriteAllToFile();
                     System.out.println("På gensyn");
                     System.exit(0);
                     break;
@@ -98,9 +98,8 @@ public class SuperUI {
         while (input != 1 && input != 2);
     }
 
-    private void overwriteAllToFile(){
-        controller.overwriteSwimmerDatabase();
-        controller.overwriteSwimTimeDatabase();
+    public void logOut() {
+        System.out.println("Logger ud.");
     }
 
 }
