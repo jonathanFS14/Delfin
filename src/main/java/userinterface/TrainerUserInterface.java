@@ -1,4 +1,5 @@
 package userinterface;
+
 import domain.Controller;
 import domain.Events;
 import domain.SwimTime;
@@ -6,16 +7,18 @@ import domain.Swimmer;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-public class TrainerUserInterface extends SuperUI{
+
+public class TrainerUserInterface extends SuperUI {
 
 
     public void trainerUI() {
+        controller.initialLoad();
         controller.setCompetitorsToTeams();
         userMenu();
     }
 
-    public void userMenu(){
-        int userchoice;
+    public void userMenu() {
+        int userInput;
         do {
             System.out.println("""                
                      Hvad vil du gøre?                       
@@ -25,8 +28,8 @@ public class TrainerUserInterface extends SuperUI{
                     8. Log ud
                     9. Afslut program
                      """);
-            userchoice = readInt();
-            switch (userchoice) {
+            userInput = readInt();
+            switch (userInput) {
                 case 1 -> showTeamMenu();
                 case 2 -> setTimeForSwimmer();
                 case 3 -> System.out.println("");
@@ -35,12 +38,13 @@ public class TrainerUserInterface extends SuperUI{
                 default -> System.out.println("Ugyldig input");
             }
         }
-        while (userchoice!=9);
+        while (userInput != 9 && userInput != 8);
     }
 
-    public void showTeamMenu(){
+    public void showTeamMenu() {
         int userChoice;
         do {
+            controller.initialLoad();
             System.out.println("""
                     hvilket hold vil du se?
                     1. Senior holdet
@@ -55,10 +59,10 @@ public class TrainerUserInterface extends SuperUI{
                 default -> System.out.println("Ugyldig input");
             }
         }
-        while(userChoice!=1 || userChoice!=2 || userChoice!=3);
+        while (userChoice != 1 || userChoice != 2 || userChoice != 3);
     }
 
-    public void setTimeForSwimmer(){
+    public void setTimeForSwimmer() {
         System.out.println("Indtast hvilken svømmer du vil registrere en tid for");
         String searchParameter = readString();
         Swimmer swimmer = controller.searchForMember(searchParameter);
@@ -83,33 +87,26 @@ public class TrainerUserInterface extends SuperUI{
                 "\nDisciplin: " + event +
                 "\nHvorhenne: " + placeSet +
                 "\n\nBekræft venligst (Ja/Nej) "
-                );
-        if(yesOrNoToBoolean())
-        controller.createSwimTime(memberID,swimTime,event,placeSet);
+        );
+        if (yesOrNoToBoolean())
+            controller.createSwimTime(memberID, swimTime, event, placeSet);
     }
 
 
-    private void printTeam(ArrayList<Swimmer> teamList){
-        for(Swimmer swimmer : teamList){
+    private void printTeam(ArrayList<Swimmer> teamList) {
+        for (Swimmer swimmer : teamList) {
             System.out.println(teamList.indexOf(swimmer) + 1 + ". " + swimmer.getName());
         }
     }
 
-    //TODO gør metoden færdig
-    public void logOut(){
-           System.out.println("""
-                   Do you want to logOut?
-                   ja/nej
-                   """);
-               boolean input = yesOrNoToBoolean();
-
-               if(input){
-                   controller.overwriteSwimTimeDatabase();
-                   MainUI mainUI = new MainUI();
-                   mainUI.login();
-               }
-
-       }
+    private void showTopFive(){
 
     }
+
+    private void showSwimmerProfile(){
+
+    }
+
+
+}
 

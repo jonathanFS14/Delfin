@@ -18,8 +18,8 @@ public class MainUI extends SuperUI {
 
     public void login() {
         int input;
-        controller.initialLoad();
         do {
+            controller.initialLoad();
             System.out.println("""
                     Hvem logger du ind som?
                     1. Formand
@@ -35,7 +35,7 @@ public class MainUI extends SuperUI {
                 default -> System.out.println("Ugyldigt Input");
             }
         }
-        while (input != 1 && input != 2 && input != 3 && input != 9);
+        while (input != 1 || input != 2 || input != 3 || input != 9);
     }
 
 
