@@ -7,12 +7,9 @@ public class Controller {
     Database database;
     Filehandler filehandler;
 
-
-    
     public Controller() {
         database = new Database();
         filehandler = new Filehandler();
-
     }
     
     public void createSwimmer(String name, String address, String phoneNumber, String mail, LocalDate birthday, boolean isCompetitor, boolean isStudent) {

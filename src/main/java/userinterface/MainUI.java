@@ -1,9 +1,4 @@
 package userinterface;
-
-import domain.Controller;
-
-import java.util.Scanner;
-
 public class MainUI extends SuperUI {
 
     FormandUserInterface formandUserInterface;
@@ -17,9 +12,9 @@ public class MainUI extends SuperUI {
     }
 
     public void login() {
+        controller.initialLoad();
         int input;
         do {
-            controller.initialLoad();
             System.out.println("""
                     Hvem logger du ind som?
                     1. Formand

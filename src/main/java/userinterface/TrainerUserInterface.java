@@ -12,7 +12,6 @@ public class TrainerUserInterface extends SuperUI {
 
 
     public void trainerUI() {
-        controller.initialLoad();
         controller.setCompetitorsToTeams();
         userMenu();
     }
@@ -24,7 +23,8 @@ public class TrainerUserInterface extends SuperUI {
                      Hvad vil du gøre?                       
                     1. Se hold
                     2. indtast tid
-                    3. se alle tider for en svømmer
+                    3. se en svømmers profil
+                    4. top 5 hurtigste svømmere
                     8. Log ud
                     9. Afslut program
                      """);
@@ -32,7 +32,8 @@ public class TrainerUserInterface extends SuperUI {
             switch (userInput) {
                 case 1 -> showTeamMenu();
                 case 2 -> setTimeForSwimmer();
-                case 3 -> System.out.println("");
+                case 3 -> showSwimmerProfile();
+                case 4 -> showTopFive();
                 case 8 -> logOut();
                 case 9 -> endProgram();
                 default -> System.out.println("Ugyldig input");

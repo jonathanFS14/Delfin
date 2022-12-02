@@ -7,7 +7,6 @@ import java.time.LocalDate;
 public class KassererUserInterface extends SuperUI {
 
     public void kassererUI() {
-        controller.initialLoad();
         automaticRestanceCheck();
         userMenu();
     }

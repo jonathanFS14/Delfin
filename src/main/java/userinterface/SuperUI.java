@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class SuperUI {
     Scanner scanner = new Scanner(System.in);
-    Controller controller = new Controller();
+    static Controller controller = new Controller();
 
 
     protected int readInt() {
@@ -69,10 +69,6 @@ public class SuperUI {
         // TODO burde køre i loop sådan at man skal prøve igen hvis input er forkert.
         return answer;
     }
-
-
-    //TODO lav en ordentlig endProgram() og logOut()
-
 
     public void endProgram() {
         int input;
