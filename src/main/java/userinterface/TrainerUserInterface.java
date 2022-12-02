@@ -100,37 +100,48 @@ public class TrainerUserInterface extends SuperUI {
         }
     }
 
-    private void showTopFive(){
+    private void showTopFive() {
         System.out.println("Indtast hvilket hold du ønsker at finde top 5, junior/senior");
-        int userChoice = scanner.nextInt();
-        if (userChoice == 1)
-            printTeam(controller.getJuniorTeam());
-        else if (userChoice == 2) {
-            printTeam(controller.getSeniorTeam());
+        int userChoice;
+        ArrayList<Swimmer>localTeamList = new ArrayList<>();
+        ArrayList<SwimTime>localSwimTimeList = new ArrayList<>();
+        Events event;
 
+        do {
+            userChoice = scanner.nextInt();
+            if (userChoice == 1) {
+                //team = "Junior";
+                localTeamList = controller.getJuniorTeam();
+            } else if (userChoice == 2) {
+               // team = "Senior";
+                localTeamList = controller.getSeniorTeam();
+            }
+        } while (userChoice != 1 && userChoice != 2);
+
+        System.out.println("Vælg disciplin");
+        event = controller.selectEvent();
+
+        for(Swimmer s : localTeamList){ //Disse to for loops samler alle svømmetider for et bestemt hold i en bestemt disciplin
+            for(SwimTime st : controller.getSwimTimeList()){
+                if(st.getMemberID() == s.getMemberID() && st.getEvent() == event){
+                    localSwimTimeList.add(st);
+                }
+            }
         }
-
-        
-
 
     }
 
-    private void showSwimmerProfile(){
+    private void showSwimmerProfile() {
         System.out.println("Indtast medlem du vil kigge på");
         Swimmer swimmer = controller.searchForMember(scanner.nextLine());
         int searchID = swimmer.getMemberID();
         ArrayList<SwimTime> swimTimeList = controller.getSwimTimeList();
         System.out.println(String.format("┃ %-20s │  %-10s │  %-20s ┃", "Disciplin", "Tid", "Sted"));
-        for (SwimTime s: swimTimeList) {
+        for (SwimTime s : swimTimeList) {
             if (searchID == s.getMemberID()) {
                 System.out.println(s.printSwimTime());
             }
-            
         }
-
-
     }
-
-
 }
 
