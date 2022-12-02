@@ -1,11 +1,13 @@
 package userinterface;
 
+import Comparators.TimeComparator;
 import domain.Controller;
 import domain.Events;
 import domain.SwimTime;
 import domain.Swimmer;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class TrainerUserInterface extends SuperUI {
@@ -118,17 +120,22 @@ public class TrainerUserInterface extends SuperUI {
             }
         } while (userChoice != 1 && userChoice != 2);
 
-        System.out.println("Vælg disciplin");
-        event = controller.selectEvent();
+
+        event = controller.selectEvent(); //Vælger disciplin
 
         for(Swimmer s : localTeamList){ //Disse to for loops samler alle svømmetider for et bestemt hold i en bestemt disciplin
             for(SwimTime st : controller.getSwimTimeList()){
-                if(st.getMemberID() == s.getMemberID() && st.getEvent() == event){
+                if(st.getMemberID() == s.getMemberID() && st.getEvent() == event && !st.getPlaceSet().equals("Træning")){
                     localSwimTimeList.add(st);
+                   //System.out.println(s.getName() + " " + st.getEvent() + " " + st.getTime() + st.getPlaceSet());
                 }
             }
         }
-
+        Collections.sort(localSwimTimeList, new TimeComparator());
+        for(int i = 0; i<=4; i++){ //gør at svømmeren navn bliver printet med. EN svømmer må kun dukke op én gang
+            SwimTime topTimes = localSwimTimeList.get(i); // gør robust hvis der ikke er nok tider eller svømmere
+            System.out.println(topTimes.getMemberID() + " " + topTimes.getEvent() + " " + topTimes.getTime() + " " + topTimes.getPlaceSet());
+        }
     }
 
     private void showSwimmerProfile() {
