@@ -12,7 +12,6 @@ public class TrainerUserInterface extends SuperUI {
 
 
     public void trainerUI() {
-        controller.initialLoad();
         controller.setCompetitorsToTeams();
         userMenu();
     }
@@ -24,7 +23,8 @@ public class TrainerUserInterface extends SuperUI {
                      Hvad vil du gøre?                       
                     1. Se hold
                     2. indtast tid
-                    3. se alle tider for en svømmer
+                    3. se en svømmers profil
+                    4. top 5 hurtigste svømmere
                     8. Log ud
                     9. Afslut program
                      """);
@@ -32,7 +32,8 @@ public class TrainerUserInterface extends SuperUI {
             switch (userInput) {
                 case 1 -> showTeamMenu();
                 case 2 -> setTimeForSwimmer();
-                case 3 -> System.out.println("");
+                case 3 -> showSwimmerProfile();
+                case 4 -> showTopFive();
                 case 8 -> logOut();
                 case 9 -> endProgram();
                 default -> System.out.println("Ugyldig input");
@@ -73,7 +74,7 @@ public class TrainerUserInterface extends SuperUI {
 
         System.out.println("Indtast tid");
         double swimTime = scanner.nextDouble();
-
+        scanner.nextLine();
         System.out.println("Indtast stævnet, hvor tiden blev sat (Tryk enter hvis det var en træningstid)");
         String userInput = scanner.nextLine();
         String placeSet;
@@ -100,10 +101,33 @@ public class TrainerUserInterface extends SuperUI {
     }
 
     private void showTopFive(){
+        System.out.println("Indtast hvilket hold du ønsker at finde top 5, junior/senior");
+        int userChoice = scanner.nextInt();
+        if (userChoice == 1)
+            printTeam(controller.getJuniorTeam());
+        else if (userChoice == 2) {
+            printTeam(controller.getSeniorTeam());
+
+        }
+
+        
+
 
     }
 
     private void showSwimmerProfile(){
+        System.out.println("Indtast medlem du vil kigge på");
+        Swimmer swimmer = controller.searchForMember(scanner.nextLine());
+        int searchID = swimmer.getMemberID();
+        ArrayList<SwimTime> swimTimeList = controller.getSwimTimeList();
+        System.out.println(String.format("┃ %-20s │  %-10s │  %-20s ┃", "Disciplin", "Tid", "Sted"));
+        for (SwimTime s: swimTimeList) {
+            if (searchID == s.getMemberID()) {
+                System.out.println(s.printSwimTime());
+            }
+            
+        }
+
 
     }
 

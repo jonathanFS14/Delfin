@@ -33,4 +33,10 @@ public class SwimTime {
     public String getPlaceSet() {
         return placeSet;
     }
+
+    public String printSwimTime() {
+
+        return String.format("┃ %-20s │  %-10.2f │  %-20s ┃", event, time, placeSet);
+    }
+
 }
