@@ -1,4 +1,5 @@
 package userinterface;
+
 import Comparator.TimeComparator;
 import domain.Events;
 import domain.SwimTime;
@@ -18,7 +19,8 @@ public class TrainerUserInterface extends SuperUI {
     public void userMenu() {
         int userInput;
         do {
-            System.out.println("""                
+            System.out.println("""    
+                                 
                      Hvad vil du gøre?                       
                     1. Se hold
                     2. indtast tid
@@ -100,16 +102,18 @@ public class TrainerUserInterface extends SuperUI {
     }
 
     private void showTopFive() {
+        int userChoice;
+        ArrayList<Swimmer> localTeamList = new ArrayList<>();
+        ArrayList<SwimTime> localSwimTimeList = new ArrayList<>();
+        ArrayList<SwimTime> top5Times = new ArrayList<>();
+
+        Events event;
+
+        //Vælger holdet man vil se tider for
         System.out.println("""
                 Indtast hvilket hold du ønsker at finde top 5
                 1. Junior
                 2. Senior""");
-        int userChoice;
-        ArrayList<Swimmer>localTeamList = new ArrayList<>();
-        ArrayList<SwimTime>localSwimTimeList = new ArrayList<>();
-        ArrayList<SwimTime> top5Times = new ArrayList<>();
-        Events event;
-
         do {
             userChoice = scanner.nextInt();
             if (userChoice == 1) {
@@ -119,43 +123,53 @@ public class TrainerUserInterface extends SuperUI {
             }
         } while (userChoice != 1 && userChoice != 2);
 
-
+        //Metode til at vælge disciplin med indbygget menu
         event = controller.selectEvent(); //Vælger disciplin
 
-        for(Swimmer s : localTeamList){ //Disse to for loops samler alle svømmetider for et bestemt hold i en bestemt disciplin
-            for(SwimTime st : controller.getSwimTimeList()){
-                if(st.getMemberID() == s.getMemberID() && st.getEvent() == event && !st.getPlaceSet().equals("Træning")){
+        //Disse to for loops samler alle svømmetider for et bestemt hold i en bestemt disciplin
+        for (Swimmer s : localTeamList) {
+            for (SwimTime st : controller.getSwimTimeList()) {
+                if (st.getMemberID() == s.getMemberID() && st.getEvent() == event && !st.getPlaceSet().equals("Træning")) {
                     localSwimTimeList.add(st);
-                   //System.out.println(s.getName() + " " + st.getEvent() + " " + st.getTime() + st.getPlaceSet());
-                }
-            }
-        }
-        Collections.sort(localSwimTimeList, new TimeComparator());
-     /*   for(int i = 0; i<=4; i++){ //gør at svømmeren navn bliver printet med. EN svømmer må kun dukke op én gang
-            SwimTime topTimes = localSwimTimeList.get(i); // gør robust hvis der ikke er nok tider eller svømmere
-            System.out.println(topTimes.getMemberID() + " " + topTimes.getEvent() + " " + topTimes.getTime() + " " + topTimes.getPlaceSet());
-        }*/
-
-        for(Swimmer s : localTeamList) {
-            for (SwimTime st : localSwimTimeList) {
-                if (s.getMemberID() == st.getMemberID()){
-                    top5Times.add(st);
-                    break;
                 }
             }
         }
 
-        for(int i = 0; i<=4; i++){
-            SwimTime st;
-                st = top5Times.get(i);
-                System.out.println(getSwimmerNameFromID(st.getMemberID()) + 1 + " " + st.getTime() + " " + st.getMemberID()); //TODO formatér og gøre robust hvis der ikke er 5 tider
+        //Tjekker om det man har søgt på er tomt.
+        if (localSwimTimeList.isEmpty()) {
+            System.out.println("Ingen tider");
+        } else {
+            //Sorterer den samlede liste af tider efter hurtigeste tid
+            Collections.sort(localSwimTimeList, new TimeComparator());
+
+            //Flytter kun den hurtigste tid for hver svømmer i en liste.
+            for (Swimmer s : localTeamList) {
+                for (SwimTime st : localSwimTimeList) {
+                    if (s.getMemberID() == st.getMemberID()) {
+                        top5Times.add(st);
+                        break;
+                    }
+                }
+            }
+
+            //Sortere top5 listen og printer de 5 hurtigeste tider. Hvis der ikke er 5 tider så fyldes resten ud med "N/A"
+            Collections.sort(top5Times, new TimeComparator());
+            for(int i = 0; i<5; i++){
+                try{
+                    SwimTime st = top5Times.get(i);
+                    System.out.println(i + 1 + ". " + getSwimmerNameFromID(st.getMemberID()) + ": " + st.getTime());
+                }
+                catch (IndexOutOfBoundsException e) {
+                    System.out.println(i + 1 + ". N/A");
+                }
+            }
         }
     }
 
-    private String getSwimmerNameFromID(int memberID){
+    private String getSwimmerNameFromID(int memberID) {
         String swimmerName = "SwimmerName";
-        for(Swimmer s : controller.getSwimmerList()){
-            if(memberID == s.getMemberID()){
+        for (Swimmer s : controller.getSwimmerList()) {
+            if (memberID == s.getMemberID()) {
                 swimmerName = s.getName();
                 break;
             }
