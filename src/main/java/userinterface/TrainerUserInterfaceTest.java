@@ -29,7 +29,7 @@ class TrainerUserInterfaceTest {
 
         for(Swimmer s : localSwimmerList){ //Disse to for loops samler alle svømmetider for et bestemt hold i en bestemt disciplin
             for(SwimTime st : localTimeList){
-                if(st.getMemberID() == s.getMemberID() && st.getEvent().equals(Events.BUTTERFLY50M )&& !st.getPlaceSet().equals("Træning")){
+                if(st.getMemberID() == s.getMemberID() && st.getEvent().equals(Events.CRAWL50M )&& !st.getPlaceSet().equals("Træning")){
                     localTimeList.add(st);
                 }
             }
@@ -46,7 +46,7 @@ class TrainerUserInterfaceTest {
                 }
             }
         }
-        Collections.sort(top5Times, new TimeComparator());
+
 
         for(SwimTime st: top5Times){
             System.out.println(st.getTime() + " " + st.getMemberID());

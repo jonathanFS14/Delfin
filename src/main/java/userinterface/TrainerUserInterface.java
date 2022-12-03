@@ -110,6 +110,7 @@ public class TrainerUserInterface extends SuperUI {
         int userChoice;
         ArrayList<Swimmer>localTeamList = new ArrayList<>();
         ArrayList<SwimTime>localSwimTimeList = new ArrayList<>();
+        ArrayList<SwimTime> top5Times = new ArrayList<>();
         Events event;
 
         do {
@@ -133,9 +134,22 @@ public class TrainerUserInterface extends SuperUI {
             }
         }
         Collections.sort(localSwimTimeList, new TimeComparator());
-        for(int i = 0; i<=4; i++){ //gør at svømmeren navn bliver printet med. EN svømmer må kun dukke op én gang
+     /*   for(int i = 0; i<=4; i++){ //gør at svømmeren navn bliver printet med. EN svømmer må kun dukke op én gang
             SwimTime topTimes = localSwimTimeList.get(i); // gør robust hvis der ikke er nok tider eller svømmere
             System.out.println(topTimes.getMemberID() + " " + topTimes.getEvent() + " " + topTimes.getTime() + " " + topTimes.getPlaceSet());
+        }*/
+
+        for(Swimmer s : localTeamList) {
+            for (SwimTime st : localSwimTimeList) {
+                if (s.getMemberID() == st.getMemberID()){
+                    top5Times.add(st);
+                    break;
+                }
+            }
+        }
+
+        for(SwimTime st : top5Times){
+            System.out.println(top5Times.indexOf(st) + 1 + " " + st.getTime() + " " + st.getMemberID());
         }
     }
 
