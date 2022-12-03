@@ -103,7 +103,10 @@ public class TrainerUserInterface extends SuperUI {
     }
 
     private void showTopFive() {
-        System.out.println("Indtast hvilket hold du ønsker at finde top 5, junior/senior");
+        System.out.println("""
+                Indtast hvilket hold du ønsker at finde top 5
+                1. Junior
+                2. Senior""");
         int userChoice;
         ArrayList<Swimmer>localTeamList = new ArrayList<>();
         ArrayList<SwimTime>localSwimTimeList = new ArrayList<>();
@@ -112,10 +115,8 @@ public class TrainerUserInterface extends SuperUI {
         do {
             userChoice = scanner.nextInt();
             if (userChoice == 1) {
-                //team = "Junior";
                 localTeamList = controller.getJuniorTeam();
             } else if (userChoice == 2) {
-               // team = "Senior";
                 localTeamList = controller.getSeniorTeam();
             }
         } while (userChoice != 1 && userChoice != 2);
@@ -137,6 +138,7 @@ public class TrainerUserInterface extends SuperUI {
             System.out.println(topTimes.getMemberID() + " " + topTimes.getEvent() + " " + topTimes.getTime() + " " + topTimes.getPlaceSet());
         }
     }
+
 
     private void showSwimmerProfile() {
         System.out.println("Indtast medlem du vil kigge på");
