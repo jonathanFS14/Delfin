@@ -1,4 +1,4 @@
-package Comparators;
+package Comparator;
 
 import domain.SwimTime;
 

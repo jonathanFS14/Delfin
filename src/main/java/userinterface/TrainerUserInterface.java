@@ -1,14 +1,11 @@
 package userinterface;
-
-import Comparators.TimeComparator;
-import domain.Controller;
+import Comparator.TimeComparator;
 import domain.Events;
 import domain.SwimTime;
 import domain.Swimmer;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Scanner;
 
 public class TrainerUserInterface extends SuperUI {
 
@@ -148,11 +145,23 @@ public class TrainerUserInterface extends SuperUI {
             }
         }
 
-        for(SwimTime st : top5Times){
-            System.out.println(top5Times.indexOf(st) + 1 + " " + st.getTime() + " " + st.getMemberID());
+        for(int i = 0; i<=4; i++){
+            SwimTime st;
+                st = top5Times.get(i);
+                System.out.println(getSwimmerNameFromID(st.getMemberID()) + 1 + " " + st.getTime() + " " + st.getMemberID()); //TODO formatér og gøre robust hvis der ikke er 5 tider
         }
     }
 
+    private String getSwimmerNameFromID(int memberID){
+        String swimmerName = "SwimmerName";
+        for(Swimmer s : controller.getSwimmerList()){
+            if(memberID == s.getMemberID()){
+                swimmerName = s.getName();
+                break;
+            }
+        }
+        return swimmerName;
+    }
 
     private void showSwimmerProfile() {
         System.out.println("Indtast medlem du vil kigge på");

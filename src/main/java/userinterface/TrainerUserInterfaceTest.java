@@ -1,14 +1,12 @@
 package userinterface;
 
-import Comparators.TimeComparator;
+import Comparator.TimeComparator;
 import domain.Controller;
 import domain.Events;
 import domain.Swimmer;
 import domain.SwimTime;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 
