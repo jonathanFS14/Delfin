@@ -1,12 +1,12 @@
 package userinterface;
 
-import domain.Controller;
+import Comparator.TimeComparator;
 import domain.Events;
 import domain.SwimTime;
 import domain.Swimmer;
 
 import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.Collections;
 
 public class TrainerUserInterface extends SuperUI {
 
@@ -19,7 +19,8 @@ public class TrainerUserInterface extends SuperUI {
     public void userMenu() {
         int userInput;
         do {
-            System.out.println("""                
+            System.out.println("""    
+                                 
                      Hvad vil du gøre?                       
                     1. Se hold
                     2. indtast tid
@@ -100,37 +101,95 @@ public class TrainerUserInterface extends SuperUI {
         }
     }
 
-    private void showTopFive(){
-        System.out.println("Indtast hvilket hold du ønsker at finde top 5, junior/senior");
-        int userChoice = scanner.nextInt();
-        if (userChoice == 1)
-            printTeam(controller.getJuniorTeam());
-        else if (userChoice == 2) {
-            printTeam(controller.getSeniorTeam());
+    private void showTopFive() {
+        int userChoice;
+        ArrayList<Swimmer> localTeamList = new ArrayList<>();
+        ArrayList<SwimTime> localSwimTimeList = new ArrayList<>();
+        ArrayList<SwimTime> top5Times = new ArrayList<>();
 
+        Events event;
+
+        //Vælger holdet man vil se tider for
+        System.out.println("""
+                Indtast hvilket hold du ønsker at finde top 5
+                1. Junior
+                2. Senior""");
+        do {
+            userChoice = scanner.nextInt();
+            if (userChoice == 1) {
+                localTeamList = controller.getJuniorTeam();
+            } else if (userChoice == 2) {
+                localTeamList = controller.getSeniorTeam();
+            }
+        } while (userChoice != 1 && userChoice != 2);
+
+        //Metode til at vælge disciplin med indbygget menu
+        event = controller.selectEvent(); //Vælger disciplin
+
+        //Disse to for loops samler alle svømmetider for et bestemt hold i en bestemt disciplin
+        for (Swimmer s : localTeamList) {
+            for (SwimTime st : controller.getSwimTimeList()) {
+                if (st.getMemberID() == s.getMemberID() && st.getEvent() == event && !st.getPlaceSet().equals("Træning")) {
+                    localSwimTimeList.add(st);
+                }
+            }
         }
 
-        
+        //Tjekker om det man har søgt på er tomt.
+        if (localSwimTimeList.isEmpty()) {
+            System.out.println("Ingen tider");
+        } else {
+            //Sorterer den samlede liste af tider efter hurtigeste tid
+            Collections.sort(localSwimTimeList, new TimeComparator());
 
+            //Flytter kun den hurtigste tid for hver svømmer i en liste.
+            for (Swimmer s : localTeamList) {
+                for (SwimTime st : localSwimTimeList) {
+                    if (s.getMemberID() == st.getMemberID()) {
+                        top5Times.add(st);
+                        break;
+                    }
+                }
+            }
 
+            sortAndPrintTop5(top5Times);
+        }
+    }
+    private void sortAndPrintTop5(ArrayList<SwimTime> top5Times) {
+        //Sortere top5 listen og printer de 5 hurtigeste tider. Hvis der ikke er 5 tider så fyldes resten ud med "N/A"
+        Collections.sort(top5Times, new TimeComparator());
+        for (int i = 0; i < 5; i++) {
+            try {
+                SwimTime st = top5Times.get(i);
+                System.out.println(i + 1 + ". " + getSwimmerNameFromID(st.getMemberID()) + ": " + st.getTime());
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println(i + 1 + ". N/A");
+            }
+        }
     }
 
-    private void showSwimmerProfile(){
+    private String getSwimmerNameFromID(int memberID) {
+        String swimmerName = "SwimmerName";
+        for (Swimmer s : controller.getSwimmerList()) {
+            if (memberID == s.getMemberID()) {
+                swimmerName = s.getName();
+                break;
+            }
+        }
+        return swimmerName;
+    }
+
+    private void showSwimmerProfile() {
         System.out.println("Indtast medlem du vil kigge på");
         Swimmer swimmer = controller.searchForMember(scanner.nextLine());
         int searchID = swimmer.getMemberID();
         ArrayList<SwimTime> swimTimeList = controller.getSwimTimeList();
         System.out.println(String.format("┃ %-20s │  %-10s │  %-20s ┃", "Disciplin", "Tid", "Sted"));
-        for (SwimTime s: swimTimeList) {
+        for (SwimTime s : swimTimeList) {
             if (searchID == s.getMemberID()) {
                 System.out.println(s.printSwimTime());
             }
-            
         }
-
-
     }
-
-
 }
 
