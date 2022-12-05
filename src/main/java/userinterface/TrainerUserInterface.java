@@ -67,8 +67,7 @@ public class TrainerUserInterface extends SuperUI {
                     printTeam(controller.getJuniorTeam());
                     insertSeperatorLine(25);
                 }
-    
-                case 3 -> userMenu();
+                case 3 -> System.out.println("Vender tilbage");
                 default -> System.out.println("Ugyldig input");
             }
         }
