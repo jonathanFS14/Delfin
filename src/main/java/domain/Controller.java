@@ -66,7 +66,7 @@ public class Controller {
 
     public void printAllMembers() {
         String a, b, c, d, e, f, g, h, i, j, k, l;
-        System.out.println(String.format("┃ %-4s │  %-20s │  %-20s │  %-20s │  %-25s │  %-15s │  %-10s │  %-10s │  %-20s │  %-10s │  %-10s │  %-15s │ ", "ID", "Navn", "Addresse", "Tlf", "Mail", "Fødselsdag", "Betalt", "Aktiv", "Konkurrencesvømmer", "Studerende", "Arkiveret", "Betalingsdato"));
+        System.out.println(String.format("┃ %-4s │  %-18s │  %-18s │  %-13s │  %-23s │  %-15s │  %-10s │  %-10s │  %-20s │  %-10s │  %-10s │  %-15s │ ", "ID", "Navn", "Addresse", "Tlf", "Mail", "Fødselsdag", "Betalt", "Aktiv", "Konkurrencesvømmer", "Studerende", "Arkiveret", "Betalingsdato"));
         for (Swimmer swimmer : getSwimmerList()) {
             a = String.valueOf(swimmer.getMemberID());
             b = swimmer.getName();
@@ -81,7 +81,7 @@ public class Controller {
             k = booleanToYesOrNo(swimmer.isArchived());
             l = swimmer.getPaymentDate().toString();
 
-            String s = String.format("┃ %-4s │  %-20s │  %-20s │  %-20s │  %-25s │  %-15s │  %-10s │  %-10s │  %-20s │  %-10s │  %-10s │  %-15s │ ", a, b, c, d, e, f, g, h, i, j, k, l);
+            String s = String.format("┃ %-4s │  %-18s │  %-18s │  %-13s │  %-23s │  %-15s │  %-10s │  %-10s │  %-20s │  %-10s │  %-10s │  %-15s │ ", a, b, c, d, e, f, g, h, i, j, k, l);
             System.out.println(s);
 
         }

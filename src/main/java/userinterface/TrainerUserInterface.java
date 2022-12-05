@@ -28,7 +28,6 @@ public class TrainerUserInterface extends SuperUI {
                     4. Top 5 hurtigste svømmere
                     8. Log ud
                     9. Afslut program""");
-            insertSeperatorLine(25);
             userInput = readInt();
             insertSeperatorLine(25);
             switch (userInput) {

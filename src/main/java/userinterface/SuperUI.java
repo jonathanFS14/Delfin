@@ -70,27 +70,21 @@ public class SuperUI {
     }
 
     public void endProgram() {
-        int input;
+        boolean input;
         System.out.println("""
-                Er du sikker på du vil forlade programmet?
-                1. ja
-                2. nej""");
+                Er du sikker på du vil forlade programmet? Ja/Nej""");
         do {
-            input = readInt();
-            switch (input) {
-                case 1:
-                    System.out.println("På gensyn");
-                    System.exit(0);
-                    break;
-                case 2:
-                    System.out.println("Vender tilbage");
-                    break;
-                default:
-                    System.out.println("Ugyldig input");
-                    break;
+            input = yesOrNoToBoolean();
+            if (input == input) {
+                System.out.println("På gensyn");
+                System.exit(0);
+            } else if (input != input ) {
+                System.out.println("Vender tilbage");
+            } else {
+                System.out.println("Ugyldig input");
             }
         }
-        while (input != 1 && input != 2);
+        while (!input && input);
     }
 
     protected void logOut(){

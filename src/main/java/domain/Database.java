@@ -66,7 +66,6 @@ public class Database {
         }
         else if(swimmerSearchList.size() == 1) {
             swimmer = swimmerSearchList.get(0);
-            System.out.println("Du søgte " + swimmer.getName() + " frem");
         }
         return swimmer;
     }

@@ -17,6 +17,7 @@ public class FormandUserInterface extends SuperUI {
     private void userMenu() {
         int userInput;
         do {
+            insertSeperatorLine(50);
             System.out.println("""                
                     Hvad vil du gøre?                       
                     1. Opret ny svømmer/ gendan gammel svømmer
@@ -24,13 +25,16 @@ public class FormandUserInterface extends SuperUI {
                     3. Vis alle svømmere
                     7. Arkivér svømmer (afmeld)
                     8. Log ud                
-                    9. afslut programmet
-                    """);
+                    9. afslut programmet""");
             userInput = readInt();
             switch (userInput) {
                 case 1 -> createSwimmerMenu();
                 case 2 -> editSwimmer();
-                case 3 -> controller.printAllMembers();
+                case 3 -> {
+                    insertSeperatorLine(215);
+                    controller.printAllMembers();
+                    insertSeperatorLine(215);
+                }
                 case 7 -> archiveSwimmer();
                 case 8 -> logOut();
                 case 9 -> endProgram();
@@ -41,12 +45,13 @@ public class FormandUserInterface extends SuperUI {
     }
 
     private void createSwimmerMenu() {
+        insertSeperatorLine(50);
         System.out.println("""
                 Vil du oprette et helt nyt medlem eller gendanne et gammel medlem?
                 1. Opret nyt medlem
                 2. Gendan gammelt medlem
-                9. fortryd
-                """);
+                9. fortryd""");
+        insertSeperatorLine(50);
         int input = readInt();
         switch (input) {
             case 1 -> createNewSwimmer();
@@ -60,16 +65,18 @@ public class FormandUserInterface extends SuperUI {
     }
 
     private void archiveSwimmer() {
+        insertSeperatorLine(50);
         System.out.println("Indtast medlem der skal arkiveres");
         Swimmer swimmer = controller.searchForMember(scanner.nextLine());
 
         swimmer.setArchived(true);
         swimmer.setHasPaid(false);
+        insertSeperatorLine(50);
         System.out.println(swimmer.getName() + " er nu arkiveret.");
     }
 
     private void restoreArchivedSwimmer() {
-
+        insertSeperatorLine(50);
         System.out.println("Indtast medlem der skal genoprettes");
         String searchParameter = scanner.nextLine();
 
@@ -87,6 +94,7 @@ public class FormandUserInterface extends SuperUI {
         Swimmer swimmer = localSwimmerList.get(chooseSwimmer - 1);
 
         swimmer.setArchived(false);
+        insertSeperatorLine(50);
         System.out.println(swimmer.getName() + " er nu genoprettet.");
 
     }
@@ -115,8 +123,9 @@ public class FormandUserInterface extends SuperUI {
         isCompetitor = yesOrNoToBoolean();
         System.out.println("Er svømmeren studerende?");
         isStudent = yesOrNoToBoolean();
+        insertSeperatorLine(50);
 
-        System.out.println("\nDu er ved at tilføje følgende svømmer:" +
+        System.out.println("Du er ved at tilføje følgende svømmer:" +
                 "\nNavn: " + navn +
                 "\nAddresse: " + address +
                 "\nTelefonnr: " + phoneNumber +
@@ -125,9 +134,13 @@ public class FormandUserInterface extends SuperUI {
                 "\nEr konkurrencesvømmer: " + booleanToYesOrNo(isCompetitor) +
                 "\nEr studerende: " + booleanToYesOrNo(isStudent) +
                 "\n\nBekræft venligst (Ja/Nej) ");
+        insertSeperatorLine(50);
         if (yesOrNoToBoolean()) {
             controller.createSwimmer(navn, address, phoneNumber, mail, birthday, isCompetitor, isStudent);
+            System.out.println(navn + " er tilføjet");
         }
+        else
+            System.out.println("Annulerer...");
     }
 
     private boolean validateBirthdayLocaleDate(LocalDate birthday) {

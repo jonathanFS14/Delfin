@@ -16,6 +16,7 @@ public class KassererUserInterface extends SuperUI {
     public void userMenu() {
         int userInput;
         do {
+            insertSeperatorLine(50);
             System.out.println("""
                     1. Ændre et medlems betalingsstatus
                     2. Tjek et medlems betalingsstatus
@@ -24,6 +25,7 @@ public class KassererUserInterface extends SuperUI {
                     8. Log ud
                     9. Afslut Program""");
             userInput = readInt();
+            insertSeperatorLine(50);
 
             switch (userInput) {
                 case 1 -> editSwimmerHasPaid();
@@ -39,13 +41,15 @@ public class KassererUserInterface extends SuperUI {
 
     private void checkMembersPaymentStatus() {
         System.out.println("Indtast medlem du vil tjekke betalingsstatus på");
+        insertSeperatorLine(50);
         Swimmer swimmer = controller.searchForMember(scanner.nextLine());
 
         if (swimmer != null) {
+            insertSeperatorLine(50);
             if (swimmer.getHasPaid()) {
-                System.out.println("Medlemmet har betalt kontingent den " + swimmer.getPaymentDate());
+                System.out.print(swimmer.getName() + " har betalt kontingent den " + swimmer.getPaymentDate());
             } else {
-                System.out.println("Medlemmet er i restance og skylder " + getKontingentPrice(swimmer) + " kr.\n");
+                System.out.print(swimmer.getName() +" er i restance og skylder " + getKontingentPrice(swimmer) + " kr.\n");
             }
         } else {
             System.out.println("Kunne ikke finde medlemmet");
@@ -58,24 +62,26 @@ public class KassererUserInterface extends SuperUI {
         ArrayList<Swimmer> localList = controller.getSwimmerList();
 
         // Junior
-        System.out.println("Junior: ");
+        System.out.println("Forventet indtjening fra Juniorer: ");
         for (Swimmer swimmer : localList) {
             if (ChronoUnit.YEARS.between(swimmer.getBirthday(),LocalDate.now()) < 18){
                 total += getKontingentPrice(swimmer);
-                System.out.printf("|  %-20s |  %-7s kr |\n", swimmer.getName(), String.valueOf(getKontingentPrice(swimmer)));
+                System.out.printf("| %-20s | %-7s kr |\n", swimmer.getName(), String.valueOf(getKontingentPrice(swimmer)));
             }
         }
+        insertSeperatorLine(50);
 
         //Senior
-        System.out.println("Senior: ");
+        System.out.println("Forventet indtjening fra Seniorer: ");
         for (Swimmer swimmer : localList) {
         if (ChronoUnit.YEARS.between(swimmer.getBirthday(),LocalDate.now()) >= 18){
                 total += getKontingentPrice(swimmer);
                 System.out.printf("|  %-20s |  %-7s kr |\n", swimmer.getName(), String.valueOf(getKontingentPrice(swimmer)));
             }
         }
+        insertSeperatorLine(50);
 
-        System.out.println("\n Total forventet betaling for næste år: " + total + "\n");
+        System.out.println("Total forventet betaling for næste år: " + total);
     }
 
     private double getKontingentPrice(Swimmer swimmer) {
@@ -97,7 +103,8 @@ public class KassererUserInterface extends SuperUI {
     }
 
     private void showMembersInRestance() {
-        System.out.println("Følgende medlemmer er i restance");
+        System.out.println("Følgende medlemmer er i restance: ");
+        insertSeperatorLine(50);
         int i = 1;
         for (Swimmer swimmer: controller.getSwimmerList())
             if(!swimmer.getHasPaid())
@@ -116,25 +123,30 @@ public class KassererUserInterface extends SuperUI {
 
     private void editSwimmerHasPaid() {
         System.out.println("Indtast medlem der skal redigeres");
+        insertSeperatorLine(50);
         Swimmer swimmer = controller.searchForMember(scanner.nextLine());
+        insertSeperatorLine(50);
 
         if (swimmer != null) {
-            System.out.println("Sæt " + swimmer.getName() + "'s betalingsstatus");
+            System.out.println("Hvordan vil du ændre " + swimmer.getName() + "'s betalingsstatus");
             int inputActiveStatus;
+            insertSeperatorLine(50);
             do {
                 System.out.println("""
                         1. Sæt betalingsstatus til betalt
                         2. Sæt betalingsstatus til ikke betalt
-                        3. fortryd
-                        """);
+                        3. Fortryd""");
                 inputActiveStatus = readInt();
+                insertSeperatorLine(50);
                 switch (inputActiveStatus) {
                     case 1:
                         swimmer.setHasPaid(true);
                         swimmer.setPaymentDate(LocalDate.now());
+                        System.out.println("Betalingsstatus ændret til betalt");
                         break;
                     case 2:
                         swimmer.setHasPaid(false);
+                        System.out.println("Betalingsstatus ændret til ikke betalt");
                         break;
                     case 3:
                         System.out.println("Vender tilbage");
