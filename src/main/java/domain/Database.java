@@ -71,24 +71,6 @@ public class Database {
         return swimmer;
     }
 
- /*   //TODO merge searchformembers med searchformember metoderne
-    public Swimmer searchForMember(String searchParameter) {
-
-        Swimmer swimmer = null;
-
-        if (!swimmerList .isEmpty()) {
-            System.out.println("Vælg hvem du vil tjekke ");
-            for (Swimmer s : swimmerList) {
-                System.out.println(swimmerList.indexOf(s) + 1 + ". " + s.getName());
-            }
-            int chooseSwimmer = scanner.nextInt();
-            swimmer = swimmerList.get(chooseSwimmer - 1);
-        }
-
-        return swimmer;
-    }
-    */
-    
     public ArrayList<Swimmer> searchForArchived(String searchParameter) {
         
         swimmerSearchList.clear();
