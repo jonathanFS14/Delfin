@@ -72,7 +72,7 @@ public class TrainerUserInterface extends SuperUI {
                 default -> System.out.println("Ugyldig input");
             }
         }
-        while (userChoice != 1 || userChoice != 2 || userChoice != 3);
+        while (userChoice != 3);
     }
 
     public void setTimeForSwimmer() {
