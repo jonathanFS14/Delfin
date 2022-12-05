@@ -5,7 +5,7 @@ import domain.Controller;
 import java.util.Scanner;
 
 public class SuperUI {
-    Scanner scanner = new Scanner(System.in);
+   protected Scanner scanner = new Scanner(System.in);
     static Controller controller = new Controller();
 
 
@@ -93,8 +93,14 @@ public class SuperUI {
         while (input != 1 && input != 2);
     }
 
-    public void logOut(){
+    protected void logOut(){
         System.out.println("Logger ud.");
+    }
+    protected void insertSeperatorLine(int numberOfLines) {
+        for(int i = 0; i < numberOfLines; ++i) {
+            System.out.print("━");
+        }
+        System.out.println("");
     }
 
 }

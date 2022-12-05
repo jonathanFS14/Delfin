@@ -19,17 +19,18 @@ public class TrainerUserInterface extends SuperUI {
     public void userMenu() {
         int userInput;
         do {
-            System.out.println("""    
-                                 
-                     Hvad vil du gøre?                       
+            insertSeperatorLine(25);
+            System.out.println("""
+                    Hvad vil du gøre?
                     1. Se hold
-                    2. indtast tid
-                    3. se en svømmers profil
-                    4. top 5 hurtigste svømmere
+                    2. Indtast tid
+                    3. Se en svømmers profil
+                    4. Top 5 hurtigste svømmere
                     8. Log ud
-                    9. Afslut program
-                     """);
+                    9. Afslut program""");
+            insertSeperatorLine(25);
             userInput = readInt();
+            insertSeperatorLine(25);
             switch (userInput) {
                 case 1 -> showTeamMenu();
                 case 2 -> setTimeForSwimmer();
@@ -48,15 +49,25 @@ public class TrainerUserInterface extends SuperUI {
         do {
             controller.initialLoad();
             System.out.println("""
-                    hvilket hold vil du se?
+                    Hvilket hold vil du se?
                     1. Senior holdet
                     2. Junior holdet
-                    3. Vend tilbage
-                    """);
+                    3. Vend tilbage""");
+            insertSeperatorLine(25);
             userChoice = scanner.nextInt();
+            insertSeperatorLine(25);
             switch (userChoice) {
-                case 1 -> printTeam(controller.getSeniorTeam());
-                case 2 -> printTeam(controller.getJuniorTeam());
+                case 1 -> {
+                    System.out.println("Seniorholdet består af: ");
+                    printTeam(controller.getSeniorTeam());
+                    insertSeperatorLine(25);
+                }
+                case 2 -> {
+                    System.out.println("Seniorholdet består af: ");
+                    printTeam(controller.getJuniorTeam());
+                    insertSeperatorLine(25);
+                }
+    
                 case 3 -> userMenu();
                 default -> System.out.println("Ugyldig input");
             }
@@ -114,18 +125,21 @@ public class TrainerUserInterface extends SuperUI {
                 Indtast hvilket hold du ønsker at finde top 5
                 1. Junior
                 2. Senior""");
+        insertSeperatorLine(25);
         do {
-            userChoice = scanner.nextInt();
+            userChoice = readInt();
             if (userChoice == 1) {
                 localTeamList = controller.getJuniorTeam();
             } else if (userChoice == 2) {
                 localTeamList = controller.getSeniorTeam();
             }
         } while (userChoice != 1 && userChoice != 2);
-
+        insertSeperatorLine(25);
+        
         //Metode til at vælge disciplin med indbygget menu
         event = controller.selectEvent(); //Vælger disciplin
-
+        
+        insertSeperatorLine(25);
         //Disse to for loops samler alle svømmetider for et bestemt hold i en bestemt disciplin
         for (Swimmer s : localTeamList) {
             for (SwimTime st : controller.getSwimTimeList()) {
@@ -151,7 +165,8 @@ public class TrainerUserInterface extends SuperUI {
                     }
                 }
             }
-
+            System.out.printf("Top 5 tider i %s\n", event);
+            insertSeperatorLine(25);
             sortAndPrintTop5(top5Times);
         }
     }
@@ -181,15 +196,20 @@ public class TrainerUserInterface extends SuperUI {
 
     private void showSwimmerProfile() {
         System.out.println("Indtast medlem du vil kigge på");
+        insertSeperatorLine(25);
         Swimmer swimmer = controller.searchForMember(scanner.nextLine());
         int searchID = swimmer.getMemberID();
         ArrayList<SwimTime> swimTimeList = controller.getSwimTimeList();
+        insertSeperatorLine(25);
+        System.out.println(String.format("┃ Fulde navn: %-20s\n┃ Fødselsdag: %-20s",swimmer.getName(),swimmer.getBirthday()));
+        insertSeperatorLine(65);
         System.out.println(String.format("┃ %-20s │  %-10s │  %-20s ┃", "Disciplin", "Tid", "Sted"));
         for (SwimTime s : swimTimeList) {
             if (searchID == s.getMemberID()) {
                 System.out.println(s.printSwimTime());
             }
         }
+        insertSeperatorLine(65);
     }
 }
 
