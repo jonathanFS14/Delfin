@@ -1,4 +1,4 @@
-package userinterface;
+package Test;
 
 import Comparator.TimeComparator;
 import domain.Controller;

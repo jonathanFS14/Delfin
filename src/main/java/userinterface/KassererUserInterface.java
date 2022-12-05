@@ -84,7 +84,7 @@ public class KassererUserInterface extends SuperUI {
         System.out.println("Total forventet betaling for næste år: " + total);
     }
 
-    private double getKontingentPrice(Swimmer swimmer) {
+    public double getKontingentPrice(Swimmer swimmer) {
         double price = 500; //Hvis medlemmet er passiv så er deres kontingent på 500.
         long age = ChronoUnit.YEARS.between(swimmer.getBirthday(),LocalDate.now());
         if (swimmer.isActive() && !swimmer.isArchived()) {
