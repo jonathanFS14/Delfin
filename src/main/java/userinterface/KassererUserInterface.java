@@ -3,6 +3,8 @@ package userinterface;
 import domain.Swimmer;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 
 public class KassererUserInterface extends SuperUI {
 
@@ -17,9 +19,8 @@ public class KassererUserInterface extends SuperUI {
             System.out.println("""
                     1. Ændre et medlems betalingsstatus
                     2. Tjek et medlems betalingsstatus
-                    3. Vis oversigt over forventet indtjening
+                    3. Vis forventet indtjening
                     4. Vis oversigt over medlemmer i restance
-                                    
                     8. Log ud
                     9. Afslut Program""");
             userInput = readInt();
@@ -44,7 +45,7 @@ public class KassererUserInterface extends SuperUI {
             if (swimmer.getHasPaid()) {
                 System.out.println("Medlemmet har betalt kontingent den " + swimmer.getPaymentDate());
             } else {
-                System.out.println("Medlemmet er i restance");
+                System.out.println("Medlemmet er i restance og skylder " + getKontingentPrice(swimmer) + " kr.\n");
             }
         } else {
             System.out.println("Kunne ikke finde medlemmet");
@@ -53,9 +54,54 @@ public class KassererUserInterface extends SuperUI {
     }
 
     private void showExpectedIncome() {
+        double total = 0;
+        ArrayList<Swimmer> localList = controller.getSwimmerList();
+
+        // Junior
+        System.out.println("Junior: ");
+        for (Swimmer swimmer : localList) {
+            if (ChronoUnit.YEARS.between(swimmer.getBirthday(),LocalDate.now()) < 18){
+                total += getKontingentPrice(swimmer);
+                System.out.printf("|  %-20s |  %-7s kr |\n", swimmer.getName(), String.valueOf(getKontingentPrice(swimmer)));
+            }
+        }
+
+        //Senior
+        System.out.println("Senior: ");
+        for (Swimmer swimmer : localList) {
+        if (ChronoUnit.YEARS.between(swimmer.getBirthday(),LocalDate.now()) >= 18){
+                total += getKontingentPrice(swimmer);
+                System.out.printf("|  %-20s |  %-7s kr |\n", swimmer.getName(), String.valueOf(getKontingentPrice(swimmer)));
+            }
+        }
+
+        System.out.println("\n Total forventet betaling for næste år: " + total + "\n");
+    }
+
+    private double getKontingentPrice(Swimmer swimmer) {
+        double price = 500; //Hvis medlemmet er passiv så er deres kontingent på 500.
+        long age = ChronoUnit.YEARS.between(swimmer.getBirthday(),LocalDate.now());
+        if (swimmer.isActive() && !swimmer.isArchived()) {
+            if (18 > age) {
+                price = 1000;
+            } else if (18 <= age && age < 60) {
+                price = 1600;
+            } else if (age >= 60) {
+                price = 1200;
+            }
+        }
+        if (swimmer.isStudent()) {
+            price *= 0.75;
+        }
+        return price;
     }
 
     private void showMembersInRestance() {
+        System.out.println("Følgende medlemmer er i restance");
+        int i = 1;
+        for (Swimmer swimmer: controller.getSwimmerList())
+            if(!swimmer.getHasPaid())
+                System.out.println(i++ + ". " + swimmer.getName());
     }
 
 

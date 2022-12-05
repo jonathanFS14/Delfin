@@ -114,6 +114,7 @@ public class TrainerUserInterface extends SuperUI {
                 Indtast hvilket hold du ønsker at finde top 5
                 1. Junior
                 2. Senior""");
+
         do {
             userChoice = scanner.nextInt();
             if (userChoice == 1) {
@@ -151,7 +152,6 @@ public class TrainerUserInterface extends SuperUI {
                     }
                 }
             }
-
             sortAndPrintTop5(top5Times);
         }
     }

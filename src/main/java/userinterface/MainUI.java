@@ -34,19 +34,4 @@ public class MainUI extends SuperUI {
         }
         while (input != 1 || input != 2 || input != 3 || input != 9);
     }
-
-
-
-/*     public void returnToMainUI() {
-          int input;
-          System.out.println("""
-                  Vil du vende tilbage til login skærmen?
-                  1. Ja
-                  2. Nej""");
-          input = scanner.nextInt();
-          switch (input){
-              case 1 -> mainUI.login();
-              case 2 -> userMenu();
-          }
-    }*/
 }
