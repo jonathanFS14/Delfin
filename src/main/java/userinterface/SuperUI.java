@@ -96,5 +96,11 @@ public class SuperUI {
     protected void logOut(){
         System.out.println("Logger ud.");
     }
+    protected void insertSeperatorLine(int numberOfLines) {
+        for(int i = 0; i < numberOfLines; ++i) {
+            System.out.print("━");
+        }
+        System.out.println("");
+    }
 
 }
