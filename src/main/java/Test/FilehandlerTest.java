@@ -1,4 +1,4 @@
-package datasource;
+package Test;
 
 import domain.Events;
 import domain.SwimTime;
