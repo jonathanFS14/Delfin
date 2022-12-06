@@ -80,7 +80,8 @@ public class Filehandler {
                         Integer.parseInt(attributes[0]),
                         Double.parseDouble(attributes[1]),
                         Events.valueOf(attributes[2]),
-                        attributes[3]
+                        attributes[3],
+                        LocalDate.parse(attributes[4])
                 );
                 swimTimeListFile.add(swimTime);
             }
@@ -105,7 +106,8 @@ public class Filehandler {
         return swimTime.getMemberID() + ";"
                 + swimTime.getTime() + ";"
                 + swimTime.getEvent() + ";"
-                + swimTime.getPlaceSet() + ";";
+                + swimTime.getPlaceSet() + ";"
+                + swimTime.getDateSet() + ";";
     }
 
 }

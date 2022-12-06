@@ -39,8 +39,8 @@ public class Database {
         addSwimmerToDatabase(swimmer);
     }
 
-    public void createSwimTime(int memberID, double time, Events event, String placeSet){
-        SwimTime swimTime = new SwimTime(memberID, time, event, placeSet);
+    public void createSwimTime(int memberID, double time, Events event, String placeSet, LocalDate dateSet){
+        SwimTime swimTime = new SwimTime(memberID, time, event, placeSet, dateSet);
         addSwimTimeToDatabase(swimTime);
     }
 

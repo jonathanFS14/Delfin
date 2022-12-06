@@ -5,6 +5,7 @@ import domain.Events;
 import domain.SwimTime;
 import domain.Swimmer;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -100,7 +101,7 @@ public class TrainerUserInterface extends SuperUI {
                 "\n\nBekræft venligst (Ja/Nej) "
         );
         if (yesOrNoToBoolean())
-            controller.createSwimTime(memberID, swimTime, event, placeSet);
+            controller.createSwimTime(memberID, swimTime, event, placeSet, LocalDate.now());
     }
 
 
@@ -174,9 +175,11 @@ public class TrainerUserInterface extends SuperUI {
         for (int i = 0; i < 5; i++) {
             try {
                 SwimTime st = top5Times.get(i);
-                System.out.println(i + 1 + ". " + getSwimmerNameFromID(st.getMemberID()) + ": " + st.getTime() + " sek");
+                System.out.println(String.format("┃ %-1s │ %-20s │ %-5s sek │ %-10s ┃", i + 1, getSwimmerNameFromID(st.getMemberID()), st.getTime(), st.getDateSet()));
+                
             } catch (IndexOutOfBoundsException e) {
-                System.out.println(i + 1 + ". N/A");
+                System.out.println(String.format("┃ %-1s │ %-20s │ %-9s │ %-10s ┃",i + 1, "N/A", "", ""));
+                //System.out.println(i + 1 + ". N/A");
             }
         }
     }
@@ -202,14 +205,14 @@ public class TrainerUserInterface extends SuperUI {
         ArrayList<SwimTime> swimTimeList = controller.getSwimTimeList();
         insertSeperatorLine(25);
         System.out.println(String.format("┃ Fulde navn: %-20s\n┃ Fødselsdag: %-20s",swimmer.getName(),swimmer.getBirthday()));
-        insertSeperatorLine(65);
-        System.out.println(String.format("┃ %-20s │  %-10s │  %-20s ┃", "Disciplin", "Tid", "Sted"));
+        insertSeperatorLine(77);
+        System.out.println(String.format("┃ %-20s │ %-9s │ %-20s │ %-12s ┃", "Disciplin", "Tid", "Sted", "Dato"));
         for (SwimTime s : swimTimeList) {
             if (searchID == s.getMemberID()) {
                 System.out.println(s.printSwimTime());
             }
         }
-        insertSeperatorLine(65);
+        insertSeperatorLine(77);
     }
 }
 

@@ -55,8 +55,8 @@ public class Controller {
       return database.selectEvent();
     }
 
-    public void createSwimTime(int memberID, double time, Events event, String placeSet){
-        database.createSwimTime(memberID,time,event,placeSet);
+    public void createSwimTime(int memberID, double time, Events event, String placeSet, LocalDate dateSet){
+        database.createSwimTime(memberID,time,event,placeSet, dateSet);
         overwriteSwimTimeDatabase();
     }
 
