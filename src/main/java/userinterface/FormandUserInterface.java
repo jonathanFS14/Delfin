@@ -1,12 +1,10 @@
 package userinterface;
 
-import domain.Controller;
 import domain.Swimmer;
 
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class FormandUserInterface extends SuperUI {
 
@@ -19,7 +17,7 @@ public class FormandUserInterface extends SuperUI {
         do {
             insertSeperatorLine(50);
             System.out.println("""                
-                    Hvad vil du gøre?                       
+                    Hvad vil du gøre?                     
                     1. Opret ny svømmer/ gendan gammel svømmer
                     2. Rediger en eksisterende svømmer
                     3. Vis alle svømmere
@@ -185,33 +183,15 @@ public class FormandUserInterface extends SuperUI {
         int menuInput = readInt();
 
         switch (menuInput) {
-            case 1:
-                editSwimmerName(swimmer);
-                break;
-            case 2:
-                editSwimmerAddress(swimmer);
-                break;
-            case 3:
-                editSwimmerPhoneNumber(swimmer);
-                break;
-            case 4:
-                editSwimmerMail(swimmer);
-                break;
-            case 5:
-                editSwimmerActiveStatus(swimmer);
-                break;
-            case 6:
-                editSwimmerCompetitionStatus(swimmer);
-                break;
-            case 7:
-                editStudyStatus(swimmer);
-                break;
-            case 9:
-                System.out.println("Vender tilbage til menuen");
-                break;
-            default:
-                System.out.println("Ugyldig input");
-                break;
+            case 1 -> editSwimmerName(swimmer);
+            case 2 -> editSwimmerAddress(swimmer);
+            case 3 -> editSwimmerPhoneNumber(swimmer);
+            case 4 -> editSwimmerMail(swimmer);
+            case 5 -> editSwimmerActiveStatus(swimmer);
+            case 6 -> editSwimmerCompetitionStatus(swimmer);
+            case 7 -> editStudyStatus(swimmer);
+            case 9 -> System.out.println("Vender tilbage til menuen");
+            default -> System.out.println("Ugyldig input");
         }
     }
 
@@ -283,17 +263,10 @@ public class FormandUserInterface extends SuperUI {
                     """);
             inputCompetitionStatus = readInt();
             switch (inputCompetitionStatus) {
-                case 1:
-                    swimmer.setCompetitor(true);
-                    break;
-                case 2:
-                    swimmer.setCompetitor(false);
-                    break;
-                case 3:
-                    System.out.println("Vender tilbage");
-                    break;
-                default:
-                    System.out.println("ugyldigt input, prøv igen");
+                case 1 -> swimmer.setCompetitor(true);
+                case 2 -> swimmer.setCompetitor(false);
+                case 3 -> System.out.println("Vender tilbage");
+                default -> System.out.println("ugyldigt input, prøv igen");
             }
         } while (inputCompetitionStatus != 1 && inputCompetitionStatus != 2 && inputCompetitionStatus != 3);
     }

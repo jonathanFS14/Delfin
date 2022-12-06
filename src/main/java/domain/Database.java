@@ -1,7 +1,6 @@
 package domain;
 
 import java.time.LocalDate;
-import java.time.Period;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,7 +13,7 @@ public class Database {
     private ArrayList<Swimmer> juniorTeam;
     private ArrayList<SwimTime> swimTimeList;
     private ArrayList<Events>eventsList;
-    Scanner scanner;
+    private Scanner scanner;
 
 
     public Database() {
@@ -87,7 +86,7 @@ public class Database {
     }
 
     public Events selectEvent(){
-        Events event = null;
+        Events event;
         int userInput;
         do {
             System.out.println("Vælg disciplin");

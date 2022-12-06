@@ -12,14 +12,15 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Filehandler {
-    
-    String swimmerFileDatabase = "swimmerDatabase.csv";
-    
+
+    private final String swimmerFileDatabase = "swimmerDatabase.csv";
+    private final String swimTimeFileDatabase = "SwimTimeDatabase.csv";
+
     public ArrayList<Swimmer> retrieveSwimmerDatabase() {
         ArrayList<Swimmer> swimmerListFile = new ArrayList<Swimmer>();
         try {
             Scanner sc = new Scanner(new File(swimmerFileDatabase));
-            
+
             while (sc.hasNextLine()) {
                 String linje = sc.nextLine();
                 String[] attributes = linje.split(";");
@@ -57,7 +58,7 @@ public class Filehandler {
             System.out.println(e.getMessage());
         }
     }
-    
+
     private String swimmerToFileWriter(Swimmer swimmer) {
         return (swimmer.getName() + ";" + swimmer.getAddress() + ";" + swimmer.getPhoneNumber() + ";" +
                 swimmer.getMail() + ";" + swimmer.getBirthday() + ";" + swimmer.getCreationDate() + ";" +
@@ -66,7 +67,6 @@ public class Filehandler {
                 swimmer.getPaymentDate();
     }
 
-    String swimTimeFileDatabase = "SwimTimeDatabase.csv";
 
     public ArrayList<SwimTime> retrieveSwimTimeDatabase() {
         ArrayList<SwimTime> swimTimeListFile = new ArrayList<>();
@@ -89,6 +89,7 @@ public class Filehandler {
         }
         return swimTimeListFile;
     }
+
     public void overwriteSwimTimeDatabase(ArrayList<SwimTime> swimTimeList) {
         try {
             PrintStream out = new PrintStream(swimTimeFileDatabase);
@@ -100,10 +101,10 @@ public class Filehandler {
         }
     }
 
-    private String swimTimeToFileWriter(SwimTime swimTime){
+    private String swimTimeToFileWriter(SwimTime swimTime) {
         return swimTime.getMemberID() + ";"
-                + swimTime.getTime()+ ";"
-                + swimTime.getEvent( ) + ";"
+                + swimTime.getTime() + ";"
+                + swimTime.getEvent() + ";"
                 + swimTime.getPlaceSet() + ";";
     }
 

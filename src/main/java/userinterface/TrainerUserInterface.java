@@ -16,7 +16,7 @@ public class TrainerUserInterface extends SuperUI {
         userMenu();
     }
 
-    public void userMenu() {
+    private void userMenu() {
         int userInput;
         do {
             insertSeperatorLine(25);
@@ -43,7 +43,7 @@ public class TrainerUserInterface extends SuperUI {
         while (userInput != 9 && userInput != 8);
     }
 
-    public void showTeamMenu() {
+    private void showTeamMenu() {
         int userChoice;
         do {
             controller.initialLoad();
@@ -73,7 +73,7 @@ public class TrainerUserInterface extends SuperUI {
         while (userChoice != 3);
     }
 
-    public void setTimeForSwimmer() {
+    private void setTimeForSwimmer() {
         System.out.println("Indtast hvilken svømmer du vil registrere en tid for");
         String searchParameter = readString();
         Swimmer swimmer = controller.searchForMember(searchParameter);
@@ -174,7 +174,7 @@ public class TrainerUserInterface extends SuperUI {
         for (int i = 0; i < 5; i++) {
             try {
                 SwimTime st = top5Times.get(i);
-                System.out.println(i + 1 + ". " + getSwimmerNameFromID(st.getMemberID()) + ": " + st.getTime());
+                System.out.println(i + 1 + ". " + getSwimmerNameFromID(st.getMemberID()) + ": " + st.getTime() + " sek");
             } catch (IndexOutOfBoundsException e) {
                 System.out.println(i + 1 + ". N/A");
             }
@@ -182,6 +182,7 @@ public class TrainerUserInterface extends SuperUI {
     }
 
     private String getSwimmerNameFromID(int memberID) {
+        //Finder svømmerens navn når man kun har memberID fra en svømmetid
         String swimmerName = "SwimmerName";
         for (Swimmer s : controller.getSwimmerList()) {
             if (memberID == s.getMemberID()) {
@@ -193,6 +194,7 @@ public class TrainerUserInterface extends SuperUI {
     }
 
     private void showSwimmerProfile() {
+        //Viser alle tider for en bestemt svømmer
         System.out.println("Indtast medlem du vil kigge på");
         insertSeperatorLine(25);
         Swimmer swimmer = controller.searchForMember(scanner.nextLine());

@@ -4,8 +4,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 public class Controller {
     
-    Database database;
-    Filehandler filehandler;
+    private Database database;
+    private Filehandler filehandler;
 
     public Controller() {
         database = new Database();

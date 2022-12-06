@@ -13,7 +13,7 @@ public class KassererUserInterface extends SuperUI {
         userMenu();
     }
 
-    public void userMenu() {
+    private void userMenu() {
         int userInput;
         do {
             insertSeperatorLine(50);

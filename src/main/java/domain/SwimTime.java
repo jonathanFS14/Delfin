@@ -2,15 +2,14 @@ package domain;
 
 public class SwimTime {
 
-    int memberID;
-    double time; //mm.ss
+    private int memberID;
+    private double time; //mm.ss
 
-    Events event;
-    String placeSet; //Stævne eller træning
+    private Events event;
+    private String placeSet; //Stævne eller træning
 
 
-
-    public SwimTime(int memberID, double time, Events event, String placeSet){ //constructor for stævnetider
+    public SwimTime(int memberID, double time, Events event, String placeSet) { //constructor for stævnetider
         this.memberID = memberID;
         this.time = time;
         this.event = event;

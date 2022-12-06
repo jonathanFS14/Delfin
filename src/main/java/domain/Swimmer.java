@@ -1,7 +1,6 @@
 package domain;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class Swimmer {
     
@@ -10,8 +9,8 @@ public class Swimmer {
     private String phoneNumber;
     private String mail;
     private LocalDate birthday;
-    private LocalDate creationDate;
-    private int memberID;
+    private final LocalDate creationDate;
+    private final int memberID;
     private boolean hasPaid;
     private boolean isActive;
     private boolean isCompetitor;
@@ -97,10 +96,7 @@ public class Swimmer {
     public LocalDate getBirthday() {
         return birthday;
     }
-    
-    public void setBirthday(LocalDate birthday) {
-        this.birthday = birthday;
-    }
+
     
     public LocalDate getCreationDate() {
         return creationDate;

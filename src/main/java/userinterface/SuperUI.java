@@ -6,10 +6,11 @@ import java.util.Scanner;
 
 public class SuperUI {
    protected Scanner scanner = new Scanner(System.in);
-    static Controller controller = new Controller();
+   protected static Controller controller = new Controller();
 
 
     protected int readInt() {
+        //Sørger for man inputter et gyldigt int input
         while (!scanner.hasNextInt()) {
             String text = scanner.next();
             System.out.println(text + " er ugyldig input, indtast igen.");
@@ -33,6 +34,7 @@ public class SuperUI {
         return readString;
     }
     protected boolean yesOrNoToBoolean() {
+        //lader bruger skrive ja eller nej og oversætte det til en boolean
         boolean answer = false;
         int check; //Er der en bedre måde at loop løkken?
         String yesOrNo;
@@ -58,6 +60,7 @@ public class SuperUI {
     }
 
     protected String booleanToYesOrNo(Boolean bool) {
+        //Omdanner en boolean værdi til "ja" eller "nej"
         String answer = null;
         if (bool)
             answer = "Ja";
@@ -69,19 +72,19 @@ public class SuperUI {
         return answer;
     }
 
-    public void endProgram() {
+    protected void endProgram() {
         boolean input;
         System.out.println("""
                 Er du sikker på du vil forlade programmet? Ja/Nej""");
         do {
             input = yesOrNoToBoolean();
-            if (input == input) {
+            if (input) {
                 System.out.println("På gensyn");
                 System.exit(0);
-            } else if (input != input ) {
+            } else if (!input) {
                 System.out.println("Vender tilbage");
             } else {
-                System.out.println("Ugyldig input");
+                System.out.println("Ugyldig input"); //TODO overflødig linje?
             }
         }
         while (!input && input);
@@ -91,6 +94,7 @@ public class SuperUI {
         System.out.println("Logger ud.");
     }
     protected void insertSeperatorLine(int numberOfLines) {
+        //Gør at der bliver rent opdelt i terminalen efter en metode er kørt
         for(int i = 0; i < numberOfLines; ++i) {
             System.out.print("━");
         }

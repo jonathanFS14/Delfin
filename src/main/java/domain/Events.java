@@ -1,5 +1,5 @@
 package domain;
-
+//Enum til at kalde på forskellige discipliner
 public enum Events {
     BUTTERFLY50M,
     BUTTERFLY100M,
