@@ -37,9 +37,8 @@ public class Filehandler {
                         Boolean.parseBoolean(attributes[9]), // isCompetitor
                         Boolean.parseBoolean(attributes[10]), // isStudent
                         Boolean.parseBoolean(attributes[11]), // isArchived
-                        LocalDate.parse(attributes[12]) // paymentDate
+                        LocalDate.parse(attributes[12])); // paymentDate
 
-                );
                 swimmerListFile.add(swimmer);
             }
         } catch (IOException e) {
@@ -81,8 +80,8 @@ public class Filehandler {
                         Double.parseDouble(attributes[1]),
                         Events.valueOf(attributes[2]),
                         attributes[3],
-                        LocalDate.parse(attributes[4])
-                );
+                        LocalDate.parse(attributes[4]));
+
                 swimTimeListFile.add(swimTime);
             }
         } catch (IOException e) {

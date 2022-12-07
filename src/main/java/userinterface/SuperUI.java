@@ -5,9 +5,8 @@ import domain.Controller;
 import java.util.Scanner;
 
 public class SuperUI {
-   protected Scanner scanner = new Scanner(System.in);
-   protected static Controller controller = new Controller();
-
+    protected Scanner scanner = new Scanner(System.in);
+    protected static Controller controller = new Controller();
 
     protected int readInt() {
         //Sørger for man inputter et gyldigt int input
@@ -33,6 +32,7 @@ public class SuperUI {
         while (readString.isEmpty());
         return readString;
     }
+
     protected boolean yesOrNoToBoolean() {
         //lader bruger skrive ja eller nej og oversætte det til en boolean
         boolean answer = false;
@@ -45,7 +45,7 @@ public class SuperUI {
                     answer = true;
                     check = 1;
                 }
-                case "nej", "no", "n" ->{
+                case "nej", "no", "n" -> {
                     answer = false;
                     check = 1;
                 }
@@ -90,12 +90,13 @@ public class SuperUI {
         while (!input && input);
     }
 
-    protected void logOut(){
+    protected void logOut() {
         System.out.println("Logger ud.");
     }
+
     protected void insertSeperatorLine(int numberOfLines) {
         //Gør at der bliver rent opdelt i terminalen efter en metode er kørt
-        for(int i = 0; i < numberOfLines; ++i) {
+        for (int i = 0; i < numberOfLines; ++i) {
             System.out.print("━");
         }
         System.out.println("");

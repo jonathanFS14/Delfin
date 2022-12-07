@@ -1,11 +1,12 @@
 package userinterface;
+
 public class MainUI extends SuperUI {
 
     FormandUserInterface formandUserInterface;
     KassererUserInterface kassererUserInterface;
     TrainerUserInterface trainerUserInterface;
 
-    public MainUI(){
+    public MainUI() {
         formandUserInterface = new FormandUserInterface();
         kassererUserInterface = new KassererUserInterface();
         trainerUserInterface = new TrainerUserInterface();

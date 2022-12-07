@@ -1,6 +1,8 @@
 package domain;
 
+import java.text.DecimalFormat;
 import java.time.LocalDate;
+import java.util.concurrent.TimeUnit;
 
 public class SwimTime {
 
@@ -9,7 +11,6 @@ public class SwimTime {
     private Events event;
     private String placeSet; //Stævne eller træning
     private LocalDate dateSet;
-
 
     public SwimTime(int memberID, double time, Events event, String placeSet, LocalDate dateSet) { //constructor for stævnetider
         this.memberID = memberID;
@@ -27,7 +28,6 @@ public class SwimTime {
         return time;
     }
 
-
     public Events getEvent() {
         return event;
     }
@@ -35,13 +35,25 @@ public class SwimTime {
     public String getPlaceSet() {
         return placeSet;
     }
+
     public LocalDate getDateSet() {
         return dateSet;
     }
 
-    public String printSwimTime() {
+    public String convertSecondsToMinutes(double time) {
+        String formattedTime;
+        DecimalFormat df = new DecimalFormat("00.00");
+        if (time > 60) {
+            String s = (df.format(time % 60));
+            int m = Math.floorDiv((int) time, 60);
+            formattedTime = String.format("%d.%s", m, s);
+        } else
+            formattedTime = df.format(time);
 
-        return String.format("┃ %-20s │ %-5.2f sek │ %-20s │ %-12s ┃", event, time, placeSet, dateSet);
+        return formattedTime;
     }
 
+    public String printSwimTime() {
+        return String.format("┃ %-20s │ %9s │ %-25s │ %-12s ┃", event, convertSecondsToMinutes(time), placeSet, dateSet);
+    }
 }

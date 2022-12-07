@@ -7,7 +7,6 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 public class KassererUserInterface extends SuperUI {
-
     public void kassererUI() {
         automaticRestanceCheck();
         userMenu();
@@ -24,6 +23,7 @@ public class KassererUserInterface extends SuperUI {
                     4. Vis oversigt over medlemmer i restance
                     8. Log ud
                     9. Afslut Program""");
+
             userInput = readInt();
             insertSeperatorLine(50);
 
@@ -49,12 +49,11 @@ public class KassererUserInterface extends SuperUI {
             if (swimmer.getHasPaid()) {
                 System.out.print(swimmer.getName() + " har betalt kontingent den " + swimmer.getPaymentDate());
             } else {
-                System.out.print(swimmer.getName() +" er i restance og skylder " + getKontingentPrice(swimmer) + " kr.\n");
+                System.out.print(swimmer.getName() + " er i restance og skylder " + getKontingentPrice(swimmer) + " kr.\n");
             }
         } else {
             System.out.println("Kunne ikke finde medlemmet");
         }
-
     }
 
     private void showExpectedIncome() {
@@ -64,7 +63,7 @@ public class KassererUserInterface extends SuperUI {
         // Junior
         System.out.println("Forventet indtjening fra Juniorer: ");
         for (Swimmer swimmer : localList) {
-            if (ChronoUnit.YEARS.between(swimmer.getBirthday(),LocalDate.now()) < 18){
+            if (ChronoUnit.YEARS.between(swimmer.getBirthday(), LocalDate.now()) < 18) {
                 total += getKontingentPrice(swimmer);
                 System.out.printf("| %-20s | %-7s kr |\n", swimmer.getName(), String.valueOf(getKontingentPrice(swimmer)));
             }
@@ -74,19 +73,18 @@ public class KassererUserInterface extends SuperUI {
         //Senior
         System.out.println("Forventet indtjening fra Seniorer: ");
         for (Swimmer swimmer : localList) {
-        if (ChronoUnit.YEARS.between(swimmer.getBirthday(),LocalDate.now()) >= 18){
+            if (ChronoUnit.YEARS.between(swimmer.getBirthday(), LocalDate.now()) >= 18) {
                 total += getKontingentPrice(swimmer);
                 System.out.printf("|  %-20s |  %-7s kr |\n", swimmer.getName(), String.valueOf(getKontingentPrice(swimmer)));
             }
         }
         insertSeperatorLine(50);
-
         System.out.println("Total forventet betaling for næste år: " + total);
     }
 
     public double getKontingentPrice(Swimmer swimmer) {
         double price = 500; //Hvis medlemmet er passiv så er deres kontingent på 500.
-        long age = ChronoUnit.YEARS.between(swimmer.getBirthday(),LocalDate.now());
+        long age = ChronoUnit.YEARS.between(swimmer.getBirthday(), LocalDate.now());
         if (swimmer.isActive() && !swimmer.isArchived()) {
             if (18 > age) {
                 price = 1000;
@@ -106,11 +104,10 @@ public class KassererUserInterface extends SuperUI {
         System.out.println("Følgende medlemmer er i restance: ");
         insertSeperatorLine(50);
         int i = 1;
-        for (Swimmer swimmer: controller.getSwimmerList())
-            if(!swimmer.getHasPaid())
+        for (Swimmer swimmer : controller.getSwimmerList())
+            if (!swimmer.getHasPaid())
                 System.out.println(i++ + ". " + swimmer.getName());
     }
-
 
     private void automaticRestanceCheck() {
         for (Swimmer swimmer : controller.getSwimmerList()) {
@@ -119,7 +116,6 @@ public class KassererUserInterface extends SuperUI {
 
         }
     }
-
 
     private void editSwimmerHasPaid() {
         System.out.println("Indtast medlem der skal redigeres");
@@ -158,6 +154,4 @@ public class KassererUserInterface extends SuperUI {
             System.out.println("Kunne ikke finde medlemmet");
         }
     }
-
-
 }

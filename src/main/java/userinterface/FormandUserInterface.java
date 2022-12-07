@@ -24,6 +24,7 @@ public class FormandUserInterface extends SuperUI {
                     7. Arkivér svømmer (afmeld)
                     8. Log ud                
                     9. afslut programmet""");
+
             userInput = readInt();
             switch (userInput) {
                 case 1 -> createSwimmerMenu();
@@ -104,7 +105,6 @@ public class FormandUserInterface extends SuperUI {
         String mail;
         boolean isCompetitor;
         boolean isStudent;
-
         LocalDate birthday;
 
         System.out.println("Indtast svømmerens navn");
@@ -123,22 +123,12 @@ public class FormandUserInterface extends SuperUI {
         isStudent = yesOrNoToBoolean();
         insertSeperatorLine(50);
 
-        System.out.println("Du er ved at tilføje følgende svømmer:" +
-                "\nNavn: " + navn +
-                "\nAddresse: " + address +
-                "\nTelefonnr: " + phoneNumber +
-                "\nMail: " + mail +
-                "\nFødselsdato: " + birthday +
-                "\nEr konkurrencesvømmer: " + booleanToYesOrNo(isCompetitor) +
-                "\nEr studerende: " + booleanToYesOrNo(isStudent) +
-                "\n\nBekræft venligst (Ja/Nej) ");
+        System.out.println("Du er ved at tilføje følgende svømmer:" + "\nNavn: " + navn + "\nAddresse: " + address + "\nTelefonnr: " + phoneNumber + "\nMail: " + mail + "\nFødselsdato: " + birthday + "\nEr konkurrencesvømmer: " + booleanToYesOrNo(isCompetitor) + "\nEr studerende: " + booleanToYesOrNo(isStudent) + "\n\nBekræft venligst (Ja/Nej) ");
         insertSeperatorLine(50);
         if (yesOrNoToBoolean()) {
             controller.createSwimmer(navn, address, phoneNumber, mail, birthday, isCompetitor, isStudent);
             System.out.println(navn + " er tilføjet");
-        }
-        else
-            System.out.println("Annulerer...");
+        } else System.out.println("Annulerer...");
     }
 
     private boolean validateBirthdayLocaleDate(LocalDate birthday) {
@@ -166,9 +156,7 @@ public class FormandUserInterface extends SuperUI {
 
     private void editSwimmer() {
         System.out.println("Indtast medlem der skal redigeres");
-
         Swimmer swimmer = controller.searchForMember(scanner.nextLine());
-
         System.out.println("""
                 Hvad vil du redigere?
                 1. Navn
@@ -295,7 +283,6 @@ public class FormandUserInterface extends SuperUI {
             }
         } while (inputStudyStatus != 1 && inputStudyStatus != 2 && inputStudyStatus != 3);
     }
-
 
 
 }
