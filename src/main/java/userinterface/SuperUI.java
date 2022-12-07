@@ -79,12 +79,12 @@ public class SuperUI {
         do {
             input = yesOrNoToBoolean();
             if (input) {
+                controller.overwriteSwimTimeDatabase();
+                controller.overwriteSwimmerDatabase();
                 System.out.println("På gensyn");
                 System.exit(0);
             } else if (!input) {
                 System.out.println("Vender tilbage");
-            } else {
-                System.out.println("Ugyldig input"); //TODO overflødig linje?
             }
         }
         while (!input && input);
