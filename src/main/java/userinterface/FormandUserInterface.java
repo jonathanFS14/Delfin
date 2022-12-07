@@ -1,12 +1,10 @@
 package userinterface;
 
-import domain.Controller;
 import domain.Swimmer;
 
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class FormandUserInterface extends SuperUI {
 
@@ -17,20 +15,25 @@ public class FormandUserInterface extends SuperUI {
     private void userMenu() {
         int userInput;
         do {
+            insertSeperatorLine(50);
             System.out.println("""                
-                    Hvad vil du gøre?                       
+                    Hvad vil du gøre?                     
                     1. Opret ny svømmer/ gendan gammel svømmer
                     2. Rediger en eksisterende svømmer
                     3. Vis alle svømmere
                     7. Arkivér svømmer (afmeld)
                     8. Log ud                
-                    9. afslut programmet
-                    """);
+                    9. afslut programmet""");
+
             userInput = readInt();
             switch (userInput) {
                 case 1 -> createSwimmerMenu();
                 case 2 -> editSwimmer();
-                case 3 -> controller.printAllMembers();
+                case 3 -> {
+                    insertSeperatorLine(215);
+                    controller.printAllMembers();
+                    insertSeperatorLine(215);
+                }
                 case 7 -> archiveSwimmer();
                 case 8 -> logOut();
                 case 9 -> endProgram();
@@ -41,12 +44,13 @@ public class FormandUserInterface extends SuperUI {
     }
 
     private void createSwimmerMenu() {
+        insertSeperatorLine(50);
         System.out.println("""
                 Vil du oprette et helt nyt medlem eller gendanne et gammel medlem?
                 1. Opret nyt medlem
                 2. Gendan gammelt medlem
-                9. fortryd
-                """);
+                9. fortryd""");
+        insertSeperatorLine(50);
         int input = readInt();
         switch (input) {
             case 1 -> createNewSwimmer();
@@ -60,16 +64,18 @@ public class FormandUserInterface extends SuperUI {
     }
 
     private void archiveSwimmer() {
+        insertSeperatorLine(50);
         System.out.println("Indtast medlem der skal arkiveres");
         Swimmer swimmer = controller.searchForMember(scanner.nextLine());
 
         swimmer.setArchived(true);
         swimmer.setHasPaid(false);
+        insertSeperatorLine(50);
         System.out.println(swimmer.getName() + " er nu arkiveret.");
     }
 
     private void restoreArchivedSwimmer() {
-
+        insertSeperatorLine(50);
         System.out.println("Indtast medlem der skal genoprettes");
         String searchParameter = scanner.nextLine();
 
@@ -87,6 +93,7 @@ public class FormandUserInterface extends SuperUI {
         Swimmer swimmer = localSwimmerList.get(chooseSwimmer - 1);
 
         swimmer.setArchived(false);
+        insertSeperatorLine(50);
         System.out.println(swimmer.getName() + " er nu genoprettet.");
 
     }
@@ -98,7 +105,6 @@ public class FormandUserInterface extends SuperUI {
         String mail;
         boolean isCompetitor;
         boolean isStudent;
-
         LocalDate birthday;
 
         System.out.println("Indtast svømmerens navn");
@@ -115,19 +121,14 @@ public class FormandUserInterface extends SuperUI {
         isCompetitor = yesOrNoToBoolean();
         System.out.println("Er svømmeren studerende?");
         isStudent = yesOrNoToBoolean();
+        insertSeperatorLine(50);
 
-        System.out.println("\nDu er ved at tilføje følgende svømmer:" +
-                "\nNavn: " + navn +
-                "\nAddresse: " + address +
-                "\nTelefonnr: " + phoneNumber +
-                "\nMail: " + mail +
-                "\nFødselsdato: " + birthday +
-                "\nEr konkurrencesvømmer: " + booleanToYesOrNo(isCompetitor) +
-                "\nEr studerende: " + booleanToYesOrNo(isStudent) +
-                "\n\nBekræft venligst (Ja/Nej) ");
+        System.out.println("Du er ved at tilføje følgende svømmer:" + "\nNavn: " + navn + "\nAddresse: " + address + "\nTelefonnr: " + phoneNumber + "\nMail: " + mail + "\nFødselsdato: " + birthday + "\nEr konkurrencesvømmer: " + booleanToYesOrNo(isCompetitor) + "\nEr studerende: " + booleanToYesOrNo(isStudent) + "\n\nBekræft venligst (Ja/Nej) ");
+        insertSeperatorLine(50);
         if (yesOrNoToBoolean()) {
             controller.createSwimmer(navn, address, phoneNumber, mail, birthday, isCompetitor, isStudent);
-        }
+            System.out.println(navn + " er tilføjet");
+        } else System.out.println("Annulerer...");
     }
 
     private boolean validateBirthdayLocaleDate(LocalDate birthday) {
@@ -155,9 +156,7 @@ public class FormandUserInterface extends SuperUI {
 
     private void editSwimmer() {
         System.out.println("Indtast medlem der skal redigeres");
-
         Swimmer swimmer = controller.searchForMember(scanner.nextLine());
-
         System.out.println("""
                 Hvad vil du redigere?
                 1. Navn
@@ -172,33 +171,15 @@ public class FormandUserInterface extends SuperUI {
         int menuInput = readInt();
 
         switch (menuInput) {
-            case 1:
-                editSwimmerName(swimmer);
-                break;
-            case 2:
-                editSwimmerAddress(swimmer);
-                break;
-            case 3:
-                editSwimmerPhoneNumber(swimmer);
-                break;
-            case 4:
-                editSwimmerMail(swimmer);
-                break;
-            case 5:
-                editSwimmerActiveStatus(swimmer);
-                break;
-            case 6:
-                editSwimmerCompetitionStatus(swimmer);
-                break;
-            case 7:
-                editStudyStatus(swimmer);
-                break;
-            case 9:
-                System.out.println("Vender tilbage til menuen");
-                break;
-            default:
-                System.out.println("Ugyldig input");
-                break;
+            case 1 -> editSwimmerName(swimmer);
+            case 2 -> editSwimmerAddress(swimmer);
+            case 3 -> editSwimmerPhoneNumber(swimmer);
+            case 4 -> editSwimmerMail(swimmer);
+            case 5 -> editSwimmerActiveStatus(swimmer);
+            case 6 -> editSwimmerCompetitionStatus(swimmer);
+            case 7 -> editStudyStatus(swimmer);
+            case 9 -> System.out.println("Vender tilbage til menuen");
+            default -> System.out.println("Ugyldig input");
         }
     }
 
@@ -270,17 +251,10 @@ public class FormandUserInterface extends SuperUI {
                     """);
             inputCompetitionStatus = readInt();
             switch (inputCompetitionStatus) {
-                case 1:
-                    swimmer.setCompetitor(true);
-                    break;
-                case 2:
-                    swimmer.setCompetitor(false);
-                    break;
-                case 3:
-                    System.out.println("Vender tilbage");
-                    break;
-                default:
-                    System.out.println("ugyldigt input, prøv igen");
+                case 1 -> swimmer.setCompetitor(true);
+                case 2 -> swimmer.setCompetitor(false);
+                case 3 -> System.out.println("Vender tilbage");
+                default -> System.out.println("ugyldigt input, prøv igen");
             }
         } while (inputCompetitionStatus != 1 && inputCompetitionStatus != 2 && inputCompetitionStatus != 3);
     }
@@ -309,7 +283,6 @@ public class FormandUserInterface extends SuperUI {
             }
         } while (inputStudyStatus != 1 && inputStudyStatus != 2 && inputStudyStatus != 3);
     }
-
 
 
 }

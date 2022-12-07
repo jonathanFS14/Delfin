@@ -1,11 +1,12 @@
 package userinterface;
+
 public class MainUI extends SuperUI {
 
     FormandUserInterface formandUserInterface;
     KassererUserInterface kassererUserInterface;
     TrainerUserInterface trainerUserInterface;
 
-    public MainUI(){
+    public MainUI() {
         formandUserInterface = new FormandUserInterface();
         kassererUserInterface = new KassererUserInterface();
         trainerUserInterface = new TrainerUserInterface();
@@ -27,7 +28,11 @@ public class MainUI extends SuperUI {
                 case 1 -> formandUserInterface.formandUI();
                 case 2 -> kassererUserInterface.kassererUI();
                 case 3 -> trainerUserInterface.trainerUI();
-                case 8 -> controller.printAllMembers();
+                case 8 -> {
+                    insertSeperatorLine(215);
+                    controller.printAllMembers();
+                    insertSeperatorLine(215);
+                }
                 case 9 -> endProgram();
                 default -> System.out.println("Ugyldigt Input");
             }

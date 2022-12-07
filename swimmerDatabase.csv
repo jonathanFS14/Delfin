@@ -1,10 +1,14 @@
-Jens Mikkelsen;Aagade 46;88888888;jmikkelsen@mails.dk;1999-01-01;2022-12-02;0;false;true;true;true;false;2000-01-01
+Jens Mikkelsen;Aagade 46;88888888;jmikkelsen@mails.dk;1999-01-01;2022-12-02;0;false;true;true;false;false;2000-01-01
 Peter Madsen;Ubåden 1;90909090;pmadsen@mail.dk;1988-01-01;2022-12-02;1;false;true;true;false;false;2000-01-01
 Anne Jensen;Brogade 23;92929292;ajensen@mail.dk;1977-01-01;2022-12-02;2;false;true;true;true;false;2000-01-01
 Ida Larsen;Havnegade 16;94949494;ilarsen@mail.dk;1966-01-01;2022-12-02;3;false;true;true;true;false;2000-01-01
 Karl Petersen;Brogade 32;96969696;kpetersen@mail.dk;1955-01-01;2022-12-02;4;false;true;true;false;false;2000-01-01
 Hans Olesen;Nygade 420;29102929;Hans.olesen@gmail.com;2010-02-03;2022-12-02;5;false;true;true;false;false;2000-01-01
-Tony Tony;Gade;12345678;mail@mail.com;2000-01-01;2022-12-02;5;FALSE;TRUE;TRUE;TRUE;FALSE;2000-01-01
-Niels Nols;Gade;12345678;mail@mail.com;2000-01-02;2022-12-03;6;FALSE;TRUE;TRUE;TRUE;FALSE;2000-01-02
-Pyrus;Gade;12345678;mail@mail.com;2000-01-03;2022-12-04;7;FALSE;TRUE;TRUE;TRUE;FALSE;2000-01-03
-Joe Biden;Gade;12345678;mail@mail.com;2000-01-04;2022-12-05;8;FALSE;TRUE;TRUE;TRUE;FALSE;2000-01-04
+Tony Tony;Gade;12345678;mail@mail.com;2000-01-01;2022-12-02;5;false;true;true;true;false;2000-01-01
+Niels Nols;Gade;12345678;mail@mail.com;2000-01-02;2022-12-03;6;false;true;true;true;false;2000-01-02
+Pyrus;Gade;12345678;mail@mail.com;2000-01-03;2022-12-04;7;false;true;true;true;false;2000-01-03
+Joe Biden;Gade;12345678;mail@mail.com;2000-01-04;2022-12-05;8;false;false;true;true;false;2000-01-04
+Hap Sop;Lolvej 20;72292728;hap@sop.dk;2010-01-03;2022-12-05;10;false;true;false;true;false;2000-01-01
+Jens;Peter;1;1;1999-01-01;2022-12-05;11;false;true;true;true;true;2000-01-01
+Peter;larsen;1;1;1999-01-01;2022-12-05;12;false;true;true;true;false;2000-01-01
+Asger Tor Mikkelsen;Strandvejen 69;82482482;Asge1114@stud.kea.dk;1997-06-17;2022-12-07;13;false;true;true;true;false;2000-01-01
