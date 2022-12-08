@@ -68,7 +68,6 @@ public class SuperUI {
             answer = "Nej";
         else
             System.out.println("Forkert input.");
-        // TODO burde køre i loop sådan at man skal prøve igen hvis input er forkert.
         return answer;
     }
 
