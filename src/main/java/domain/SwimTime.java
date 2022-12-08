@@ -1,8 +1,9 @@
 package domain;
 
+import domain.enums.Events;
+
 import java.text.DecimalFormat;
 import java.time.LocalDate;
-import java.util.concurrent.TimeUnit;
 
 public class SwimTime {
 

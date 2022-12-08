@@ -1,4 +1,4 @@
-package Test;
+package test;
 import domain.Swimmer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,7 +24,7 @@ class DatabaseTest {
 
     @BeforeEach
     void createSwimmer(){
-        swimmer1 = new Swimmer("navn1", "addresse", "nummer", "mail", LocalDate.parse("2004-11-29"), 111, true, true);
+        swimmer1 = new Swimmer("navn1", "addresse", "nummer", "mail", LocalDate.parse("2000-11-29"), 111, true, true);
         swimmer2 = new Swimmer("navn2", "addresse", "nummer", "mail", LocalDate.parse("2010-11-28"), 111, true, true);
         swimmer3 = new Swimmer("navn3", "addresse", "nummer", "mail", LocalDate.parse("1996-11-28"), 111, true, true);
         swimmer4 = new Swimmer("navn4", "addresse", "nummer", "mail", LocalDate.parse("2013-11-28"), 111, true, true);

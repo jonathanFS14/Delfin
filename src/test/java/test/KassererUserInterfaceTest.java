@@ -1,4 +1,4 @@
-package Test;
+package test;
 
 import domain.Swimmer;
 import userinterface.KassererUserInterface;

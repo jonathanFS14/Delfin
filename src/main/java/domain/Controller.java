@@ -1,6 +1,7 @@
 package domain;
 
 import datasource.Filehandler;
+import domain.enums.Events;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package domain;
+package domain.enums;
 
 //Enum til at kalde på forskellige discipliner
 public enum Events {

@@ -1,7 +1,7 @@
 package userinterface;
 
 import Comparator.TimeComparator;
-import domain.Events;
+import domain.enums.Events;
 import domain.SwimTime;
 import domain.Swimmer;
 
