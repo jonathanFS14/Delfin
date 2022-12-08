@@ -11,7 +11,7 @@ public class SuperUI {
     protected int readInt() {
         //Sørger for man inputter et gyldigt int input
         while (!scanner.hasNextInt()) {
-            String text = scanner.next();
+            String text = scanner.nextLine();
             System.out.println(text + " er ugyldig input, indtast igen.");
         }
         int result;
