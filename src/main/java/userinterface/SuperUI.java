@@ -20,6 +20,18 @@ public class SuperUI {
         return result;
     }
 
+    protected double readDouble() {
+        //Sørger for man inputter et gyldigt int input
+        while (!scanner.hasNextDouble()) {
+            String text = scanner.next();
+            System.out.println(text + " er ugyldig input, indtast igen.");
+        }
+        double result;
+        result = scanner.nextDouble();
+        scanner.nextLine();
+        return result;
+    }
+
     //Sørger for at input ikke er tomt. Strukturen i readInt virker ikke for string af en eller anden grund.
     protected String readString() {
         String readString;

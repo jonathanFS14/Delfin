@@ -92,9 +92,9 @@ public class Database {
             for (Events e : eventsList) {
                 System.out.println(eventsList.indexOf(e) + 1 + ". " + e);
             }
-            userInput = scanner.nextInt();
+            userInput = readInt();
 
-            if (userInput > eventsList.size() || userInput < 0) {
+            if (userInput > eventsList.size() || userInput <= 0) {
                 System.out.println("Ugyldigt valg");
                 event = null;
             } else {
@@ -151,5 +151,15 @@ public class Database {
         return swimTimeList;
     }
 
-
+   private int readInt() {
+        //Sørger for man inputter et gyldigt int input
+        while (!scanner.hasNextInt()) {
+            String text = scanner.next();
+            System.out.println(text + " er ugyldig input, indtast igen.");
+        }
+        int result;
+        result = scanner.nextInt();
+        scanner.nextLine();
+        return result;
+    }
 }
