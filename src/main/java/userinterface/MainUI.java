@@ -23,7 +23,7 @@ public class MainUI extends SuperUI {
                     3. Træner
                     8. Print all members
                     9. Luk programmet""");
-            input = scanner.nextInt();
+            input = readInt();
             switch (input) {
                 case 1 -> formandUserInterface.formandUI();
                 case 2 -> kassererUserInterface.kassererUI();
