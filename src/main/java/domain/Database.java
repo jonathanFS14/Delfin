@@ -55,6 +55,7 @@ public class Database {
                     swimmerSearchList.add(s);
         }
 
+
         if (swimmerSearchList.size() > 1) {
             System.out.println("Vælg hvem du vil tjekke ");
             for (Swimmer s : swimmerSearchList) {

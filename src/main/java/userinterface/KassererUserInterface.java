@@ -42,17 +42,22 @@ public class KassererUserInterface extends SuperUI {
     private void checkMembersPaymentStatus() {
         System.out.println("Indtast medlem du vil tjekke betalingsstatus på");
         insertSeperatorLine(50);
-        Swimmer swimmer = controller.searchForMember(scanner.nextLine());
-
-        if (swimmer != null) {
-            insertSeperatorLine(50);
-            if (swimmer.getHasPaid()) {
-                System.out.print(swimmer.getName() + " har betalt kontingent den " + swimmer.getPaymentDate());
-            } else {
-                System.out.print(swimmer.getName() + " er i restance og skylder " + getKontingentPrice(swimmer) + " kr.\n");
-            }
+        String searchParameter = scanner.nextLine();
+        Swimmer swimmer = controller.searchForMember(searchParameter);
+        if (swimmer == null) {
+            System.out.println("Kunne ikke finde medlem med " + searchParameter);
         } else {
-            System.out.println("Kunne ikke finde medlemmet");
+
+            if (swimmer != null) {
+                insertSeperatorLine(50);
+                if (swimmer.getHasPaid()) {
+                    System.out.print(swimmer.getName() + " har betalt kontingent den " + swimmer.getPaymentDate());
+                } else {
+                    System.out.print(swimmer.getName() + " er i restance og skylder " + getKontingentPrice(swimmer) + " kr.\n");
+                }
+            } else {
+                System.out.println("Kunne ikke finde medlemmet");
+            }
         }
     }
 
@@ -120,38 +125,44 @@ public class KassererUserInterface extends SuperUI {
     private void editSwimmerHasPaid() {
         System.out.println("Indtast medlem der skal redigeres");
         insertSeperatorLine(50);
-        Swimmer swimmer = controller.searchForMember(scanner.nextLine());
-        insertSeperatorLine(50);
-
-        if (swimmer != null) {
-            System.out.println("Hvordan vil du ændre " + swimmer.getName() + "'s betalingsstatus");
-            int inputActiveStatus;
+        String searchParameter = scanner.nextLine();
+        Swimmer swimmer = controller.searchForMember(searchParameter);
+        if(swimmer == null){
+            System.out.println("Kunne ikke finde medlem med " + searchParameter);
+        }
+        else {
             insertSeperatorLine(50);
-            do {
-                System.out.println("""
-                        1. Sæt betalingsstatus til betalt
-                        2. Sæt betalingsstatus til ikke betalt
-                        3. Fortryd""");
-                inputActiveStatus = readInt();
+
+            if (swimmer != null) {
+                System.out.println("Hvordan vil du ændre " + swimmer.getName() + "'s betalingsstatus");
+                int inputActiveStatus;
                 insertSeperatorLine(50);
-                switch (inputActiveStatus) {
-                    case 1:
-                        swimmer.setHasPaid(true);
-                        swimmer.setPaymentDate(LocalDate.now());
-                        System.out.println("Betalingsstatus ændret til betalt");
-                        break;
-                    case 2:
-                        swimmer.setHasPaid(false);
-                        System.out.println("Betalingsstatus ændret til ikke betalt");
-                        break;
-                    case 3:
-                        System.out.println("Vender tilbage");
-                    default:
-                        System.out.println("ugyldigt input, prøv igen");
-                }
-            } while (inputActiveStatus != 1 && inputActiveStatus != 2 && inputActiveStatus != 3);
-        } else {
-            System.out.println("Kunne ikke finde medlemmet");
+                do {
+                    System.out.println("""
+                            1. Sæt betalingsstatus til betalt
+                            2. Sæt betalingsstatus til ikke betalt
+                            3. Fortryd""");
+                    inputActiveStatus = readInt();
+                    insertSeperatorLine(50);
+                    switch (inputActiveStatus) {
+                        case 1:
+                            swimmer.setHasPaid(true);
+                            swimmer.setPaymentDate(LocalDate.now());
+                            System.out.println("Betalingsstatus ændret til betalt");
+                            break;
+                        case 2:
+                            swimmer.setHasPaid(false);
+                            System.out.println("Betalingsstatus ændret til ikke betalt");
+                            break;
+                        case 3:
+                            System.out.println("Vender tilbage");
+                        default:
+                            System.out.println("ugyldigt input, prøv igen");
+                    }
+                } while (inputActiveStatus != 1 && inputActiveStatus != 2 && inputActiveStatus != 3);
+            } else {
+                System.out.println("Kunne ikke finde medlemmet");
+            }
         }
     }
 }

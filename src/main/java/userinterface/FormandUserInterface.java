@@ -66,12 +66,17 @@ public class FormandUserInterface extends SuperUI {
     private void archiveSwimmer() {
         insertSeperatorLine(50);
         System.out.println("Indtast medlem der skal arkiveres");
-        Swimmer swimmer = controller.searchForMember(scanner.nextLine());
-
-        swimmer.setArchived(true);
-        swimmer.setHasPaid(false);
-        insertSeperatorLine(50);
-        System.out.println(swimmer.getName() + " er nu arkiveret.");
+        String searchParameter = scanner.nextLine();
+        Swimmer swimmer = controller.searchForMember(searchParameter);
+        if(swimmer == null){
+            System.out.println("Kunne ikke finde medlem med " + searchParameter);
+        }
+        else {
+            swimmer.setArchived(true);
+            swimmer.setHasPaid(false);
+            insertSeperatorLine(50);
+            System.out.println(swimmer.getName() + " er nu arkiveret.");
+        }
     }
 
     private void restoreArchivedSwimmer() {
@@ -156,30 +161,36 @@ public class FormandUserInterface extends SuperUI {
 
     private void editSwimmer() {
         System.out.println("Indtast medlem der skal redigeres");
-        Swimmer swimmer = controller.searchForMember(scanner.nextLine());
-        System.out.println("""
-                Hvad vil du redigere?
-                1. Navn
-                2. Addresse
-                3. Telefon nummer
-                4. Mail
-                5. Aktivitetsstatus
-                6. Konkurence status
-                7. Studie status
-                9. Fortryd
-                """);
-        int menuInput = readInt();
+        String searchParameter = scanner.nextLine();
+        Swimmer swimmer = controller.searchForMember(searchParameter);
+        if(swimmer == null){
+            System.out.println("Kunne ikke finde medlem med " + searchParameter);
+        }
+        else {
+            System.out.println("""
+                    Hvad vil du redigere?
+                    1. Navn
+                    2. Addresse
+                    3. Telefon nummer
+                    4. Mail
+                    5. Aktivitetsstatus
+                    6. Konkurence status
+                    7. Studie status
+                    9. Fortryd
+                    """);
+            int menuInput = readInt();
 
-        switch (menuInput) {
-            case 1 -> editSwimmerName(swimmer);
-            case 2 -> editSwimmerAddress(swimmer);
-            case 3 -> editSwimmerPhoneNumber(swimmer);
-            case 4 -> editSwimmerMail(swimmer);
-            case 5 -> editSwimmerActiveStatus(swimmer);
-            case 6 -> editSwimmerCompetitionStatus(swimmer);
-            case 7 -> editStudyStatus(swimmer);
-            case 9 -> System.out.println("Vender tilbage til menuen");
-            default -> System.out.println("Ugyldig input");
+            switch (menuInput) {
+                case 1 -> editSwimmerName(swimmer);
+                case 2 -> editSwimmerAddress(swimmer);
+                case 3 -> editSwimmerPhoneNumber(swimmer);
+                case 4 -> editSwimmerMail(swimmer);
+                case 5 -> editSwimmerActiveStatus(swimmer);
+                case 6 -> editSwimmerCompetitionStatus(swimmer);
+                case 7 -> editStudyStatus(swimmer);
+                case 9 -> System.out.println("Vender tilbage til menuen");
+                default -> System.out.println("Ugyldig input");
+            }
         }
     }
 

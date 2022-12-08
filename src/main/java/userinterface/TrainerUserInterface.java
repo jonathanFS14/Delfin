@@ -74,33 +74,39 @@ public class TrainerUserInterface extends SuperUI {
         insertSeperatorLine(50);
         System.out.println("Indtast hvilken svømmer du vil registrere en tid for");
         String searchParameter = readString();
+
         Swimmer swimmer = controller.searchForMember(searchParameter);
 
-        int memberID = swimmer.getMemberID();
+        if(swimmer == null){
+            System.out.println("Kunne finde ikke finde medlem med " + searchParameter);
+        }
+        else {
+            int memberID = swimmer.getMemberID();
 
-        Events event = controller.selectEvent();
+            Events event = controller.selectEvent();
 
-        System.out.println("Indtast tid");
-        double swimTime = scanner.nextDouble();
-        scanner.nextLine();
-        System.out.println("Indtast stævnet, hvor tiden blev sat (Tryk enter hvis det var en træningstid)");
-        String userInput = scanner.nextLine();
-        String placeSet;
-        if (userInput.isEmpty())
-            placeSet = "Træning";
-        else
-            placeSet = userInput;
+            System.out.println("Indtast tid");
+            double swimTime = scanner.nextDouble();
+            scanner.nextLine();
+            System.out.println("Indtast stævnet, hvor tiden blev sat (Tryk enter hvis det var en træningstid)");
+            String userInput = scanner.nextLine();
+            String placeSet;
+            if (userInput.isEmpty())
+                placeSet = "Træning";
+            else
+                placeSet = userInput;
 
-        insertSeperatorLine(50);
-        System.out.println("Du er ved at tilføje følgende tid til " + swimmer.getName() +
-                "\nTid: " + swimTime +
-                "\nDisciplin: " + event +
-                "\nHvorhenne: " + placeSet +
-                "\n\nBekræft venligst (Ja/Nej) "
-        );
-        insertSeperatorLine(50);
-        if (yesOrNoToBoolean())
-            controller.createSwimTime(memberID, swimTime, event, placeSet, LocalDate.now());
+            insertSeperatorLine(50);
+            System.out.println("Du er ved at tilføje følgende tid til " + swimmer.getName() +
+                    "\nTid: " + swimTime +
+                    "\nDisciplin: " + event +
+                    "\nHvorhenne: " + placeSet +
+                    "\n\nBekræft venligst (Ja/Nej) "
+            );
+            insertSeperatorLine(50);
+            if (yesOrNoToBoolean())
+                controller.createSwimTime(memberID, swimTime, event, placeSet, LocalDate.now());
+        }
     }
 
 
@@ -201,19 +207,25 @@ public class TrainerUserInterface extends SuperUI {
         //Viser alle tider for en bestemt svømmer
         System.out.println("Indtast medlem du vil kigge på");
         insertSeperatorLine(25);
-        Swimmer swimmer = controller.searchForMember(scanner.nextLine());
-        int searchID = swimmer.getMemberID();
-        ArrayList<SwimTime> swimTimeList = controller.getSwimTimeList();
-        insertSeperatorLine(25);
-        System.out.println(String.format("┃ Fulde navn: %-20s\n┃ Fødselsdag: %-20s", swimmer.getName(), swimmer.getBirthday()));
-        insertSeperatorLine(77);
-        System.out.println(String.format("┃ %-20s │ %-9s │ %-25s │ %-12s ┃", "Disciplin", "Tid", "Sted", "Dato"));
-        for (SwimTime s : swimTimeList) {
-            if (searchID == s.getMemberID()) {
-                System.out.println(s.printSwimTime());
-            }
+        String searchParameter = scanner.nextLine();
+        Swimmer swimmer = controller.searchForMember(searchParameter);
+        if(swimmer == null){
+            System.out.println("Kunne ikke finde medlem med " + searchParameter);
         }
-        insertSeperatorLine(77);
+        else {
+            int searchID = swimmer.getMemberID();
+            ArrayList<SwimTime> swimTimeList = controller.getSwimTimeList();
+            insertSeperatorLine(25);
+            System.out.println(String.format("┃ Fulde navn: %-20s\n┃ Fødselsdag: %-20s", swimmer.getName(), swimmer.getBirthday()));
+            insertSeperatorLine(77);
+            System.out.println(String.format("┃ %-20s │ %-9s │ %-25s │ %-12s ┃", "Disciplin", "Tid", "Sted", "Dato"));
+            for (SwimTime s : swimTimeList) {
+                if (searchID == s.getMemberID()) {
+                    System.out.println(s.printSwimTime());
+                }
+            }
+            insertSeperatorLine(77);
+        }
     }
 }
 
