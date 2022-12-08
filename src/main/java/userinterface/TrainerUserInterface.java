@@ -74,9 +74,10 @@ public class TrainerUserInterface extends SuperUI {
         insertSeperatorLine(50);
         System.out.println("Indtast hvilken svømmer du vil registrere en tid for");
         String searchParameter = readString();
-
+        //Søger på et medlem
         Swimmer swimmer = controller.searchForMember(searchParameter);
 
+        //Tjekker hvis man ikke fandt noget da man søgte på et medlem
         if(swimmer == null){
             System.out.println("Kunne finde ikke finde medlem med " + searchParameter);
         }
@@ -85,13 +86,14 @@ public class TrainerUserInterface extends SuperUI {
 
             Events event = controller.selectEvent();
 
+            //Opret tid
             System.out.println("Indtast tid");
             double swimTime = readDouble();
             scanner.nextLine();
             System.out.println("Indtast stævnet, hvor tiden blev sat (Tryk enter hvis det var en træningstid)");
             String userInput = readString();
             String placeSet;
-            if (userInput.isEmpty())
+            if (userInput.isEmpty())    //Hvis man ikke inputter noget vil det blive til en træningstid
                 placeSet = "Træning";
             else
                 placeSet = userInput;
@@ -209,6 +211,7 @@ public class TrainerUserInterface extends SuperUI {
         insertSeperatorLine(25);
         String searchParameter = scanner.nextLine();
         Swimmer swimmer = controller.searchForMember(searchParameter);
+
         if(swimmer == null){
             System.out.println("Kunne ikke finde medlem med " + searchParameter);
         }
