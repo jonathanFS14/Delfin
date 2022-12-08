@@ -5,11 +5,11 @@ import domain.Controller;
 import java.util.Scanner;
 
 public class SuperUI {
-   protected Scanner scanner = new Scanner(System.in);
-    static Controller controller = new Controller();
-
+    protected Scanner scanner = new Scanner(System.in);
+    protected static Controller controller = new Controller();
 
     protected int readInt() {
+        //Sørger for man inputter et gyldigt int input
         while (!scanner.hasNextInt()) {
             String text = scanner.next();
             System.out.println(text + " er ugyldig input, indtast igen.");
@@ -32,7 +32,9 @@ public class SuperUI {
         while (readString.isEmpty());
         return readString;
     }
+
     protected boolean yesOrNoToBoolean() {
+        //lader bruger skrive ja eller nej og oversætte det til en boolean
         boolean answer = false;
         int check; //Er der en bedre måde at loop løkken?
         String yesOrNo;
@@ -43,7 +45,7 @@ public class SuperUI {
                     answer = true;
                     check = 1;
                 }
-                case "nej", "no", "n" ->{
+                case "nej", "no", "n" -> {
                     answer = false;
                     check = 1;
                 }
@@ -58,6 +60,7 @@ public class SuperUI {
     }
 
     protected String booleanToYesOrNo(Boolean bool) {
+        //Omdanner en boolean værdi til "ja" eller "nej"
         String answer = null;
         if (bool)
             answer = "Ja";
@@ -69,35 +72,31 @@ public class SuperUI {
         return answer;
     }
 
-    public void endProgram() {
-        int input;
+    protected void endProgram() {
+        boolean input;
         System.out.println("""
-                Er du sikker på du vil forlade programmet?
-                1. ja
-                2. nej""");
+                Er du sikker på du vil forlade programmet? Ja/Nej""");
         do {
-            input = readInt();
-            switch (input) {
-                case 1:
-                    System.out.println("På gensyn");
-                    System.exit(0);
-                    break;
-                case 2:
-                    System.out.println("Vender tilbage");
-                    break;
-                default:
-                    System.out.println("Ugyldig input");
-                    break;
+            input = yesOrNoToBoolean();
+            if (input) {
+                controller.overwriteSwimTimeDatabase();
+                controller.overwriteSwimmerDatabase();
+                System.out.println("På gensyn");
+                System.exit(0);
+            } else if (!input) {
+                System.out.println("Vender tilbage");
             }
         }
-        while (input != 1 && input != 2);
+        while (!input && input);
     }
 
-    protected void logOut(){
+    protected void logOut() {
         System.out.println("Logger ud.");
     }
+
     protected void insertSeperatorLine(int numberOfLines) {
-        for(int i = 0; i < numberOfLines; ++i) {
+        //Gør at der bliver rent opdelt i terminalen efter en metode er kørt
+        for (int i = 0; i < numberOfLines; ++i) {
             System.out.print("━");
         }
         System.out.println("");
