@@ -48,26 +48,26 @@ public class SuperUI {
     protected boolean yesOrNoToBoolean() {
         //lader bruger skrive ja eller nej og oversætte det til en boolean
         boolean answer = false;
-        int check; //Er der en bedre måde at loop løkken?
+        boolean running = true;
         String yesOrNo;
         do {
             yesOrNo = scanner.nextLine();
             switch (yesOrNo.toLowerCase()) {
                 case "ja", "yes", "j", "y" -> {
                     answer = true;
-                    check = 1;
+                    running = false;
                 }
                 case "nej", "no", "n" -> {
                     answer = false;
-                    check = 1;
+                    running = false;
                 }
                 default -> {
                     System.out.println("Ugyldig input");
-                    check = 0;
+
                 }
             }
         }
-        while (check == 0);
+        while (running);
         return answer;
     }
 

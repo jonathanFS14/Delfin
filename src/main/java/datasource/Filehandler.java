@@ -1,6 +1,6 @@
 package datasource;
 
-import domain.Events;
+import domain.enums.Events;
 import domain.SwimTime;
 import domain.Swimmer;
 

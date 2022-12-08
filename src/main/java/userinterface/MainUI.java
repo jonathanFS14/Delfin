@@ -13,6 +13,7 @@ public class MainUI extends SuperUI {
     }
 
     public void login() {
+        boolean runnning = true;
         controller.initialLoad();
         int input;
         do {
@@ -33,10 +34,13 @@ public class MainUI extends SuperUI {
                     controller.printAllMembers();
                     insertSeperatorLine(215);
                 }
-                case 9 -> endProgram();
+                case 9 -> {
+                    endProgram();
+                    runnning = false;
+                }
                 default -> System.out.println("Ugyldigt Input");
             }
         }
-        while (input != 1 || input != 2 || input != 3 || input != 9);
+        while (runnning);
     }
 }

@@ -1,8 +1,8 @@
-package Test;
+package test;
 
 import Comparator.TimeComparator;
 import domain.Controller;
-import domain.Events;
+import domain.enums.Events;
 import domain.Swimmer;
 import domain.SwimTime;
 import org.junit.jupiter.api.Test;

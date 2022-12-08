@@ -1,7 +1,7 @@
 package userinterface;
 
 import Comparator.TimeComparator;
-import domain.Events;
+import domain.enums.Events;
 import domain.SwimTime;
 import domain.Swimmer;
 
@@ -16,6 +16,7 @@ public class TrainerUserInterface extends SuperUI {
     }
 
     private void userMenu() {
+        boolean running = true;
         int userInput;
         do {
             insertSeperatorLine(25);
@@ -33,15 +34,20 @@ public class TrainerUserInterface extends SuperUI {
                 case 2 -> setTimeForSwimmer();
                 case 3 -> showSwimmerProfile();
                 case 4 -> showTopFive();
-                case 8 -> logOut();
-                case 9 -> endProgram();
-                default -> System.out.println("Ugyldig input");
+                case 8 -> {
+                    logOut();
+                    running = false; }
+                case 9 -> {
+                    endProgram();
+                    running = false; }
+                default -> System.out.println("Ugyldigt valg");
             }
-        }
-        while (userInput != 9 && userInput != 8);
+
+        } while (running);
     }
 
     private void showTeamMenu() {
+        boolean running = true;
         int userChoice;
         do {
             controller.initialLoad();
@@ -63,11 +69,14 @@ public class TrainerUserInterface extends SuperUI {
                     System.out.println("Seniorholdet består af: ");
                     printTeam(controller.getJuniorTeam());
                 }
-                case 3 -> System.out.println("Vender tilbage");
+                case 3 -> {
+                    System.out.println("Vender tilbage");
+                    running = false;
+                }
                 default -> System.out.println("Ugyldig input");
             }
         }
-        while (userChoice != 3);
+        while (running);
     }
 
     private void setTimeForSwimmer() {

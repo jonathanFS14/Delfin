@@ -11,6 +11,7 @@ public class Swimmer {
     private LocalDate birthday;
     private final LocalDate creationDate;
     private final int memberID;
+    // boolean kunne have været ændret til enums ligesom event/disciplin
     private boolean hasPaid;
     private boolean isActive;
     private boolean isCompetitor;
