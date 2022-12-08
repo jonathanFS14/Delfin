@@ -11,7 +11,7 @@ public class SuperUI {
     protected int readInt() {
         //Sørger for man inputter et gyldigt int input
         while (!scanner.hasNextInt()) {
-            String text = scanner.next();
+            String text = scanner.nextLine();
             System.out.println(text + " er ugyldig input, indtast igen.");
         }
         int result;
@@ -80,7 +80,6 @@ public class SuperUI {
             answer = "Nej";
         else
             System.out.println("Forkert input.");
-        // TODO burde køre i loop sådan at man skal prøve igen hvis input er forkert.
         return answer;
     }
 
