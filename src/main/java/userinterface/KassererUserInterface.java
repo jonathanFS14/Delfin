@@ -13,6 +13,7 @@ public class KassererUserInterface extends SuperUI {
     }
 
     private void userMenu() {
+        boolean running = true;
         int userInput;
         do {
             insertSeperatorLine(50);
@@ -32,11 +33,16 @@ public class KassererUserInterface extends SuperUI {
                 case 2 -> checkMembersPaymentStatus();
                 case 3 -> showExpectedIncome();
                 case 4 -> showMembersInRestance();
-                case 8 -> logOut();
-                case 9 -> endProgram();
+                case 8 -> {
+                    logOut();
+                    running = false; }
+                case 9 -> {
+                    endProgram();
+                    running = false; }
                 default -> System.out.println("Ugyldigt valg");
             }
-        } while (userInput != 9 && userInput != 8);
+
+        } while (running);
     }
 
     private void checkMembersPaymentStatus() {
