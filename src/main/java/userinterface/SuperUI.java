@@ -23,7 +23,7 @@ public class SuperUI {
     protected double readDouble() {
         //Sørger for man inputter et gyldigt int input
         while (!scanner.hasNextDouble()) {
-            String text = scanner.next();
+            String text = scanner.nextLine();
             System.out.println(text + " er ugyldig input, indtast igen.");
         }
         double result;

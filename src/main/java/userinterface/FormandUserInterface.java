@@ -120,11 +120,11 @@ public class FormandUserInterface extends SuperUI {
         phoneNumber = readString();
         System.out.println("Indtast svømmerens mail");
         mail = readString();
-        System.out.println("Indtast svømmerens fødselsdato (på formen ÅÅÅÅ-MM-DD");
+        System.out.println("Indtast svømmerens fødselsdato (med formattet ÅÅÅÅ-MM-DD");
         birthday = validateBirthdayString();
         System.out.println("Er det en konkurrencesvømmer? ja/nej");
         isCompetitor = yesOrNoToBoolean();
-        System.out.println("Er svømmeren studerende?");
+        System.out.println("Er svømmeren studerende? ja/nej");
         isStudent = yesOrNoToBoolean();
         insertSeperatorLine(50);
 
@@ -294,7 +294,4 @@ public class FormandUserInterface extends SuperUI {
             }
         } while (inputStudyStatus != 1 && inputStudyStatus != 2 && inputStudyStatus != 3);
     }
-
-
 }
-
